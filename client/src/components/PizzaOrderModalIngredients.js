@@ -117,8 +117,8 @@ function PizzaOrderModalIngredients(props) {
 
 const mapStateToProps = (state) => {
   return {
-    pizzaInModal: state.pizzas.pizzaInModal,
-    removedIngredients: state.pizzas.removedIngredients,
+    pizzaInModal: state.pizzaModal.pizzaInModal,
+    removedIngredients: state.pizzaModal.removedIngredients,
   };
 };
 const mapDispatchToProps = {

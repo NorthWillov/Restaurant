@@ -5,11 +5,13 @@ import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
 import { changePizzaSize, changePizzaDough } from "../redux/actions";
 
 function PizzaOrderModalSizeAndDough(props) {
-  const { handleDoughChange, classes } = props;
+  const { classes } = props;
 
-  const currPizzaSize = useSelector((state) => state.pizzas.currPizzaSize);
-  const currPizzaDough = useSelector((state) => state.pizzas.currPizzaDough);
-  const pizzaInModal = useSelector((state) => state.pizzas.pizzaInModal);
+  const currPizzaSize = useSelector((state) => state.pizzaModal.currPizzaSize);
+  const currPizzaDough = useSelector(
+    (state) => state.pizzaModal.currPizzaDough
+  );
+  const pizzaInModal = useSelector((state) => state.pizzaModal.pizzaInModal);
   const dispatch = useDispatch();
 
   return (

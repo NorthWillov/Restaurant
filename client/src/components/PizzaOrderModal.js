@@ -279,10 +279,10 @@ function PizzaOrderModal(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isModalOpen: state.pizzas.isModalOpen,
-    pizzaInModal: state.pizzas.pizzaInModal,
-    currPizzaSize: state.pizzas.currPizzaSize,
-    currPizzaDough: state.pizzas.currPizzaDough,
+    isModalOpen: state.pizzaModal.isModalOpen,
+    pizzaInModal: state.pizzaModal.pizzaInModal,
+    currPizzaSize: state.pizzaModal.currPizzaSize,
+    currPizzaDough: state.pizzaModal.currPizzaDough,
   };
 };
 

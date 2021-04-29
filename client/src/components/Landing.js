@@ -62,7 +62,7 @@ function Landing(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isModalOpen: state.pizzas.isModalOpen,
+    isModalOpen: state.pizzaModal.isModalOpen,
   };
 };
 

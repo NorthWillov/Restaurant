@@ -15,7 +15,7 @@ const initialState = {
   removedIngredients: [],
 };
 
-export const pizzaReducer = (state = initialState, action) => {
+export const pizzaModalReducer = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_PIZZA_MODAL:
       return { ...state, isModalOpen: true, pizzaInModal: action.payload };
