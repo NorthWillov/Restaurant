@@ -1,1 +1,2 @@
 export const OPEN_PIZZA_MODAL = "OPEN_PIZZA_MODAL";
+export const CHANGE_PIZZA_SIZE = "CHANGE_PIZZA_SIZE";

@@ -27,7 +27,7 @@ function PizzaOrderModal(props) {
   );
   const { newItem } = useContext(NewItemContext);
 
-  const { classes, isModalOpen, pizzaInModal } = props;
+  const { classes, isModalOpen, pizzaInModal, currPizzaSize } = props;
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
@@ -177,7 +177,7 @@ function PizzaOrderModal(props) {
               <p>
                 {pizzaInModal?.name === "Calzone (Pierog)"
                   ? "28cm, średnie"
-                  : `${size}, ${dough}`}
+                  : `${currPizzaSize}, ${dough}`}
               </p>
 
               {pizzaInModal?.name === "Fantazja" ? (
@@ -202,7 +202,6 @@ function PizzaOrderModal(props) {
               )}
 
               <PizzaOrderModalSizeAndDough
-                size={size}
                 dough={dough}
                 newItem={pizzaInModal}
                 handleSizeChange={handleSizeChange}
@@ -233,12 +232,18 @@ function PizzaOrderModal(props) {
               <span className={classes.modalPrice}>
                 {pizzaInModal?.name === "Calzone (Pierog)"
                   ? formatter.format(pizzaInModal?.price + extrasSumPrice)
-                  : size === "20cm"
-                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
-                  : size === "28cm"
-                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
-                  : size === "50cm"
-                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
+                  : currPizzaSize === "20cm"
+                  ? formatter.format(
+                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                    )
+                  : currPizzaSize === "28cm"
+                  ? formatter.format(
+                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                    )
+                  : currPizzaSize === "50cm"
+                  ? formatter.format(
+                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                    )
                   : null}
                 zł
               </span>
@@ -275,6 +280,7 @@ const mapStateToProps = (state) => {
   return {
     isModalOpen: state.pizzas.isModalOpen,
     pizzaInModal: state.pizzas.pizzaInModal,
+    currPizzaSize: state.pizzas.currPizzaSize,
   };
 };
 

@@ -1,27 +1,28 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
+import { changePizzaSize } from "../redux/actions";
 
 function PizzaOrderModalSizeAndDough(props) {
-  const {
-    size,
-    dough,
-    newItem,
-    handleSizeChange,
-    handleDoughChange,
-    classes,
-  } = props;
+  const { dough, newItem, handleDoughChange, classes } = props;
+
+  const currPizzaSize = useSelector((state) => state.pizzas.currPizzaSize);
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.root}>
       <h6>Rozmiar:</h6>
-      <div className={classes.group} onChange={handleSizeChange}>
+      <div
+        className={classes.group}
+        onChange={(e) => dispatch(changePizzaSize(e.target.value))}
+      >
         <input
           className={classes.input}
           type="radio"
           name="rb-size"
           id="rb1"
-          checked={size === "20cm"}
+          checked={currPizzaSize === "20cm"}
           value="20cm"
           disabled={newItem.name === "Calzone (Pierog)"}
           readOnly
@@ -35,7 +36,9 @@ function PizzaOrderModalSizeAndDough(props) {
           name="rb-size"
           id="rb2"
           value="28cm"
-          checked={size === "28cm" || newItem.name === "Calzone (Pierog)"}
+          checked={
+            currPizzaSize === "28cm" || newItem.name === "Calzone (Pierog)"
+          }
           readOnly
         />
         <label className={classes.label} htmlFor="rb2">
@@ -47,7 +50,7 @@ function PizzaOrderModalSizeAndDough(props) {
           name="rb-size"
           id="rb3"
           value="50cm"
-          checked={size === "50cm"}
+          checked={currPizzaSize === "50cm"}
           disabled={dough === "grube" || newItem.name === "Calzone (Pierog)"}
           readOnly
         />
@@ -89,7 +92,9 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb6"
           value="grube"
           checked={dough === "grube"}
-          disabled={size === "50cm" || newItem.name === "Calzone (Pierog)"}
+          disabled={
+            currPizzaSize === "50cm" || newItem.name === "Calzone (Pierog)"
+          }
           readOnly
         />
         <label className={classes.label} htmlFor="rb6">
