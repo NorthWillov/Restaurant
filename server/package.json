@@ -2,16 +2,12 @@
   "name": "riccardo-api",
   "version": "1.0.0",
   "description": "Backend for updated pizzeriariccardo.pl",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix ../client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NorthWillov/riccardo-api.git"
   },
   "keywords": [
     "restaurant",
@@ -24,10 +20,7 @@
   ],
   "author": "Artem Verbytskyi <northwillov@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NorthWillov/riccardo-api/issues"
-  },
-  "homepage": "https://github.com/NorthWillov/riccardo-api#readme",
+  
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
