@@ -1,0 +1,1 @@
+export const OPEN_PIZZA_MODAL = "OPEN_PIZZA_MODAL";

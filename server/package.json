@@ -20,7 +20,6 @@
   ],
   "author": "Artem Verbytskyi <northwillov@gmail.com>",
   "license": "ISC",
-  
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
@@ -26,7 +27,7 @@ function PizzaOrderModal(props) {
   );
   const { newItem } = useContext(NewItemContext);
 
-  const { classes } = props;
+  const { classes, isModalOpen, pizzaInModal } = props;
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
@@ -148,7 +149,7 @@ function PizzaOrderModal(props) {
 
   return (
     <Modal
-      {...props}
+      show={isModalOpen}
       onHide={handleModalClose}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -159,7 +160,7 @@ function PizzaOrderModal(props) {
           <Col lg={7} style={{ display: "flex" }}>
             <img
               className={classes.modalPizzaImage}
-              src={newItem.image}
+              src={pizzaInModal.image}
               alt="pizza"
             />
           </Col>
@@ -172,17 +173,17 @@ function PizzaOrderModal(props) {
             }}
           >
             <div>
-              <Modal.Title>{newItem.name}</Modal.Title>
+              <Modal.Title>{pizzaInModal.name}</Modal.Title>
               <p>
-                {newItem.name === "Calzone (Pierog)"
+                {pizzaInModal.name === "Calzone (Pierog)"
                   ? "28cm, średnie"
                   : `${size}, ${dough}`}
               </p>
 
-              {newItem.name === "Fantazja" ? (
+              {pizzaInModal.name === "Fantazja" ? (
                 <PizzaOrderModalFantazjaCase
                   extras={extras}
-                  newItem={newItem}
+                  newItem={pizzaInModal}
                   currIngredients={currIngredients}
                   handleIngredientClick={handleIngredientClick}
                   handleFantazjaInputClick={handleFantazjaInputClick}
@@ -203,7 +204,7 @@ function PizzaOrderModal(props) {
               <PizzaOrderModalSizeAndDough
                 size={size}
                 dough={dough}
-                newItem={newItem}
+                newItem={pizzaInModal}
                 handleSizeChange={handleSizeChange}
                 handleDoughChange={handleDoughChange}
               />
@@ -230,14 +231,14 @@ function PizzaOrderModal(props) {
                 Wroć
               </Button>
               <span className={classes.modalPrice}>
-                {newItem.name === "Calzone (Pierog)"
-                  ? formatter.format(newItem.price + extrasSumPrice)
+                {pizzaInModal.name === "Calzone (Pierog)"
+                  ? formatter.format(pizzaInModal.price + extrasSumPrice)
                   : size === "20cm"
-                  ? formatter.format(newItem.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
                   : size === "28cm"
-                  ? formatter.format(newItem.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
                   : size === "50cm"
-                  ? formatter.format(newItem.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
                   : null}
                 zł
               </span>
@@ -270,4 +271,14 @@ function PizzaOrderModal(props) {
   );
 }
 
-export default withStyles(styles)(PizzaOrderModal);
+const mapStateToProps = (state) => {
+  return {
+    isModalOpen: state.pizzas.isModalOpen,
+    pizzaInModal: state.pizzas.pizzaInModal,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(PizzaOrderModal));

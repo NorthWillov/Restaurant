@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { connect } from "react-redux";
 import { Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import { NewItemContext } from "../contexts/NewItemContext";
@@ -15,19 +16,44 @@ function PizzaOrderModalIngredients(props) {
     handleExtraIngredientInputClick,
     handleExtraIngredientClick,
     classes,
+    pizzaInModal,
   } = props;
 
   return (
     <>
       <ul className={classes.modalIngredients}>
-        {newItem.ingredients.map((i, idx) => (
+        {pizzaInModal.ingredients.map((i, idx) => (
           <li
             key={uuidv4()}
             value={i}
             className={classes.modalIngredientsIngredient}
             onClick={() => handleIngredientClick(i)}
           >
-            {currIngredients.includes(i) ? (
+            <>
+              <span className={classes.modalIngredientsIngredientName}>
+                {i}
+              </span>
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                className={`bi bi-dash-circle ${classes.icons}`}
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+            </>
+
+            {/* REFACTORING FOR REDUX LOGIC DELETE INGREDIENT */}
+            {/* {currIngredients.includes(i) ? (
               <>
                 <span className={classes.modalIngredientsIngredientName}>
                   {i}
@@ -69,9 +95,9 @@ function PizzaOrderModalIngredients(props) {
                   />
                 </svg>
               </>
-            )}
+            )} */}
 
-            {newItem.ingredients[idx + 1] && ","}
+            {pizzaInModal.ingredients[idx + 1] && ","}
           </li>
         ))}
       </ul>
@@ -136,4 +162,13 @@ function PizzaOrderModalIngredients(props) {
   );
 }
 
-export default withStyles(styles)(PizzaOrderModalIngredients);
+const mapStateToProps = (state) => {
+  return {
+    pizzaInModal: state.pizzas.pizzaInModal,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(PizzaOrderModalIngredients));

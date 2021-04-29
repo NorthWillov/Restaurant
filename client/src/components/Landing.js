@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { connect } from "react-redux";
 import MainNavbar from "./MainNavbar";
 import PizzasList from "./PizzasList";
 import LunchesList from "./LunchesList";
@@ -15,7 +16,7 @@ function Landing(props) {
   const [lunchModalShow, setLunchModalShow] = useState(false);
   const [pizzaModalShow, setPizzaModalShow] = useState(false);
 
-  const { classes } = props;
+  const { classes, isModalOpen } = props;
 
   const { newItem, setNewItem } = useContext(NewItemContext);
   const { setCurrIngredients } = useContext(CurrIngredientsContext);
@@ -44,12 +45,12 @@ function Landing(props) {
 
       <LunchesList handleLunchModalOpen={handleLunchModalOpen} />
 
+      {isModalOpen && (
+        <PizzaOrderModal onHide={() => setPizzaModalShow(false)} />
+      )}
+
       {newItem && (
         <>
-          <PizzaOrderModal
-            show={pizzaModalShow}
-            onHide={() => setPizzaModalShow(false)}
-          />
           <LunchesOrderModal
             lunch={newItem}
             show={lunchModalShow}
@@ -61,4 +62,10 @@ function Landing(props) {
   );
 }
 
-export default withStyles(styles)(Landing);
+const mapStateToProps = (state) => {
+  return {
+    isModalOpen: state.pizzas.isModalOpen,
+  };
+};
+
+export default connect(mapStateToProps, null)(withStyles(styles)(Landing));

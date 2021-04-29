@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
+import { connect } from "react-redux";
+import { openPizzaModal } from "../redux/actions";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaListStyles";
 
 function PizzasList(props) {
   const [pizzas, setPizzas] = useState([]);
-  const { classes, handlePizzaClick } = props;
+  const { classes } = props;
 
   useEffect(() => {
     const getPizzas = async () => {
@@ -20,6 +22,10 @@ function PizzasList(props) {
     };
     getPizzas();
   }, []);
+
+  const handlePizzaClick = (pizza) => {
+    props.openPizzaModal(pizza);
+  };
 
   return (
     <section id="pizzas">
@@ -80,4 +86,11 @@ function PizzasList(props) {
   );
 }
 
-export default withStyles(styles)(PizzasList);
+const mapDispatchToProps = {
+  openPizzaModal,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(PizzasList));
