@@ -160,7 +160,7 @@ function PizzaOrderModal(props) {
           <Col lg={7} style={{ display: "flex" }}>
             <img
               className={classes.modalPizzaImage}
-              src={pizzaInModal.image}
+              src={pizzaInModal?.image}
               alt="pizza"
             />
           </Col>
@@ -173,14 +173,14 @@ function PizzaOrderModal(props) {
             }}
           >
             <div>
-              <Modal.Title>{pizzaInModal.name}</Modal.Title>
+              <Modal.Title>{pizzaInModal?.name}</Modal.Title>
               <p>
-                {pizzaInModal.name === "Calzone (Pierog)"
+                {pizzaInModal?.name === "Calzone (Pierog)"
                   ? "28cm, średnie"
                   : `${size}, ${dough}`}
               </p>
 
-              {pizzaInModal.name === "Fantazja" ? (
+              {pizzaInModal?.name === "Fantazja" ? (
                 <PizzaOrderModalFantazjaCase
                   extras={extras}
                   newItem={pizzaInModal}
@@ -231,14 +231,14 @@ function PizzaOrderModal(props) {
                 Wroć
               </Button>
               <span className={classes.modalPrice}>
-                {pizzaInModal.name === "Calzone (Pierog)"
-                  ? formatter.format(pizzaInModal.price + extrasSumPrice)
+                {pizzaInModal?.name === "Calzone (Pierog)"
+                  ? formatter.format(pizzaInModal?.price + extrasSumPrice)
                   : size === "20cm"
-                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
                   : size === "28cm"
-                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
                   : size === "50cm"
-                  ? formatter.format(pizzaInModal.price[size] + extrasSumPrice)
+                  ? formatter.format(pizzaInModal?.price[size] + extrasSumPrice)
                   : null}
                 zł
               </span>

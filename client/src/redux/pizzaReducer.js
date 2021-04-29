@@ -2,7 +2,7 @@ import { OPEN_PIZZA_MODAL } from "./types";
 
 const initialState = {
   isModalOpen: false,
-  pizzaInModal: {},
+  pizzaInModal: null,
 };
 
 export const pizzaReducer = (state = initialState, action) => {

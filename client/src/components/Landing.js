@@ -45,9 +45,7 @@ function Landing(props) {
 
       <LunchesList handleLunchModalOpen={handleLunchModalOpen} />
 
-      {isModalOpen && (
-        <PizzaOrderModal onHide={() => setPizzaModalShow(false)} />
-      )}
+      <PizzaOrderModal />
 
       {newItem && (
         <>
