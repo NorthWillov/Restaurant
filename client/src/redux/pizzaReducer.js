@@ -1,10 +1,16 @@
-import { OPEN_PIZZA_MODAL, CHANGE_PIZZA_SIZE } from "./types";
+import {
+  OPEN_PIZZA_MODAL,
+  CHANGE_PIZZA_SIZE,
+  REMOVE_PIZZA_INGREDIENT,
+  RETURN_DELETED_PIZZA_INGREDIENT,
+} from "./types";
 
 const initialState = {
   isModalOpen: false,
   pizzaInModal: null,
   currPizzaSize: "20cm",
   currPizzaDough: "cieńkie",
+  removedIngredients: [],
 };
 
 export const pizzaReducer = (state = initialState, action) => {
@@ -13,6 +19,20 @@ export const pizzaReducer = (state = initialState, action) => {
       return { ...state, isModalOpen: true, pizzaInModal: action.payload };
     case CHANGE_PIZZA_SIZE:
       return { ...state, currPizzaSize: action.payload };
+    case CHANGE_PIZZA_SIZE:
+      return { ...state, currPizzaSize: action.payload };
+    case REMOVE_PIZZA_INGREDIENT:
+      return {
+        ...state,
+        removedIngredients: [...state.removedIngredients, action.payload],
+      };
+    case RETURN_DELETED_PIZZA_INGREDIENT:
+      return {
+        ...state,
+        removedIngredients: state.removedIngredients.filter(
+          (ingredient) => ingredient !== action.payload
+        ),
+      };
 
     default:
       return state;

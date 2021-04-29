@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { connect } from "react-redux";
+import { removeIngredient, backRemovedIngredient } from "../redux/actions";
 import { Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import { NewItemContext } from "../contexts/NewItemContext";
 import { CurrIngredientsContext } from "../contexts/CurrIngredientsContext";
+import RemoveIcon from "./icons/RemoveIcon";
+import BackIcon from "./icons/BackIcon";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
@@ -17,6 +20,9 @@ function PizzaOrderModalIngredients(props) {
     handleExtraIngredientClick,
     classes,
     pizzaInModal,
+    removeIngredient,
+    backRemovedIngredient,
+    removedIngredients,
   } = props;
 
   return (
@@ -27,77 +33,24 @@ function PizzaOrderModalIngredients(props) {
             key={uuidv4()}
             value={i}
             className={classes.modalIngredientsIngredient}
-            onClick={() => handleIngredientClick(i)}
           >
-            <>
-              <span className={classes.modalIngredientsIngredientName}>
-                {i}
-              </span>
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                className={`bi bi-dash-circle ${classes.icons}`}
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
-                />
-              </svg>
-            </>
-
-            {/* REFACTORING FOR REDUX LOGIC DELETE INGREDIENT */}
-            {/* {currIngredients.includes(i) ? (
-              <>
-                <span className={classes.modalIngredientsIngredientName}>
-                  {i}
-                </span>
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  className={`bi bi-dash-circle ${classes.icons}`}
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
-                  />
-                </svg>
-              </>
-            ) : (
-              <>
+            {removedIngredients.includes(i) ? (
+              <div onClick={() => backRemovedIngredient(i)}>
                 <span className={classes.modalIngredientsIngredientNameDeleted}>
                   {i}
                 </span>
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  className={`bi bi-arrow-return-left ${classes.icons}`}
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"
-                  />
-                </svg>
-              </>
-            )} */}
-
-            {pizzaInModal.ingredients[idx + 1] && ","}
+                <BackIcon styles={classes.icons} />
+                {pizzaInModal.ingredients[idx + 1] && ","}
+              </div>
+            ) : (
+              <div onClick={() => removeIngredient(i)}>
+                <span className={classes.modalIngredientsIngredientName}>
+                  {i}
+                </span>
+                <RemoveIcon styles={classes.icons} />
+                {pizzaInModal.ingredients[idx + 1] && ","}
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -165,10 +118,15 @@ function PizzaOrderModalIngredients(props) {
 const mapStateToProps = (state) => {
   return {
     pizzaInModal: state.pizzas.pizzaInModal,
+    removedIngredients: state.pizzas.removedIngredients,
   };
+};
+const mapDispatchToProps = {
+  removeIngredient,
+  backRemovedIngredient,
 };
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withStyles(styles)(PizzaOrderModalIngredients));
