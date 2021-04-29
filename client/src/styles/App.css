@@ -1,0 +1,13 @@
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(0, 0, 0);
+  margin-left: 15px;
+}
+.modal-content {
+  border-radius: 1.5rem;
+}
+.modal-header {
+  border: 0;
+}
+html {
+  scroll-behavior: smooth;
+}

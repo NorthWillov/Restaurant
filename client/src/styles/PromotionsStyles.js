@@ -1,0 +1,16 @@
+const styles = {
+  title: {
+    "@media (max-width: 767.98px)": {
+      marginBottom: "0",
+      fontSize: "24px",
+    },
+  },
+  subtitle: {
+    "@media (max-width: 767.98px)": {
+      marginBottom: "0",
+      fontSize: "14px",
+    },
+  },
+};
+
+export default styles;
