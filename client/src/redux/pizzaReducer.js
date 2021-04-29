@@ -4,6 +4,7 @@ import {
   CHANGE_PIZZA_SIZE,
   REMOVE_PIZZA_INGREDIENT,
   RETURN_DELETED_PIZZA_INGREDIENT,
+  CHANGE_PIZZA_DOUGH,
 } from "./types";
 
 const initialState = {
@@ -22,6 +23,8 @@ export const pizzaReducer = (state = initialState, action) => {
       return { ...initialState };
     case CHANGE_PIZZA_SIZE:
       return { ...state, currPizzaSize: action.payload };
+    case CHANGE_PIZZA_DOUGH:
+      return { ...state, currPizzaDough: action.payload };
     case CHANGE_PIZZA_SIZE:
       return { ...state, currPizzaSize: action.payload };
     case REMOVE_PIZZA_INGREDIENT:

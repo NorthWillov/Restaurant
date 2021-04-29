@@ -33,6 +33,7 @@ function PizzaOrderModal(props) {
     isModalOpen,
     pizzaInModal,
     currPizzaSize,
+    currPizzaDough,
     hidePizzaModal,
   } = props;
 
@@ -177,7 +178,7 @@ function PizzaOrderModal(props) {
               <p>
                 {pizzaInModal?.name === "Calzone (Pierog)"
                   ? "28cm, średnie"
-                  : `${currPizzaSize}, ${dough}`}
+                  : `${currPizzaSize}, ${currPizzaDough}`}
               </p>
 
               {pizzaInModal?.name === "Fantazja" ? (
@@ -281,6 +282,7 @@ const mapStateToProps = (state) => {
     isModalOpen: state.pizzas.isModalOpen,
     pizzaInModal: state.pizzas.pizzaInModal,
     currPizzaSize: state.pizzas.currPizzaSize,
+    currPizzaDough: state.pizzas.currPizzaDough,
   };
 };
 

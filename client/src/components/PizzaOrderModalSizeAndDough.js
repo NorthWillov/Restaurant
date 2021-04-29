@@ -2,12 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
-import { changePizzaSize } from "../redux/actions";
+import { changePizzaSize, changePizzaDough } from "../redux/actions";
 
 function PizzaOrderModalSizeAndDough(props) {
-  const { dough, newItem, handleDoughChange, classes } = props;
+  const { handleDoughChange, classes } = props;
 
   const currPizzaSize = useSelector((state) => state.pizzas.currPizzaSize);
+  const currPizzaDough = useSelector((state) => state.pizzas.currPizzaDough);
   const pizzaInModal = useSelector((state) => state.pizzas.pizzaInModal);
   const dispatch = useDispatch();
 
@@ -54,7 +55,8 @@ function PizzaOrderModalSizeAndDough(props) {
           value="50cm"
           checked={currPizzaSize === "50cm"}
           disabled={
-            dough === "grube" || pizzaInModal?.name === "Calzone (Pierog)"
+            currPizzaDough === "grube" ||
+            pizzaInModal?.name === "Calzone (Pierog)"
           }
           readOnly
         />
@@ -63,14 +65,17 @@ function PizzaOrderModalSizeAndDough(props) {
         </label>
       </div>
       <h6>Ciasto:</h6>
-      <div className={classes.group} onChange={handleDoughChange}>
+      <div
+        className={classes.group}
+        onChange={(e) => dispatch(changePizzaDough(e.target.value))}
+      >
         <input
           className={classes.input}
           type="radio"
           name="rb-dough"
           id="rb4"
           value="cieńkie"
-          checked={dough === "cieńkie"}
+          checked={currPizzaDough === "cieńkie"}
           disabled={pizzaInModal?.name === "Calzone (Pierog)"}
           readOnly
         />
@@ -84,7 +89,8 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb5"
           value="średnie"
           checked={
-            dough === "średnie" || pizzaInModal?.name === "Calzone (Pierog)"
+            currPizzaDough === "średnie" ||
+            pizzaInModal?.name === "Calzone (Pierog)"
           }
           readOnly
         />
@@ -97,7 +103,7 @@ function PizzaOrderModalSizeAndDough(props) {
           name="rb-dough"
           id="rb6"
           value="grube"
-          checked={dough === "grube"}
+          checked={currPizzaDough === "grube"}
           disabled={
             currPizzaSize === "50cm" ||
             pizzaInModal?.name === "Calzone (Pierog)"
