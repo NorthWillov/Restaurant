@@ -1,5 +1,6 @@
 import {
   OPEN_PIZZA_MODAL,
+  HIDE_PIZZA_MODAL,
   CHANGE_PIZZA_SIZE,
   REMOVE_PIZZA_INGREDIENT,
   RETURN_DELETED_PIZZA_INGREDIENT,
@@ -17,6 +18,8 @@ export const pizzaReducer = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_PIZZA_MODAL:
       return { ...state, isModalOpen: true, pizzaInModal: action.payload };
+    case HIDE_PIZZA_MODAL:
+      return { ...initialState };
     case CHANGE_PIZZA_SIZE:
       return { ...state, currPizzaSize: action.payload };
     case CHANGE_PIZZA_SIZE:

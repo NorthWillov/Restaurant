@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { connect } from "react-redux";
+import { hidePizzaModal } from "../redux/actions";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
@@ -27,7 +28,13 @@ function PizzaOrderModal(props) {
   );
   const { newItem } = useContext(NewItemContext);
 
-  const { classes, isModalOpen, pizzaInModal, currPizzaSize } = props;
+  const {
+    classes,
+    isModalOpen,
+    pizzaInModal,
+    currPizzaSize,
+    hidePizzaModal,
+  } = props;
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
@@ -86,14 +93,7 @@ function PizzaOrderModal(props) {
   };
 
   const handleModalClose = () => {
-    props.onHide();
-    setSize("20cm");
-    setDough("cieńkie");
-    setExtras([]);
-    setRemovedIng([]);
-    setFantazjaExtras({});
-    setExtrasSumPrice(0);
-    setCurrIngredients([]);
+    hidePizzaModal();
   };
 
   const handleModalSubmit = async () => {
@@ -284,7 +284,11 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = {
+  hidePizzaModal,
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withStyles(styles)(PizzaOrderModal));

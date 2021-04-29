@@ -8,6 +8,7 @@ function PizzaOrderModalSizeAndDough(props) {
   const { dough, newItem, handleDoughChange, classes } = props;
 
   const currPizzaSize = useSelector((state) => state.pizzas.currPizzaSize);
+  const pizzaInModal = useSelector((state) => state.pizzas.pizzaInModal);
   const dispatch = useDispatch();
 
   return (
@@ -24,7 +25,7 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb1"
           checked={currPizzaSize === "20cm"}
           value="20cm"
-          disabled={newItem.name === "Calzone (Pierog)"}
+          disabled={pizzaInModal?.name === "Calzone (Pierog)"}
           readOnly
         />
         <label className={classes.label} htmlFor="rb1">
@@ -37,7 +38,8 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb2"
           value="28cm"
           checked={
-            currPizzaSize === "28cm" || newItem.name === "Calzone (Pierog)"
+            currPizzaSize === "28cm" ||
+            pizzaInModal?.name === "Calzone (Pierog)"
           }
           readOnly
         />
@@ -51,7 +53,9 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb3"
           value="50cm"
           checked={currPizzaSize === "50cm"}
-          disabled={dough === "grube" || newItem.name === "Calzone (Pierog)"}
+          disabled={
+            dough === "grube" || pizzaInModal?.name === "Calzone (Pierog)"
+          }
           readOnly
         />
         <label className={classes.label} htmlFor="rb3">
@@ -67,7 +71,7 @@ function PizzaOrderModalSizeAndDough(props) {
           id="rb4"
           value="cieńkie"
           checked={dough === "cieńkie"}
-          disabled={newItem.name === "Calzone (Pierog)"}
+          disabled={pizzaInModal?.name === "Calzone (Pierog)"}
           readOnly
         />
         <label className={classes.label} htmlFor="rb4">
@@ -79,7 +83,9 @@ function PizzaOrderModalSizeAndDough(props) {
           name="rb-dough"
           id="rb5"
           value="średnie"
-          checked={dough === "średnie" || newItem.name === "Calzone (Pierog)"}
+          checked={
+            dough === "średnie" || pizzaInModal?.name === "Calzone (Pierog)"
+          }
           readOnly
         />
         <label className={classes.label} htmlFor="rb5">
@@ -93,7 +99,8 @@ function PizzaOrderModalSizeAndDough(props) {
           value="grube"
           checked={dough === "grube"}
           disabled={
-            currPizzaSize === "50cm" || newItem.name === "Calzone (Pierog)"
+            currPizzaSize === "50cm" ||
+            pizzaInModal?.name === "Calzone (Pierog)"
           }
           readOnly
         />

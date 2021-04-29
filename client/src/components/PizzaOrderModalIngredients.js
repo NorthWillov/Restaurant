@@ -28,7 +28,7 @@ function PizzaOrderModalIngredients(props) {
   return (
     <>
       <ul className={classes.modalIngredients}>
-        {pizzaInModal.ingredients.map((i, idx) => (
+        {pizzaInModal?.ingredients.map((i, idx) => (
           <li
             key={uuidv4()}
             value={i}
@@ -40,7 +40,7 @@ function PizzaOrderModalIngredients(props) {
                   {i}
                 </span>
                 <BackIcon styles={classes.icons} />
-                {pizzaInModal.ingredients[idx + 1] && ","}
+                {pizzaInModal?.ingredients[idx + 1] && ","}
               </div>
             ) : (
               <div onClick={() => removeIngredient(i)}>
@@ -48,7 +48,7 @@ function PizzaOrderModalIngredients(props) {
                   {i}
                 </span>
                 <RemoveIcon styles={classes.icons} />
-                {pizzaInModal.ingredients[idx + 1] && ","}
+                {pizzaInModal?.ingredients[idx + 1] && ","}
               </div>
             )}
           </li>
