@@ -16,7 +16,7 @@ function Landing(props) {
   const [lunchModalShow, setLunchModalShow] = useState(false);
   const [pizzaModalShow, setPizzaModalShow] = useState(false);
 
-  const { classes, isModalOpen } = props;
+  const { classes } = props;
 
   const { newItem, setNewItem } = useContext(NewItemContext);
   const { setCurrIngredients } = useContext(CurrIngredientsContext);
@@ -60,10 +60,4 @@ function Landing(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isModalOpen: state.pizzaModal.isModalOpen,
-  };
-};
-
-export default connect(mapStateToProps, null)(withStyles(styles)(Landing));
+export default withStyles(styles)(Landing);

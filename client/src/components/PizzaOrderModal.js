@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { connect } from "react-redux";
-import { hidePizzaModal } from "../redux/actions";
+import { hidePizzaModal } from "../redux/pizzaModalActions";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";

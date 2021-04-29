@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
-import { changePizzaSize, changePizzaDough } from "../redux/actions";
+import { changePizzaSize, changePizzaDough } from "../redux/pizzaModalActions";
 
 function PizzaOrderModalSizeAndDough(props) {
   const { classes } = props;

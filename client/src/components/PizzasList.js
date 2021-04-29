@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { connect } from "react-redux";
-import { openPizzaModal } from "../redux/actions";
+import { openPizzaModal } from "../redux/pizzaModalActions";
+import { getPizzas } from "../redux/pizzasActions";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaListStyles";
 
 function PizzasList(props) {
-  const [pizzas, setPizzas] = useState([]);
-  const { classes } = props;
+  const { classes, pizzas, getPizzas, openPizzaModal } = props;
 
   useEffect(() => {
-    const getPizzas = async () => {
-      try {
-        const response = await axios.get("/api/getPizzas");
-        setPizzas(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     getPizzas();
   }, []);
 
   const handlePizzaClick = (pizza) => {
-    props.openPizzaModal(pizza);
+    openPizzaModal(pizza);
   };
 
   return (
@@ -40,7 +31,7 @@ function PizzasList(props) {
                   variant="top"
                   src={pizza.image}
                   alt={pizza.name}
-                  onClick={() => props.handlePizzaClick(pizza)}
+                  onClick={() => handlePizzaClick(pizza)}
                 />
                 <Card.Body className={classes.CardBody}>
                   <Card.Title className={classes.title}>
@@ -88,9 +79,16 @@ function PizzasList(props) {
 
 const mapDispatchToProps = {
   openPizzaModal,
+  getPizzas,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    pizzas: state.pizzas.pizzas,
+  };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(PizzasList));

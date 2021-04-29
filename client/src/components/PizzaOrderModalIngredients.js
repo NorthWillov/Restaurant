@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { connect } from "react-redux";
-import { removeIngredient, backRemovedIngredient } from "../redux/actions";
+import {
+  removeIngredient,
+  backRemovedIngredient,
+} from "../redux/pizzaModalActions";
 import { Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import { NewItemContext } from "../contexts/NewItemContext";
