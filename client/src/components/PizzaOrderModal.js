@@ -40,18 +40,14 @@ function PizzaOrderModal(props) {
   );
 
   const extraIngredientsSumPrice = useMemo(() => {
+    if (pizzaInModal?.name === "Fantazja") {
+      return 0;
+    }
+
     return extraIngredients
       .map((ing) => ing.price[currPizzaSize])
       .reduce((a, b) => a + b, 0);
   }, [extraIngredients, currPizzaSize]);
-
-  const handleSizeChange = (e) => {
-    setSize(e.target.value);
-  };
-
-  const handleDoughChange = (e) => {
-    setDough(e.target.value);
-  };
 
   const handleIngredientClick = (i) => {
     const isIngredientRemoved = !currIngredients.includes(i);
@@ -189,17 +185,7 @@ function PizzaOrderModal(props) {
                   : `${currPizzaSize}, ${currPizzaDough}`}
               </p>
 
-              <PizzaOrderModalIngredients
-                extras={extras}
-                removedIng={removedIng}
-                handleIngredientClick={handleIngredientClick}
-                handleExtraIngredientInputClick={
-                  handleExtraIngredientInputClick
-                }
-                handleExtraIngredientClick={handleExtraIngredientClick}
-              />
-
-              {pizzaInModal?.name === "Fantazja" && (
+              {pizzaInModal?.name === "Fantazja" ? (
                 <PizzaOrderModalFantazjaCase
                   extras={extras}
                   newItem={pizzaInModal}
@@ -208,13 +194,13 @@ function PizzaOrderModal(props) {
                   handleFantazjaInputClick={handleFantazjaInputClick}
                   handleExtraIngredientClick={handleExtraIngredientClick}
                 />
+              ) : (
+                <PizzaOrderModalIngredients />
               )}
 
               <PizzaOrderModalSizeAndDough
                 dough={dough}
                 newItem={pizzaInModal}
-                handleSizeChange={handleSizeChange}
-                handleDoughChange={handleDoughChange}
               />
             </div>
             <div className={classes.checkout}>

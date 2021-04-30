@@ -17,12 +17,7 @@ import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
 function PizzaOrderModalIngredients(props) {
-  const { newItem } = useContext(NewItemContext);
-  const { currIngredients } = useContext(CurrIngredientsContext);
   const {
-    extras,
-    handleIngredientClick,
-    handleExtraIngredientClick,
     classes,
     pizzaInModal,
     removeIngredient,
@@ -90,7 +85,7 @@ function PizzaOrderModalIngredients(props) {
                   {formatter.format(ing.price[currPizzaSize])}zł]
                 </span>
                 <RemoveIcon styles={classes.icons} />
-                {extras[idx + 1] && ","}
+                {extraIngredients[idx + 1] && ","}
               </li>
             ))}
           </ul>
