@@ -10,6 +10,7 @@ const Lunch = require("./models/Lunch");
 const User = require("./models/User");
 const Cart = require("./models/Cart");
 const Order = require("./models/Order");
+const PizzaIngredient = require("./models/PizzaIngredient");
 
 dotenv.config();
 
