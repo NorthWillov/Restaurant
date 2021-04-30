@@ -7,6 +7,7 @@ import {
   CHANGE_PIZZA_DOUGH,
   ADD_EXTRA_PIZZA_INGREDIENT,
   REMOVE_EXTRA_PIZZA_INGREDIENT,
+  ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
 } from "./types";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   currPizzaDough: "cieńkie",
   removedIngredients: [],
   extraIngredients: [],
+  fantazjaIngredientChoices: {},
 };
 
 export const pizzaModalReducer = (state = initialState, action) => {
@@ -53,6 +55,14 @@ export const pizzaModalReducer = (state = initialState, action) => {
         extraIngredients: state.extraIngredients.filter(
           (ingredient) => ingredient.uniqId !== action.payload
         ),
+      };
+    case ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT:
+      return {
+        ...state,
+        fantazjaIngredientChoices: {
+          ...state.fantazjaIngredientChoices,
+          [action.form]: action.payload,
+        },
       };
 
     default:

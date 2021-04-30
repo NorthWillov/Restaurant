@@ -4,7 +4,6 @@ import { hidePizzaModal } from "../redux/pizzaModalActions";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
-import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
 import { CurrIngredientsContext } from "../contexts/CurrIngredientsContext";
 import { NewItemContext } from "../contexts/NewItemContext";
 import { ToastContext } from "../contexts/ToastContext";
@@ -40,10 +39,6 @@ function PizzaOrderModal(props) {
   );
 
   const extraIngredientsSumPrice = useMemo(() => {
-    if (pizzaInModal?.name === "Fantazja") {
-      return 0;
-    }
-
     return extraIngredients
       .map((ing) => ing.price[currPizzaSize])
       .reduce((a, b) => a + b, 0);
@@ -184,19 +179,7 @@ function PizzaOrderModal(props) {
                   ? "28cm, średnie"
                   : `${currPizzaSize}, ${currPizzaDough}`}
               </p>
-
-              {pizzaInModal?.name === "Fantazja" ? (
-                <PizzaOrderModalFantazjaCase
-                  extras={extras}
-                  newItem={pizzaInModal}
-                  currIngredients={currIngredients}
-                  handleIngredientClick={handleIngredientClick}
-                  handleFantazjaInputClick={handleFantazjaInputClick}
-                  handleExtraIngredientClick={handleExtraIngredientClick}
-                />
-              ) : (
-                <PizzaOrderModalIngredients />
-              )}
+              <PizzaOrderModalIngredients />
 
               <PizzaOrderModalSizeAndDough
                 dough={dough}

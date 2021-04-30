@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addExtraIngredient } from "../redux/pizzaModalActions";
+import { addExtraFantazyIngredient } from "../redux/pizzaModalActions";
 import { Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
@@ -11,6 +11,13 @@ function OrderModalFantazjaCase(props) {
   );
   const dispatch = useDispatch();
 
+  const handleChange = (e) => {
+    // if (e.target.value === "Wybierz składnik") {
+    //   dispatch(removeExtraFantazyIngredient(e.target.value));
+    // }
+    dispatch(addExtraFantazyIngredient(e.target.value, e.target.name));
+  };
+
   return (
     <>
       <Form>
@@ -18,7 +25,7 @@ function OrderModalFantazjaCase(props) {
           <Form.Control
             name="form1"
             className={"mt-1"}
-            onChange={(e) => dispatch(addExtraIngredient(e.target.value))}
+            onChange={handleChange}
             size="sm"
             as="select"
           >
@@ -32,7 +39,7 @@ function OrderModalFantazjaCase(props) {
           <Form.Control
             name="form2"
             className={"mt-1"}
-            onChange={(e) => dispatch(addExtraIngredient(e.target.value))}
+            onChange={handleChange}
             size="sm"
             as="select"
           >
@@ -46,7 +53,7 @@ function OrderModalFantazjaCase(props) {
           <Form.Control
             name="form3"
             className={"mt-1"}
-            onChange={(e) => dispatch(addExtraIngredient(e.target.value))}
+            onChange={handleChange}
             size="sm"
             as="select"
           >
@@ -60,7 +67,7 @@ function OrderModalFantazjaCase(props) {
           <Form.Control
             name="form4"
             className={"mt-1"}
-            onChange={(e) => dispatch(addExtraIngredient(e.target.value))}
+            onChange={handleChange}
             size="sm"
             as="select"
           >
@@ -74,7 +81,7 @@ function OrderModalFantazjaCase(props) {
           <Form.Control
             name="form5"
             className={"mt-1"}
-            onChange={(e) => dispatch(addExtraIngredient(e.target.value))}
+            onChange={handleChange}
             size="sm"
             as="select"
           >

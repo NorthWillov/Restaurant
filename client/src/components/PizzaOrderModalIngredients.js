@@ -7,10 +7,9 @@ import {
   addExtraIngredient,
 } from "../redux/pizzaModalActions";
 import { Form } from "react-bootstrap";
+import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
 import { v4 as uuidv4 } from "uuid";
 import { formatter } from "../utils/formatter";
-import { NewItemContext } from "../contexts/NewItemContext";
-import { CurrIngredientsContext } from "../contexts/CurrIngredientsContext";
 import RemoveIcon from "./icons/RemoveIcon";
 import BackIcon from "./icons/BackIcon";
 import { withStyles } from "@material-ui/styles";
@@ -30,13 +29,17 @@ function PizzaOrderModalIngredients(props) {
     addExtraIngredient,
   } = props;
 
+  const inputPlaceholder = `Dodaj${
+    pizzaInModal?.name === "Fantazja" ? " płatny" : ""
+  } składnik`;
+
   const handleExtraIngredientInputClick = (e) => {
-    if (e.target.value !== "Dodaj składnik") {
+    if (e.target.value !== inputPlaceholder) {
       addExtraIngredient({
         ...pizzaIngredients.find((ing) => ing.name === e.target.value),
         uniqId: uuidv4(),
       });
-      e.target.value = "Dodaj składnik";
+      e.target.value = inputPlaceholder;
     }
   };
 
@@ -69,6 +72,7 @@ function PizzaOrderModalIngredients(props) {
           </li>
         ))}
       </ul>
+      {pizzaInModal?.name === "Fantazja" && <PizzaOrderModalFantazjaCase />}
       {extraIngredients.length > 0 && (
         <React.Fragment>
           <h6>Dodatki:</h6>
@@ -99,7 +103,7 @@ function PizzaOrderModalIngredients(props) {
             as="select"
             disabled={extraIngredients.length >= 5}
           >
-            <option>Dodaj składnik</option>
+            <option>{inputPlaceholder}</option>
             {pizzaIngredients.map((i) => (
               <option key={i._id} value={i.name}>
                 {i.name}, [{currPizzaSize}: +
