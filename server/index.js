@@ -68,6 +68,13 @@ app.get("/api/getPizzas", async (req, res) => {
   });
 });
 
+app.get("/api/getPizzaIngredients", async (req, res) => {
+  await PizzaIngredient.find({}, (err, ingredients) => {
+    if (err) return console.log(err);
+    res.json(ingredients);
+  });
+});
+
 app.get("/api/getLunches", async (req, res) => {
   await Lunch.find((err, lunches) => {
     if (err) return console.log(err);
