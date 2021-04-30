@@ -1,45 +1,28 @@
-import React, { useState, useContext, useMemo } from "react";
-import { connect, useSelector } from "react-redux";
+import React, { useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { hidePizzaModal } from "../redux/pizzaModalActions";
 import { addProductToCart } from "../redux/cartActions";
-import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
-import { CurrIngredientsContext } from "../contexts/CurrIngredientsContext";
-import { NewItemContext } from "../contexts/NewItemContext";
-import { ToastContext } from "../contexts/ToastContext";
-import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalStyles";
+import CartIcon from "./icons/CartIcon";
+import ArrowIcon from "./icons/ArrowIcon";
 
 function PizzaOrderModal(props) {
-  const [size, setSize] = useState("20cm");
-  const [dough, setDough] = useState("cieńkie");
-  const [extras, setExtras] = useState([]);
-  const [removedIng, setRemovedIng] = useState([]);
-  const [extrasSumPrice, setExtrasSumPrice] = useState(0);
-  const [fantazjaExtras, setFantazjaExtras] = useState({});
-
-  const { toggleShow } = useContext(ToastContext);
-  const { currIngredients, setCurrIngredients } = useContext(
-    CurrIngredientsContext
-  );
-  const { newItem } = useContext(NewItemContext);
-
+  const { classes } = props;
+  const dispatch = useDispatch();
+  const pizzaModal = useSelector((state) => state.pizzaModal);
   const {
-    classes,
     isModalOpen,
     pizzaInModal,
     currPizzaSize,
     currPizzaDough,
-    hidePizzaModal,
-    addProductToCart,
+    extraIngredients,
     removedIngredients,
-  } = props;
-  const extraIngredients = useSelector(
-    (state) => state.pizzaModal.extraIngredients
-  );
+  } = pizzaModal;
 
   const extraIngredientsSumPrice = useMemo(() => {
     return extraIngredients
@@ -47,108 +30,27 @@ function PizzaOrderModal(props) {
       .reduce((a, b) => a + b, 0);
   }, [extraIngredients, currPizzaSize]);
 
-  const handleIngredientClick = (i) => {
-    const isIngredientRemoved = !currIngredients.includes(i);
-    if (isIngredientRemoved) {
-      setCurrIngredients([...currIngredients, i]);
-      setRemovedIng(removedIng.filter((ing) => ing !== i));
-    } else {
-      setCurrIngredients(currIngredients.filter((ing) => ing !== i));
-      setRemovedIng([...removedIng, i]);
-    }
-  };
-
-  const handleExtraIngredientClick = (i) => {
-    setExtras(extras.filter((ing) => ing.id !== i.id));
-    setExtrasSumPrice(extrasSumPrice - i.price);
-  };
-
-  const handleExtraIngredientInputClick = (e) => {
-    // if (e.target.value !== "Dodaj składnik") {
-    //   let newIngredient = MENU.pizzasIngredients.find(
-    //     (ing) => ing.name === e.target.value
-    //   );
-    //   newIngredient = { ...newIngredient, id: uuidv4() };
-    //   setExtras([...extras, newIngredient]);
-    //   setExtrasSumPrice(extrasSumPrice + newIngredient.price);
-    //   e.target.value = "Dodaj składnik";
-    // }
-    console.log("DONT WORK FOR NOW REFACTORING FOR WEBPACK");
-  };
-
-  const handleFantazjaInputClick = (e) => {
-    // if (e.target.value !== "Wybierz składnik") {
-    //   let newIngredient = MENU.pizzasIngredients.find(
-    //     (ing) => ing.name === e.target.value
-    //   );
-    //   newIngredient = { ...newIngredient, id: uuidv4() };
-    //   setFantazjaExtras({
-    //     ...fantazjaExtras,
-    //     [e.target.name]: newIngredient,
-    //   });
-    // } else {
-    //   setFantazjaExtras({
-    //     ...fantazjaExtras,
-    //     [e.target.name]: "",
-    //   });
-    // }
-    console.log("DONT WORK FOR NOW REFACTORING FOR WEBPACK");
-  };
+  const pizzaPrice = useMemo(() => {
+    return pizzaInModal?.name === "Calzone (Pierog)"
+      ? formatter.format(pizzaInModal?.price + extraIngredientsSumPrice)
+      : currPizzaSize === "20cm"
+      ? formatter.format(
+          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
+        )
+      : currPizzaSize === "28cm"
+      ? formatter.format(
+          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
+        )
+      : currPizzaSize === "50cm"
+      ? formatter.format(
+          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
+        )
+      : 0;
+  }, [extraIngredients, currPizzaSize, isModalOpen]);
 
   const handleModalClose = () => {
-    hidePizzaModal();
+    dispatch(hidePizzaModal());
   };
-
-  // const handleModalSubmit = async () => {
-  //   let product = {};
-
-  //   if (newItem.name === "Calzone (Pierog)") {
-  //     product = {
-  //       name: newItem.name,
-  //       image: newItem.image,
-  //       ingredients: currIngredients,
-  //       size: "28cm",
-  //       dough: "średnie",
-  //       productType: newItem.type,
-  //       quantity: 1,
-  //       extras,
-  //       removedIng,
-  //       price: newItem.price + extrasSumPrice,
-  //     };
-  //   } else {
-  //     product = {
-  //       name: newItem.name,
-  //       image: newItem.image,
-  //       productType: newItem.type,
-  //       quantity: 1,
-  //       ingredients: currIngredients,
-  //       size,
-  //       dough,
-  //       extras:
-  //         newItem.name === "Fantazja" ? Object.values(fantazjaExtras) : extras,
-  //       removedIng,
-  //       price:
-  //         (size === "20cm" && newItem.price["20cm"] + extrasSumPrice) ||
-  //         (size === "28cm" && newItem.price["28cm"] + extrasSumPrice) ||
-  //         (size === "50cm" && newItem.price["50cm"] + extrasSumPrice),
-  //     };
-  //   }
-  //   try {
-  //     const res = await axios.post("/api/addProduct", { product });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  //   props.onHide();
-  //   setSize("20cm");
-  //   setDough("cieńkie");
-  //   setExtras([]);
-  //   setRemovedIng([]);
-  //   setExtrasSumPrice(0);
-  //   setCurrIngredients([]);
-  //   setFantazjaExtras({});
-  //   toggleShow();
-  // };
 
   const handleModalSubmit = () => {
     const product = {
@@ -160,16 +62,10 @@ function PizzaOrderModal(props) {
       dough: currPizzaDough,
       extras: extraIngredients,
       removedIng: removedIngredients,
-      price:
-        (currPizzaSize === "20cm" &&
-          pizzaInModal.price["20cm"] + extraIngredientsSumPrice) ||
-        (currPizzaSize === "28cm" &&
-          pizzaInModal.price["28cm"] + extraIngredientsSumPrice) ||
-        (currPizzaSize === "50cm" &&
-          pizzaInModal.price["50cm"] + extraIngredientsSumPrice),
+      price: pizzaPrice,
     };
-    addProductToCart(product);
-    hidePizzaModal();
+    dispatch(addProductToCart(product));
+    dispatch(hidePizzaModal());
   };
 
   return (
@@ -206,10 +102,7 @@ function PizzaOrderModal(props) {
               </p>
               <PizzaOrderModalIngredients />
 
-              <PizzaOrderModalSizeAndDough
-                dough={dough}
-                newItem={pizzaInModal}
-              />
+              <PizzaOrderModalSizeAndDough />
             </div>
             <div className={classes.checkout}>
               <Button
@@ -217,42 +110,11 @@ function PizzaOrderModal(props) {
                 onClick={handleModalClose}
                 className="mr-3"
               >
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  className="bi bi-arrow-left-short"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                  />
-                </svg>
+                <ArrowIcon />
                 Wroć
               </Button>
               <span className={classes.modalPrice}>
-                {pizzaInModal?.name === "Calzone (Pierog)"
-                  ? formatter.format(
-                      pizzaInModal?.price + extraIngredientsSumPrice
-                    )
-                  : currPizzaSize === "20cm"
-                  ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] +
-                        extraIngredientsSumPrice
-                    )
-                  : currPizzaSize === "28cm"
-                  ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] +
-                        extraIngredientsSumPrice
-                    )
-                  : currPizzaSize === "50cm"
-                  ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] +
-                        extraIngredientsSumPrice
-                    )
-                  : null}
+                {pizzaPrice}
                 zł
               </span>
 
@@ -261,20 +123,7 @@ function PizzaOrderModal(props) {
                 onClick={handleModalSubmit}
                 type="button"
               >
-                Dodaj{" "}
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  className={`bi bi-cart2 ${classes.icon}`}
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                  />
-                </svg>
+                Dodaj <CartIcon styles={classes.icon} />
               </Button>
             </div>
           </Col>
@@ -284,22 +133,4 @@ function PizzaOrderModal(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isModalOpen: state.pizzaModal.isModalOpen,
-    pizzaInModal: state.pizzaModal.pizzaInModal,
-    currPizzaSize: state.pizzaModal.currPizzaSize,
-    currPizzaDough: state.pizzaModal.currPizzaDough,
-    removedIngredients: state.pizzaModal.removedIngredients,
-  };
-};
-
-const mapDispatchToProps = {
-  hidePizzaModal,
-  addProductToCart,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(PizzaOrderModal));
+export default withStyles(styles)(PizzaOrderModal);
