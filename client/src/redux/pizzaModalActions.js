@@ -56,9 +56,9 @@ export function addExtraIngredient(ing) {
   };
 }
 
-export function removeExtraIngredient(ing) {
+export function removeExtraIngredient(ingUniqId) {
   return {
     type: REMOVE_EXTRA_PIZZA_INGREDIENT,
-    payload: ing,
+    payload: ingUniqId,
   };
 }

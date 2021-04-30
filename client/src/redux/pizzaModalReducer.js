@@ -51,7 +51,7 @@ export const pizzaModalReducer = (state = initialState, action) => {
       return {
         ...state,
         extraIngredients: state.extraIngredients.filter(
-          (ingredient) => ingredient !== action.payload
+          (ingredient) => ingredient.uniqId !== action.payload
         ),
       };
 

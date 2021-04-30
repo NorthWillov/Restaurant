@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { connect } from "react-redux";
+import React, { useState, useContext, useMemo } from "react";
+import { connect, useSelector } from "react-redux";
 import { hidePizzaModal } from "../redux/pizzaModalActions";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
@@ -10,7 +10,6 @@ import { NewItemContext } from "../contexts/NewItemContext";
 import { ToastContext } from "../contexts/ToastContext";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
-import { v4 as uuidv4 } from "uuid";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalStyles";
 
@@ -36,6 +35,15 @@ function PizzaOrderModal(props) {
     currPizzaDough,
     hidePizzaModal,
   } = props;
+  const extraIngredients = useSelector(
+    (state) => state.pizzaModal.extraIngredients
+  );
+
+  const extraIngredientsSumPrice = useMemo(() => {
+    return extraIngredients
+      .map((ing) => ing.price[currPizzaSize])
+      .reduce((a, b) => a + b, 0);
+  }, [extraIngredients, currPizzaSize]);
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
@@ -232,18 +240,23 @@ function PizzaOrderModal(props) {
               </Button>
               <span className={classes.modalPrice}>
                 {pizzaInModal?.name === "Calzone (Pierog)"
-                  ? formatter.format(pizzaInModal?.price + extrasSumPrice)
+                  ? formatter.format(
+                      pizzaInModal?.price + extraIngredientsSumPrice
+                    )
                   : currPizzaSize === "20cm"
                   ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                      pizzaInModal?.price[currPizzaSize] +
+                        extraIngredientsSumPrice
                     )
                   : currPizzaSize === "28cm"
                   ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                      pizzaInModal?.price[currPizzaSize] +
+                        extraIngredientsSumPrice
                     )
                   : currPizzaSize === "50cm"
                   ? formatter.format(
-                      pizzaInModal?.price[currPizzaSize] + extrasSumPrice
+                      pizzaInModal?.price[currPizzaSize] +
+                        extraIngredientsSumPrice
                     )
                   : null}
                 zł

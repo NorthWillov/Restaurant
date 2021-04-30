@@ -37,9 +37,10 @@ function PizzaOrderModalIngredients(props) {
 
   const handleExtraIngredientInputClick = (e) => {
     if (e.target.value !== "Dodaj składnik") {
-      addExtraIngredient(
-        pizzaIngredients.find((ing) => ing.name === e.target.value)
-      );
+      addExtraIngredient({
+        ...pizzaIngredients.find((ing) => ing.name === e.target.value),
+        uniqId: uuidv4(),
+      });
       e.target.value = "Dodaj składnik";
     }
   };
@@ -80,9 +81,9 @@ function PizzaOrderModalIngredients(props) {
           <ul className={classes.modalIngredients}>
             {extraIngredients.map((ing, idx) => (
               <li
-                key={ing._id}
+                key={ing.uniqId}
                 className={classes.modalIngredientsIngredient}
-                onClick={() => removeExtraIngredient(ing)}
+                onClick={() => removeExtraIngredient(ing.uniqId)}
               >
                 <span className={classes.modalIngredientsIngredientName}>
                   {ing.name}, [{currPizzaSize}: +
@@ -101,7 +102,7 @@ function PizzaOrderModalIngredients(props) {
             onChange={handleExtraIngredientInputClick}
             size="sm"
             as="select"
-            disabled={extras.length >= 5}
+            disabled={extraIngredients.length >= 5}
           >
             <option>Dodaj składnik</option>
             {pizzaIngredients.map((i) => (
