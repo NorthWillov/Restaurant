@@ -22,6 +22,7 @@ function PizzaOrderModal(props) {
     currPizzaDough,
     extraIngredients,
     removedIngredients,
+    fantazjaIngredientChoices,
   } = pizzaModal;
 
   const extraIngredientsSumPrice = useMemo(() => {
@@ -60,7 +61,12 @@ function PizzaOrderModal(props) {
       quantity: 1,
       size: currPizzaSize,
       dough: currPizzaDough,
-      extras: extraIngredients,
+      extras:
+        pizzaInModal.name === "Fantazja"
+          ? extraIngredients
+              .map((ing) => ing.name)
+              .concat(Object.values(fantazjaIngredientChoices))
+          : extraIngredients.map((ing) => ing.name),
       removedIng: removedIngredients,
       price: pizzaPrice,
     };
