@@ -181,23 +181,23 @@ function PizzaOrderModal(props) {
                   : `${currPizzaSize}, ${currPizzaDough}`}
               </p>
 
-              {pizzaInModal?.name === "Fantazja" ? (
+              <PizzaOrderModalIngredients
+                extras={extras}
+                removedIng={removedIng}
+                handleIngredientClick={handleIngredientClick}
+                handleExtraIngredientInputClick={
+                  handleExtraIngredientInputClick
+                }
+                handleExtraIngredientClick={handleExtraIngredientClick}
+              />
+
+              {pizzaInModal?.name === "Fantazja" && (
                 <PizzaOrderModalFantazjaCase
                   extras={extras}
                   newItem={pizzaInModal}
                   currIngredients={currIngredients}
                   handleIngredientClick={handleIngredientClick}
                   handleFantazjaInputClick={handleFantazjaInputClick}
-                  handleExtraIngredientClick={handleExtraIngredientClick}
-                />
-              ) : (
-                <PizzaOrderModalIngredients
-                  extras={extras}
-                  removedIng={removedIng}
-                  handleIngredientClick={handleIngredientClick}
-                  handleExtraIngredientInputClick={
-                    handleExtraIngredientInputClick
-                  }
                   handleExtraIngredientClick={handleExtraIngredientClick}
                 />
               )}
