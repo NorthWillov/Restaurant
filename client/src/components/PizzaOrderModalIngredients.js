@@ -2,10 +2,13 @@ import React, { useContext } from "react";
 import { connect } from "react-redux";
 import {
   removeIngredient,
+  removeExtraIngredient,
   backRemovedIngredient,
+  addExtraIngredient,
 } from "../redux/pizzaModalActions";
 import { Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
+import { formatter } from "../utils/formatter";
 import { NewItemContext } from "../contexts/NewItemContext";
 import { CurrIngredientsContext } from "../contexts/CurrIngredientsContext";
 import RemoveIcon from "./icons/RemoveIcon";
@@ -19,14 +22,27 @@ function PizzaOrderModalIngredients(props) {
   const {
     extras,
     handleIngredientClick,
-    handleExtraIngredientInputClick,
     handleExtraIngredientClick,
     classes,
     pizzaInModal,
     removeIngredient,
+    removeExtraIngredient,
+    extraIngredients,
     backRemovedIngredient,
     removedIngredients,
+    pizzaIngredients,
+    currPizzaSize,
+    addExtraIngredient,
   } = props;
+
+  const handleExtraIngredientInputClick = (e) => {
+    if (e.target.value !== "Dodaj składnik") {
+      addExtraIngredient(
+        pizzaIngredients.find((ing) => ing.name === e.target.value)
+      );
+      e.target.value = "Dodaj składnik";
+    }
+  };
 
   return (
     <>
@@ -57,38 +73,22 @@ function PizzaOrderModalIngredients(props) {
           </li>
         ))}
       </ul>
-      {extras.length > 0 && (
+      {extraIngredients.length > 0 && (
         <React.Fragment>
           <h6>Dodatki:</h6>
 
           <ul className={classes.modalIngredients}>
-            {extras.map((el, idx) => (
+            {extraIngredients.map((ing, idx) => (
               <li
-                key={uuidv4()}
+                key={ing._id}
                 className={classes.modalIngredientsIngredient}
-                onClick={() => handleExtraIngredientClick(el)}
+                onClick={() => removeExtraIngredient(ing)}
               >
                 <span className={classes.modalIngredientsIngredientName}>
-                  {el.name}
+                  {ing.name}, [{currPizzaSize}: +
+                  {formatter.format(ing.price[currPizzaSize])}zł]
                 </span>
-                <span>{`+(${el.price}zł)`}</span>
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  className={`bi bi-dash-circle ${classes.icons}`}
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
-                  />
-                </svg>
+                <RemoveIcon styles={classes.icons} />
                 {extras[idx + 1] && ","}
               </li>
             ))}
@@ -97,21 +97,20 @@ function PizzaOrderModalIngredients(props) {
       )}
       <Form>
         <Form.Group>
-          {/* DONT WORK FOR KNOW REFACTORING FOR WEBPACK */}
-
-          {/* <Form.Control
+          <Form.Control
             onChange={handleExtraIngredientInputClick}
             size="sm"
             as="select"
             disabled={extras.length >= 5}
           >
             <option>Dodaj składnik</option>
-            {MENU.pizzasIngredients.map((i, idx) => (
-              <option key={idx} value={i.name}>
-                {i.name} (+{i.price}pln)
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
+                {i.name}, [{currPizzaSize}: +
+                {formatter.format(i.price[currPizzaSize])}zł]
               </option>
             ))}
-          </Form.Control> */}
+          </Form.Control>
         </Form.Group>
       </Form>
     </>
@@ -122,11 +121,16 @@ const mapStateToProps = (state) => {
   return {
     pizzaInModal: state.pizzaModal.pizzaInModal,
     removedIngredients: state.pizzaModal.removedIngredients,
+    extraIngredients: state.pizzaModal.extraIngredients,
+    pizzaIngredients: state.pizzas.pizzaIngredients,
+    currPizzaSize: state.pizzaModal.currPizzaSize,
   };
 };
 const mapDispatchToProps = {
   removeIngredient,
+  removeExtraIngredient,
   backRemovedIngredient,
+  addExtraIngredient,
 };
 
 export default connect(

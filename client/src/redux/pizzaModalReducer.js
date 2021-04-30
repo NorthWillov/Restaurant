@@ -5,6 +5,8 @@ import {
   REMOVE_PIZZA_INGREDIENT,
   RETURN_DELETED_PIZZA_INGREDIENT,
   CHANGE_PIZZA_DOUGH,
+  ADD_EXTRA_PIZZA_INGREDIENT,
+  REMOVE_EXTRA_PIZZA_INGREDIENT,
 } from "./types";
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   currPizzaSize: "20cm",
   currPizzaDough: "cieńkie",
   removedIngredients: [],
+  extraIngredients: [],
 };
 
 export const pizzaModalReducer = (state = initialState, action) => {
@@ -36,6 +39,18 @@ export const pizzaModalReducer = (state = initialState, action) => {
       return {
         ...state,
         removedIngredients: state.removedIngredients.filter(
+          (ingredient) => ingredient !== action.payload
+        ),
+      };
+    case ADD_EXTRA_PIZZA_INGREDIENT:
+      return {
+        ...state,
+        extraIngredients: [...state.extraIngredients, action.payload],
+      };
+    case REMOVE_EXTRA_PIZZA_INGREDIENT:
+      return {
+        ...state,
+        extraIngredients: state.extraIngredients.filter(
           (ingredient) => ingredient !== action.payload
         ),
       };

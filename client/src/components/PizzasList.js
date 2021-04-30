@@ -3,15 +3,22 @@ import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { connect } from "react-redux";
 import { openPizzaModal } from "../redux/pizzaModalActions";
-import { getPizzas } from "../redux/pizzasActions";
+import { getPizzas, getPizzaIngredients } from "../redux/pizzasActions";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaListStyles";
 
 function PizzasList(props) {
-  const { classes, pizzas, getPizzas, openPizzaModal } = props;
+  const {
+    classes,
+    pizzas,
+    getPizzas,
+    getPizzaIngredients,
+    openPizzaModal,
+  } = props;
 
   useEffect(() => {
     getPizzas();
+    getPizzaIngredients();
   }, []);
 
   const handlePizzaClick = (pizza) => {
@@ -80,11 +87,13 @@ function PizzasList(props) {
 const mapDispatchToProps = {
   openPizzaModal,
   getPizzas,
+  getPizzaIngredients,
 };
 
 const mapStateToProps = (state) => {
   return {
     pizzas: state.pizzas.pizzas,
+    pizzaIngredients: state.pizzas.pizzaIngredients,
   };
 };
 

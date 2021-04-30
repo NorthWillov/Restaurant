@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
+import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
@@ -13,8 +13,10 @@ function OrderModalFantazjaCase(props) {
     handleFantazjaInputClick,
   } = props;
 
-  const pizzaInModal = useSelector((state) => state.pizzas.pizzaInModal);
-  const mustBeIngredientsFromDb = [{ name: "krewetki" }, { name: "fuga" }];
+  const pizzaIngredients = useSelector(
+    (state) => state.pizzas.pizzaIngredients
+  );
+  const currPizzaSize = useSelector((state) => state.pizzaModal.currPizzaSize);
 
   return (
     <>
@@ -28,9 +30,10 @@ function OrderModalFantazjaCase(props) {
             as="select"
           >
             <option>{`Wybierz składnik`}</option>
-            {mustBeIngredientsFromDb.map((i) => (
-              <option key={uuidv4()} value={i.name}>
-                {i.name}
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
+                {i.name}, [{currPizzaSize}: +
+                {formatter.format(i.price[currPizzaSize])}zł]
               </option>
             ))}
           </Form.Control>
@@ -42,8 +45,8 @@ function OrderModalFantazjaCase(props) {
             as="select"
           >
             <option>{`Wybierz składnik`}</option>
-            {mustBeIngredientsFromDb.map((i) => (
-              <option key={uuidv4()} value={i.name}>
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
                 {i.name}
               </option>
             ))}
@@ -56,8 +59,8 @@ function OrderModalFantazjaCase(props) {
             as="select"
           >
             <option>{`Wybierz składnik`}</option>
-            {mustBeIngredientsFromDb.map((i) => (
-              <option key={uuidv4()} value={i.name}>
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
                 {i.name}
               </option>
             ))}
@@ -70,8 +73,8 @@ function OrderModalFantazjaCase(props) {
             as="select"
           >
             <option>{`Wybierz składnik`}</option>
-            {mustBeIngredientsFromDb.map((i) => (
-              <option key={uuidv4()} value={i.name}>
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
                 {i.name}
               </option>
             ))}
@@ -84,8 +87,8 @@ function OrderModalFantazjaCase(props) {
             as="select"
           >
             <option>{`Wybierz składnik`}</option>
-            {mustBeIngredientsFromDb.map((i) => (
-              <option key={uuidv4()} value={i.name}>
+            {pizzaIngredients.map((i) => (
+              <option key={i._id} value={i.name}>
                 {i.name}
               </option>
             ))}
