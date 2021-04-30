@@ -10,7 +10,6 @@ const cartSchema = new mongoose.Schema(
         quantity: Number,
         size: String,
         dough: String,
-        ingredients: [String],
         removedIng: [String],
         extras: [],
         price: Number,

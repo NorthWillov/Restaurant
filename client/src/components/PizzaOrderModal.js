@@ -1,6 +1,7 @@
 import React, { useState, useContext, useMemo } from "react";
 import { connect, useSelector } from "react-redux";
 import { hidePizzaModal } from "../redux/pizzaModalActions";
+import { addProductToCart } from "../redux/cartActions";
 import axios from "axios";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
@@ -33,6 +34,8 @@ function PizzaOrderModal(props) {
     currPizzaSize,
     currPizzaDough,
     hidePizzaModal,
+    addProductToCart,
+    removedIngredients,
   } = props;
   const extraIngredients = useSelector(
     (state) => state.pizzaModal.extraIngredients
@@ -96,55 +99,77 @@ function PizzaOrderModal(props) {
     hidePizzaModal();
   };
 
-  const handleModalSubmit = async () => {
-    let product = {};
+  // const handleModalSubmit = async () => {
+  //   let product = {};
 
-    if (newItem.name === "Calzone (Pierog)") {
-      product = {
-        name: newItem.name,
-        image: newItem.image,
-        ingredients: currIngredients,
-        size: "28cm",
-        dough: "średnie",
-        productType: newItem.type,
-        quantity: 1,
-        extras,
-        removedIng,
-        price: newItem.price + extrasSumPrice,
-      };
-    } else {
-      product = {
-        name: newItem.name,
-        image: newItem.image,
-        productType: newItem.type,
-        quantity: 1,
-        ingredients: currIngredients,
-        size,
-        dough,
-        extras:
-          newItem.name === "Fantazja" ? Object.values(fantazjaExtras) : extras,
-        removedIng,
-        price:
-          (size === "20cm" && newItem.price["20cm"] + extrasSumPrice) ||
-          (size === "28cm" && newItem.price["28cm"] + extrasSumPrice) ||
-          (size === "50cm" && newItem.price["50cm"] + extrasSumPrice),
-      };
-    }
-    try {
-      const res = await axios.post("/api/addProduct", { product });
-    } catch (err) {
-      console.log(err);
-    }
+  //   if (newItem.name === "Calzone (Pierog)") {
+  //     product = {
+  //       name: newItem.name,
+  //       image: newItem.image,
+  //       ingredients: currIngredients,
+  //       size: "28cm",
+  //       dough: "średnie",
+  //       productType: newItem.type,
+  //       quantity: 1,
+  //       extras,
+  //       removedIng,
+  //       price: newItem.price + extrasSumPrice,
+  //     };
+  //   } else {
+  //     product = {
+  //       name: newItem.name,
+  //       image: newItem.image,
+  //       productType: newItem.type,
+  //       quantity: 1,
+  //       ingredients: currIngredients,
+  //       size,
+  //       dough,
+  //       extras:
+  //         newItem.name === "Fantazja" ? Object.values(fantazjaExtras) : extras,
+  //       removedIng,
+  //       price:
+  //         (size === "20cm" && newItem.price["20cm"] + extrasSumPrice) ||
+  //         (size === "28cm" && newItem.price["28cm"] + extrasSumPrice) ||
+  //         (size === "50cm" && newItem.price["50cm"] + extrasSumPrice),
+  //     };
+  //   }
+  //   try {
+  //     const res = await axios.post("/api/addProduct", { product });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
 
-    props.onHide();
-    setSize("20cm");
-    setDough("cieńkie");
-    setExtras([]);
-    setRemovedIng([]);
-    setExtrasSumPrice(0);
-    setCurrIngredients([]);
-    setFantazjaExtras({});
-    toggleShow();
+  //   props.onHide();
+  //   setSize("20cm");
+  //   setDough("cieńkie");
+  //   setExtras([]);
+  //   setRemovedIng([]);
+  //   setExtrasSumPrice(0);
+  //   setCurrIngredients([]);
+  //   setFantazjaExtras({});
+  //   toggleShow();
+  // };
+
+  const handleModalSubmit = () => {
+    const product = {
+      name: pizzaInModal.name,
+      image: pizzaInModal.image,
+      productType: pizzaInModal.type,
+      quantity: 1,
+      size: currPizzaSize,
+      dough: currPizzaDough,
+      extras: extraIngredients,
+      removedIng: removedIngredients,
+      price:
+        (currPizzaSize === "20cm" &&
+          pizzaInModal.price["20cm"] + extraIngredientsSumPrice) ||
+        (currPizzaSize === "28cm" &&
+          pizzaInModal.price["28cm"] + extraIngredientsSumPrice) ||
+        (currPizzaSize === "50cm" &&
+          pizzaInModal.price["50cm"] + extraIngredientsSumPrice),
+    };
+    addProductToCart(product);
+    hidePizzaModal();
   };
 
   return (
@@ -265,11 +290,13 @@ const mapStateToProps = (state) => {
     pizzaInModal: state.pizzaModal.pizzaInModal,
     currPizzaSize: state.pizzaModal.currPizzaSize,
     currPizzaDough: state.pizzaModal.currPizzaDough,
+    removedIngredients: state.pizzaModal.removedIngredients,
   };
 };
 
 const mapDispatchToProps = {
   hidePizzaModal,
+  addProductToCart,
 };
 
 export default connect(

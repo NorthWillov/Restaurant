@@ -8,6 +8,7 @@ import {
   RETURN_DELETED_PIZZA_INGREDIENT,
   REMOVE_EXTRA_PIZZA_INGREDIENT,
   ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
+  ADD_PRODUCT_TO_CART,
 } from "./types";
 
 export function openPizzaModal(pizza) {
