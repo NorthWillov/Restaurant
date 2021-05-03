@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   removeIngredient,
   removeExtraIngredient,
@@ -16,18 +16,20 @@ import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
 function PizzaOrderModalIngredients(props) {
+  const { classes } = props;
+
+  const dispatch = useDispatch();
+
+  const pizzaIngredients = useSelector(
+    (state) => state.pizzas.pizzaIngredients
+  );
+  const pizzaModal = useSelector((state) => state.pizzaModal);
   const {
-    classes,
     pizzaInModal,
-    removeIngredient,
-    removeExtraIngredient,
-    extraIngredients,
-    backRemovedIngredient,
     removedIngredients,
-    pizzaIngredients,
+    extraIngredients,
     currPizzaSize,
-    addExtraIngredient,
-  } = props;
+  } = pizzaModal;
 
   const inputPlaceholder = `Dodaj${
     pizzaInModal?.name === "Fantazja" ? " płatny" : ""
@@ -35,10 +37,12 @@ function PizzaOrderModalIngredients(props) {
 
   const handleExtraIngredientInputClick = (e) => {
     if (e.target.value !== inputPlaceholder) {
-      addExtraIngredient({
-        ...pizzaIngredients.find((ing) => ing.name === e.target.value),
-        uniqId: uuidv4(),
-      });
+      dispatch(
+        addExtraIngredient({
+          ...pizzaIngredients.find((ing) => ing.name === e.target.value),
+          uniqId: uuidv4(),
+        })
+      );
       e.target.value = inputPlaceholder;
     }
   };
@@ -53,7 +57,7 @@ function PizzaOrderModalIngredients(props) {
             className={classes.modalIngredientsIngredient}
           >
             {removedIngredients.includes(i) ? (
-              <div onClick={() => backRemovedIngredient(i)}>
+              <div onClick={() => dispatch(backRemovedIngredient(i))}>
                 <span className={classes.modalIngredientsIngredientNameDeleted}>
                   {i}
                 </span>
@@ -61,7 +65,7 @@ function PizzaOrderModalIngredients(props) {
                 {pizzaInModal?.ingredients[idx + 1] && ","}
               </div>
             ) : (
-              <div onClick={() => removeIngredient(i)}>
+              <div onClick={() => dispatch(removeIngredient(i))}>
                 <span className={classes.modalIngredientsIngredientName}>
                   {i}
                 </span>
@@ -82,7 +86,7 @@ function PizzaOrderModalIngredients(props) {
               <li
                 key={ing.uniqId}
                 className={classes.modalIngredientsIngredient}
-                onClick={() => removeExtraIngredient(ing.uniqId)}
+                onClick={() => dispatch(removeExtraIngredient(ing.uniqId))}
               >
                 <span className={classes.modalIngredientsIngredientName}>
                   {ing.name}, [{currPizzaSize}: +
@@ -117,23 +121,4 @@ function PizzaOrderModalIngredients(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pizzaInModal: state.pizzaModal.pizzaInModal,
-    removedIngredients: state.pizzaModal.removedIngredients,
-    extraIngredients: state.pizzaModal.extraIngredients,
-    pizzaIngredients: state.pizzas.pizzaIngredients,
-    currPizzaSize: state.pizzaModal.currPizzaSize,
-  };
-};
-const mapDispatchToProps = {
-  removeIngredient,
-  removeExtraIngredient,
-  backRemovedIngredient,
-  addExtraIngredient,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(PizzaOrderModalIngredients));
+export default withStyles(styles)(PizzaOrderModalIngredients);
