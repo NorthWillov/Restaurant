@@ -1,4 +1,4 @@
-import {} from "./types";
+import {} from "../types";
 
 const initialState = {
   cart: [],

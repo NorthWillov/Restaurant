@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PIZZAS, GET_PIZZA_INGREDIENTS } from "./types";
+import { GET_PIZZAS, GET_PIZZA_INGREDIENTS } from "../types";
 
 export function getPizzas() {
   return async (dispatch) => {

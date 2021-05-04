@@ -9,7 +9,7 @@ import {
   REMOVE_EXTRA_PIZZA_INGREDIENT,
   ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
   REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT,
-} from "./types";
+} from "../types";
 
 const initialState = {
   isModalOpen: false,

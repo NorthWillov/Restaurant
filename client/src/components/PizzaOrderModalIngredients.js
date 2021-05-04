@@ -5,7 +5,7 @@ import {
   removeExtraIngredient,
   backRemovedIngredient,
   addExtraIngredient,
-} from "../redux/pizzaModalActions";
+} from "../redux/actions/pizzaModalActions";
 import { Form } from "react-bootstrap";
 import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
 import { v4 as uuidv4 } from "uuid";

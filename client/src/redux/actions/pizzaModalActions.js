@@ -10,7 +10,7 @@ import {
   ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
   ADD_PRODUCT_TO_CART,
   REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT,
-} from "./types";
+} from "../types";
 
 export function openPizzaModal(pizza) {
   return (dispatch) => {

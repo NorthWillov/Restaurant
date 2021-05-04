@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { connect } from "react-redux";
-import { openPizzaModal } from "../redux/pizzaModalActions";
-import { getPizzas, getPizzaIngredients } from "../redux/pizzasActions";
+import { openPizzaModal } from "../redux/actions/pizzaModalActions";
+import { getPizzas, getPizzaIngredients } from "../redux/actions/pizzasActions";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaListStyles";
 
