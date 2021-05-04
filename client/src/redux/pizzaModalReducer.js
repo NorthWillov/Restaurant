@@ -15,7 +15,7 @@ const initialState = {
   isModalOpen: false,
   pizzaInModal: null,
   currPizzaSize: "20cm",
-  currPizzaDough: "cieńkie",
+  currPizzaDough: "średnie",
   removedIngredients: [],
   extraIngredients: [],
   fantazjaIngredientChoices: {},

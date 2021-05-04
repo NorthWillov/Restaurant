@@ -13,9 +13,11 @@ import {
 } from "./types";
 
 export function openPizzaModal(pizza) {
-  return {
-    type: OPEN_PIZZA_MODAL,
-    payload: pizza,
+  return (dispatch) => {
+    if (pizza.name === "Calzone (Pierog)") {
+      dispatch(changePizzaSize("28cm"));
+    }
+    dispatch({ type: OPEN_PIZZA_MODAL, payload: pizza });
   };
 }
 
