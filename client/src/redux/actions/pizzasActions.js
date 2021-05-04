@@ -14,6 +14,7 @@ export function getPizzas() {
     }
   };
 }
+
 export function getPizzaIngredients() {
   return async (dispatch) => {
     try {

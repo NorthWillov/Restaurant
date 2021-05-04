@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getCart } from "../redux/actions/cartActions";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
@@ -9,6 +11,8 @@ import styles from "../styles/cartStyles";
 function Cart(props) {
   const [sum, setSum] = useState(0);
   const [cart, setCart] = useState({ products: [] });
+
+  const dispatch = useDispatch();
 
   const { classes } = props;
 
@@ -38,17 +42,7 @@ function Cart(props) {
   };
 
   useEffect(() => {
-    const getCart = async () => {
-      try {
-        const res = await axios.get("/api/getCart");
-        if (res.data) {
-          setCart(res.data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getCart();
+    dispatch(getCart());
   }, []);
 
   useEffect(() => {
