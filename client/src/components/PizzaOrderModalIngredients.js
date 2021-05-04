@@ -110,7 +110,8 @@ function PizzaOrderModalIngredients(props) {
             as="select"
             disabled={
               pizzaInModal?.name === "Fantazja"
-                ? Object.values(fantazjaIngredientChoices).length !== 5
+                ? Object.values(fantazjaIngredientChoices).length !== 5 ||
+                  extraIngredients.length === 5
                 : extraIngredients.length === 5
             }
           >
