@@ -9,6 +9,7 @@ import {
   REMOVE_EXTRA_PIZZA_INGREDIENT,
   ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
   ADD_PRODUCT_TO_CART,
+  REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT,
 } from "./types";
 
 export function openPizzaModal(pizza) {
@@ -70,5 +71,12 @@ export function addExtraFantazyIngredient(ing, form) {
     type: ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
     payload: ing,
     form,
+  };
+}
+
+export function removeExtraFantazyIngredient(form) {
+  return {
+    type: REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT,
+    payload: form,
   };
 }

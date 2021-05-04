@@ -8,6 +8,7 @@ import {
   ADD_EXTRA_PIZZA_INGREDIENT,
   REMOVE_EXTRA_PIZZA_INGREDIENT,
   ADD_EXTRA_FANTAZY_PIZZA_INGREDIENT,
+  REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT,
 } from "./types";
 
 const initialState = {
@@ -64,6 +65,9 @@ export const pizzaModalReducer = (state = initialState, action) => {
           [action.form]: action.payload,
         },
       };
+    case REMOVE_EXTRA_FANTAZY_PIZZA_INGREDIENT:
+      delete state.fantazjaIngredientChoices[action.payload];
+      return state;
 
     default:
       return state;

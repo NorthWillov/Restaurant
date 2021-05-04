@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeIngredient,
@@ -76,7 +76,9 @@ function PizzaOrderModalIngredients(props) {
           </li>
         ))}
       </ul>
+
       {pizzaInModal?.name === "Fantazja" && <PizzaOrderModalFantazjaCase />}
+
       {extraIngredients.length > 0 && (
         <React.Fragment>
           <h6>Dodatki:</h6>
@@ -105,7 +107,9 @@ function PizzaOrderModalIngredients(props) {
             onChange={handleExtraIngredientInputClick}
             size="sm"
             as="select"
-            disabled={extraIngredients.length >= 5}
+            disabled={
+              extraIngredients.length >= 5 || pizzaInModal?.name === "Fantazja"
+            }
           >
             <option>{inputPlaceholder}</option>
             {pizzaIngredients.map((i) => (

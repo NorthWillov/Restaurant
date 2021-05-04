@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addExtraFantazyIngredient } from "../redux/pizzaModalActions";
+import {
+  addExtraFantazyIngredient,
+  removeExtraFantazyIngredient,
+} from "../redux/pizzaModalActions";
 import { Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
@@ -12,10 +15,11 @@ function OrderModalFantazjaCase(props) {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    // if (e.target.value === "Wybierz składnik") {
-    //   dispatch(removeExtraFantazyIngredient(e.target.value));
-    // }
-    dispatch(addExtraFantazyIngredient(e.target.value, e.target.name));
+    if (e.target.value === "Wybierz składnik") {
+      dispatch(removeExtraFantazyIngredient(e.target.name));
+    } else {
+      dispatch(addExtraFantazyIngredient(e.target.value, e.target.name));
+    }
   };
 
   return (
