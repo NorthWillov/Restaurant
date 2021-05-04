@@ -71,7 +71,6 @@ function PizzaOrderModal(props) {
       price: pizzaPrice,
     };
     dispatch(addProductToCart(product));
-    dispatch(hidePizzaModal());
   };
 
   return (
