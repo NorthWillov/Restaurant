@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeIngredient,
@@ -29,6 +29,7 @@ function PizzaOrderModalIngredients(props) {
     removedIngredients,
     extraIngredients,
     currPizzaSize,
+    fantazjaIngredientChoices,
   } = pizzaModal;
 
   const inputPlaceholder = `Dodaj${
@@ -108,7 +109,9 @@ function PizzaOrderModalIngredients(props) {
             size="sm"
             as="select"
             disabled={
-              extraIngredients.length >= 5 || pizzaInModal?.name === "Fantazja"
+              pizzaInModal?.name === "Fantazja"
+                ? Object.values(fantazjaIngredientChoices).length !== 5
+                : extraIngredients.length === 5
             }
           >
             <option>{inputPlaceholder}</option>
