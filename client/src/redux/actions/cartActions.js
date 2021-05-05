@@ -25,7 +25,10 @@ export function addProductToCart(product) {
   return async (dispatch) => {
     try {
       await axios.post("/api/addProduct", { product });
-      dispatch({ type: ADD_PRODUCT_TO_CART });
+      dispatch({
+        type: ADD_PRODUCT_TO_CART,
+      });
+      dispatch(getCart());
       dispatch(hidePizzaModal());
     } catch (err) {
       console.log(err);

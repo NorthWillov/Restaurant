@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   incrementQuantity,
   decrementQuantity,
 } from "../redux/actions/cartActions";
-import { getCart } from "../redux/actions/cartActions";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
@@ -17,10 +16,6 @@ function Cart(props) {
   const cart = useSelector((state) => state.cart.cart);
 
   const { classes } = props;
-
-  useEffect(() => {
-    dispatch(getCart());
-  }, []);
 
   // useEffect(() => {
   //   let counter = 0;

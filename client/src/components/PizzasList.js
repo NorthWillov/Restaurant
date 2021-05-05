@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -8,18 +8,7 @@ import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaListStyles";
 
 function PizzasList(props) {
-  const {
-    classes,
-    pizzas,
-    getPizzas,
-    getPizzaIngredients,
-    openPizzaModal,
-  } = props;
-
-  useEffect(() => {
-    getPizzas();
-    getPizzaIngredients();
-  }, []);
+  const { classes, pizzas, openPizzaModal } = props;
 
   const handlePizzaClick = (pizza) => {
     openPizzaModal(pizza);
