@@ -30,11 +30,14 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
-    main: ["@babel/polyfill", "./index.js"],
+    main: ["@babel/polyfill", "./index.tsx"],
   },
   output: {
     filename: filename("js"),
     path: path.resolve(__dirname, "dist"),
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   optimization: {
     splitChunks: {
@@ -62,6 +65,20 @@ module.exports = {
             presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
+      },
+      {
+        test: /\.tsx?$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
