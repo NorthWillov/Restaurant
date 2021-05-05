@@ -1,5 +1,10 @@
 import axios from "axios";
-import { ADD_PRODUCT_TO_CART, GET_CART, INCREMENT_QUANTITY } from "../types";
+import {
+  ADD_PRODUCT_TO_CART,
+  GET_CART,
+  INCREMENT_QUANTITY,
+  DECREMENT_QUANTITY,
+} from "../types";
 import { hidePizzaModal } from "./pizzaModalActions";
 
 export function getCart() {
@@ -45,6 +50,35 @@ export function incrementQuantity(id, products) {
       });
       dispatch({
         type: INCREMENT_QUANTITY,
+        payload: updatedProducts,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function decrementQuantity(product, products) {
+  return async (dispatch) => {
+    let updatedProducts = [];
+
+    if (product.quantity === 1) {
+      updatedProducts = products.filter((prod) => prod._id !== product._id);
+    } else {
+      updatedProducts = products.map((prod) => {
+        if (product._id === prod._id) {
+          return { ...prod, quantity: prod.quantity - 1 };
+        }
+        return prod;
+      });
+    }
+
+    try {
+      await axios.put("/api/changeQuantity", {
+        products: updatedProducts,
+      });
+      dispatch({
+        type: DECREMENT_QUANTITY,
         payload: updatedProducts,
       });
     } catch (err) {

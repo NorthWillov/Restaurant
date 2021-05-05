@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementQuantity } from "../redux/actions/cartActions";
+import {
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/actions/cartActions";
 import { getCart } from "../redux/actions/cartActions";
-import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
@@ -11,37 +13,10 @@ import { Link } from "react-router-dom";
 import styles from "../styles/cartStyles";
 
 function Cart(props) {
-  const [cartt, setCart] = useState({ products: [] });
-
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
 
   const { classes } = props;
-
-  const changeQuantity = async (product, sign) => {
-    let updatedCartProducts = [];
-    if (product.quantity === 1 && sign === "minus") {
-      updatedCartProducts = cart.products.filter((i) => i._id !== product._id);
-    } else {
-      updatedCartProducts = cart.products.map((i) =>
-        i._id === product._id
-          ? {
-              ...i,
-              quantity: sign === "plus" ? i.quantity + 1 : i.quantity - 1,
-            }
-          : i
-      );
-    }
-
-    try {
-      const res = await axios.put("/api/changeQuantity", {
-        products: updatedCartProducts,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    setCart({ ...cart, products: updatedCartProducts });
-  };
 
   useEffect(() => {
     dispatch(getCart());
@@ -125,7 +100,9 @@ function Cart(props) {
             </h5>
             <div className={classes.productCount}>
               <Button
-                onClick={(sign) => changeQuantity(product, (sign = "minus"))}
+                onClick={() =>
+                  dispatch(decrementQuantity(product, cart.products))
+                }
                 className={classes.buttonCount}
                 variant="primary"
                 size="sm"
