@@ -9,7 +9,7 @@ import { CurrIngredientsProvider } from "../contexts/CurrIngredientsContext";
 import { Container } from "react-bootstrap";
 import "../styles/App.css";
 
-function App() {
+const App: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,6 +31,6 @@ function App() {
       </NewItemProvider>
     </ToastProvider>
   );
-}
+};
 
 export default App;

@@ -1,17 +1,20 @@
-import React from "react";
+import React, { ClassAttributes } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { openPizzaModal } from "../redux/actions/pizzaModalActions";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/pizzaListStyles";
+import { RootState } from "../redux/store";
 
-function PizzasList(props) {
-  const { classes } = props;
+interface IPizzaListProps {
+  classes: any;
+}
 
+const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
   const dispatch = useDispatch();
 
-  const pizzas = useSelector((state) => state.pizzas.pizzas);
+  const pizzas = useSelector((state: RootState) => state.pizzas.pizzas);
 
   const handlePizzaClick = (pizza) => {
     dispatch(openPizzaModal(pizza));
@@ -74,6 +77,6 @@ function PizzasList(props) {
       </Row>
     </section>
   );
-}
+};
 
 export default withStyles(styles)(PizzasList);
