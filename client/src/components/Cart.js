@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { incrementQuantity } from "../redux/actions/cartActions";
 import { getCart } from "../redux/actions/cartActions";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
-import BackIcon from "./icons/BackIcon";
+import ArrowIcon from "./icons/ArrowIcon";
 import { Link } from "react-router-dom";
 import styles from "../styles/cartStyles";
 
@@ -17,13 +18,13 @@ function Cart(props) {
 
   const { classes } = props;
 
-  const changeQuantity = async (item, sign) => {
+  const changeQuantity = async (product, sign) => {
     let updatedCartProducts = [];
-    if (item.quantity === 1 && sign === "minus") {
-      updatedCartProducts = cart.products.filter((i) => i._id !== item._id);
+    if (product.quantity === 1 && sign === "minus") {
+      updatedCartProducts = cart.products.filter((i) => i._id !== product._id);
     } else {
       updatedCartProducts = cart.products.map((i) =>
-        i._id === item._id
+        i._id === product._id
           ? {
               ...i,
               quantity: sign === "plus" ? i.quantity + 1 : i.quantity - 1,
@@ -60,59 +61,59 @@ function Cart(props) {
 
       {cart.products?.length === 0 && <h6>Koszyk jest pusty :(</h6>}
 
-      {cart.products?.map((item) => (
-        <div key={item._id} className={classes.item}>
+      {cart.products?.map((product) => (
+        <div key={product._id} className={classes.item}>
           <div className={classes.itemCard}>
             <div className="mr-3">
               <img
                 style={{ width: "100px", borderRadius: "0.5rem" }}
-                src={item.image}
+                src={product.image}
                 alt="product"
               />
             </div>
             <div>
-              <h6>{item.name}</h6>
-              {item.productType === "pizza" && (
+              <h6>{product.name}</h6>
+              {product.productType === "pizza" && (
                 <>
                   <p>
-                    {item.size}, {item.dough}
+                    {product.size}, {product.dough}
                   </p>
-                  {item.removedIng.length !== 0 && (
-                    <p>Bez: {item.removedIng.map((i) => i)}</p>
+                  {product.removedIng.length !== 0 && (
+                    <p>Bez: {product.removedIng.map((i) => i)}</p>
                   )}
-                  {item.extras.length !== 0 && (
+                  {product.extras.length !== 0 && (
                     <p>
                       Dodaj:{" "}
-                      {item.extras.map((e, idx) =>
-                        item.extras[idx + 1] ? e.name + "," : e.name
+                      {product.extras.map((e, idx) =>
+                        product.extras[idx + 1] ? e.name + "," : e.name
                       )}
                     </p>
                   )}
                 </>
               )}
-              {item.productType === "lunch" && (
+              {product.productType === "lunch" && (
                 <>
-                  {item.meat && <p>mięso: {item.meat}</p>}
-                  <p>{item.first}</p>
-                  <p>{item.second}</p>
+                  {product.meat && <p>mięso: {product.meat}</p>}
+                  <p>{product.first}</p>
+                  <p>{product.second}</p>
                 </>
               )}
-              {item.productType === "salad" && (
+              {product.productType === "salad" && (
                 <>
-                  <p>{item.meat}</p>
-                  <p>{item.sous}</p>
+                  <p>{product.meat}</p>
+                  <p>{product.sous}</p>
                 </>
               )}
-              {item.productType === "sweetPancake" && (
+              {product.productType === "sweetPancake" && (
                 <>
-                  <p>{item.way}</p>
-                  <p>{item.jam}</p>
-                  <p>{item.adds}</p>
+                  <p>{product.way}</p>
+                  <p>{product.jam}</p>
+                  <p>{product.adds}</p>
                 </>
               )}
-              {item.productType === "saltPancake" && (
+              {product.productType === "saltPancake" && (
                 <>
-                  <p>{item.sous}</p>
+                  <p>{product.sous}</p>
                 </>
               )}
             </div>
@@ -120,11 +121,11 @@ function Cart(props) {
           <hr className="mt-3 mb-0" />
           <div className={classes.itemCheckout}>
             <h5 className={classes.productPrice}>
-              {formatter.format(item.price * item.quantity)}PLN
+              {formatter.format(product.price * product.quantity)}PLN
             </h5>
             <div className={classes.productCount}>
               <Button
-                onClick={(sign) => changeQuantity(item, (sign = "minus"))}
+                onClick={(sign) => changeQuantity(product, (sign = "minus"))}
                 className={classes.buttonCount}
                 variant="primary"
                 size="sm"
@@ -133,13 +134,15 @@ function Cart(props) {
               </Button>
               <Form.Control
                 type="text"
-                placeholder={item.quantity}
+                placeholder={product.quantity}
                 className={classes.numberProduct}
                 readOnly
               />
 
               <Button
-                onClick={(sign) => changeQuantity(item, (sign = "plus"))}
+                onClick={() =>
+                  dispatch(incrementQuantity(product._id, cart.products))
+                }
                 variant="primary"
                 size="sm"
                 className={classes.buttonCount}
@@ -162,7 +165,7 @@ function Cart(props) {
           className="mr-3"
           size="lg"
         >
-          <BackIcon />
+          <ArrowIcon />
           Wroć
         </Button>
         <Link to="/cart/contactinfo">

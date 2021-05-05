@@ -45,6 +45,7 @@ module.exports = {
   },
   devServer: {
     port: 4200,
+    hot: isDev,
     proxy: {
       "/api": "http://localhost:5000",
     },
