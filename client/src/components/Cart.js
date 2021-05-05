@@ -1,18 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../redux/actions/cartActions";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import { withStyles } from "@material-ui/styles";
+import BackIcon from "./icons/BackIcon";
 import { Link } from "react-router-dom";
 import styles from "../styles/cartStyles";
 
 function Cart(props) {
-  const [sum, setSum] = useState(0);
-  const [cart, setCart] = useState({ products: [] });
+  const [cartt, setCart] = useState({ products: [] });
 
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
 
   const { classes } = props;
 
@@ -45,21 +46,21 @@ function Cart(props) {
     dispatch(getCart());
   }, []);
 
-  useEffect(() => {
-    let counter = 0;
-    cart.products.map(
-      (product) => (counter = counter + product.price * product.quantity)
-    );
-    setSum(formatter.format(counter));
-  }, [cart]);
+  // useEffect(() => {
+  //   let counter = 0;
+  //   cart.products.map(
+  //     (product) => (counter = counter + product.price * product.quantity)
+  //   );
+  //   setSum(formatter.format(counter));
+  // }, [cart]);
 
   return (
     <div className={classes.root}>
       <h1 className="mt-5 mb-5">Koszyk:</h1>
 
-      {cart.products.length === 0 && <h6>Koszyk jest pusty :(</h6>}
+      {cart.products?.length === 0 && <h6>Koszyk jest pusty :(</h6>}
 
-      {cart.products.map((item) => (
+      {cart.products?.map((item) => (
         <div key={item._id} className={classes.item}>
           <div className={classes.itemCard}>
             <div className="mr-3">
@@ -150,7 +151,7 @@ function Cart(props) {
         </div>
       ))}
 
-      <h4 className={classes.sumToPay}>Do zapłaty: {sum}PLN</h4>
+      <h4 className={classes.sumToPay}>Do zapłaty: PLN</h4>
 
       <hr className="mt-4" />
 
@@ -161,19 +162,7 @@ function Cart(props) {
           className="mr-3"
           size="lg"
         >
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            className="bi bi-arrow-left-short"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-            />
-          </svg>
+          <BackIcon />
           Wroć
         </Button>
         <Link to="/cart/contactinfo">

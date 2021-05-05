@@ -1,7 +1,7 @@
 import { ADD_PRODUCT_TO_CART, GET_CART } from "../types";
 
 const initialState = {
-  cart: [],
+  cart: {},
 };
 
 export const cartReducer = (state = initialState, action) => {
