@@ -8,15 +8,12 @@ import {
   Button,
 } from "react-bootstrap";
 import logo from "../assets/logo.png";
-import { ToastContext } from "../contexts/ToastContext";
 import { formatter } from "../utils/formatter";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/mainNavbarStyles";
 
 function MainNavbar(props) {
-  const { show, toggleShow } = useContext(ToastContext);
-
   const { classes } = props;
 
   return (
@@ -38,16 +35,16 @@ function MainNavbar(props) {
             top: "90px",
           }}
         >
-          <Toast show={show} onClose={toggleShow} delay={3000} autohide>
+          {/* <Toast show={show} onClose={toggleShow} delay={3000} autohide>
             <Toast.Header>
-              {/* <span style={{ color: "black", fontSize: "15px" }}>
+              <span style={{ color: "black", fontSize: "15px" }}>
                 {cart.length !== 0 &&
                   `+1 ${cart[cart.length - 1].name} ${formatter.format(
                     cart[cart.length - 1].price
                   )}zł`}
-              </span> */}
+              </span>
             </Toast.Header>
-          </Toast>
+          </Toast> */}
         </div>
 
         <Navbar.Brand href="#home">
