@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCart } from "../redux/actions/cartActions";
-import { getPizzas, getPizzaIngredients } from "../redux/actions/pizzasActions";
+import {
+  fetchPizzas,
+  fetchPizzaIngredients,
+} from "../redux/reducers/pizzasSlice";
 import Routes from "./Routes";
 import { ToastProvider } from "../contexts/ToastContext";
 import { NewItemProvider } from "../contexts/NewItemContext";
@@ -13,8 +16,8 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPizzas());
-    dispatch(getPizzaIngredients());
+    dispatch(fetchPizzas());
+    dispatch(fetchPizzaIngredients());
     dispatch(getCart());
   }, []);
 
