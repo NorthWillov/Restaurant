@@ -1,12 +1,15 @@
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import { rootReducer } from "./reducers/rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import { pizzaModalReducer } from "./reducers/pizzaModalReducer";
+import { pizzasReducer } from "./reducers/pizzasReducer";
+import { cartReducer } from "./reducers/cartReducer";
 
-export const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+export const store = configureStore({
+  reducer: {
+    pizzas: pizzasReducer,
+    pizzaModal: pizzaModalReducer,
+    cart: cartReducer,
+  },
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
