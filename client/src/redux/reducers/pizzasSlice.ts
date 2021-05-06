@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchPizzas = createAsyncThunk("pizzas/fetchPizzas", async () => {
@@ -14,7 +14,13 @@ export const fetchPizzaIngredients = createAsyncThunk(
   }
 );
 
-const initialState = {
+interface PizzasSliceState {
+  isLoading: boolean;
+  pizzas: [];
+  pizzaIngredients: [];
+}
+
+const initialState: PizzasSliceState = {
   isLoading: false,
   pizzas: [],
   pizzaIngredients: [],
@@ -29,17 +35,20 @@ const pizzasSlice = createSlice({
       .addCase(fetchPizzas.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchPizzas.fulfilled, (state, action) => {
+      .addCase(fetchPizzas.fulfilled, (state, action: PayloadAction<[]>) => {
         state.pizzas = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchPizzaIngredients.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchPizzaIngredients.fulfilled, (state, action) => {
-        state.pizzaIngredients = action.payload;
-        state.isLoading = false;
-      });
+      .addCase(
+        fetchPizzaIngredients.fulfilled,
+        (state, action: PayloadAction<[]>) => {
+          state.pizzaIngredients = action.payload;
+          state.isLoading = false;
+        }
+      );
   },
 });
 
