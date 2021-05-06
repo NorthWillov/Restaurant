@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hidePizzaModal } from "../redux/actions/pizzaModalActions";
+import { hidePizzaModal } from "../redux/reducers/pizzaModalSlice";
 import { addProductToCart } from "../redux/actions/cartActions";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";

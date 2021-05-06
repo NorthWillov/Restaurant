@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addExtraFantazyIngredient,
   removeExtraFantazyIngredient,
-} from "../redux/actions/pizzaModalActions";
+} from "../redux/reducers/pizzaModalSlice";
 import { Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";

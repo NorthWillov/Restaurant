@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { pizzaModalReducer } from "./reducers/pizzaModalReducer";
+import pizzaModalReducer from "./reducers/pizzaModalSlice";
 import { pizzasReducer } from "./reducers/pizzasReducer";
 import { cartReducer } from "./reducers/cartReducer";
 

@@ -5,7 +5,7 @@ import {
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY,
 } from "../types";
-import { hidePizzaModal } from "./pizzaModalActions";
+import { hidePizzaModal } from "../reducers/pizzaModalSlice";
 
 export function getCart() {
   return async (dispatch) => {

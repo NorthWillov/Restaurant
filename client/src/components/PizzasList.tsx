@@ -2,7 +2,7 @@ import React, { ClassAttributes } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
-import { openPizzaModal } from "../redux/actions/pizzaModalActions";
+import { openPizzaModal } from "../redux/reducers/pizzaModalSlice";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaListStyles";
 import { RootState } from "../redux/store";

@@ -5,7 +5,7 @@ import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
 import {
   changePizzaSize,
   changePizzaDough,
-} from "../redux/actions/pizzaModalActions";
+} from "../redux/reducers/pizzaModalSlice";
 
 function PizzaOrderModalSizeAndDough(props) {
   const { classes } = props;

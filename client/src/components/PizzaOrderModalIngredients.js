@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   removeIngredient,
   removeExtraIngredient,
-  backRemovedIngredient,
+  returnRemovedIngredient,
   addExtraIngredient,
-} from "../redux/actions/pizzaModalActions";
+} from "../redux/reducers/pizzaModalSlice";
 import { Form } from "react-bootstrap";
 import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
 import { v4 as uuidv4 } from "uuid";
@@ -58,7 +58,7 @@ function PizzaOrderModalIngredients(props) {
             className={classes.modalIngredientsIngredient}
           >
             {removedIngredients.includes(i) ? (
-              <div onClick={() => dispatch(backRemovedIngredient(i))}>
+              <div onClick={() => dispatch(returnRemovedIngredient(i))}>
                 <span className={classes.modalIngredientsIngredientNameDeleted}>
                   {i}
                 </span>
