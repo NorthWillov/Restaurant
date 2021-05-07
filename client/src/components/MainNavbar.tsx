@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { FC } from "react";
 import {
   Toast,
   Navbar,
@@ -7,15 +7,16 @@ import {
   Container,
   Button,
 } from "react-bootstrap";
-import logo from "../assets/logo.png";
-import { formatter } from "../utils/formatter";
+import * as logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/mainNavbarStyles";
 
-function MainNavbar(props) {
-  const { classes } = props;
+interface MainNavbarProps {
+  classes: { [key: string]: string };
+}
 
+const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
   return (
     <Navbar
       className={classes.navbar}
@@ -90,6 +91,6 @@ function MainNavbar(props) {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default withStyles(styles)(MainNavbar);

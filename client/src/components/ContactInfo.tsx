@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Col, Button } from "react-bootstrap";
 
-function ContactInfo(props) {
+function ContactInfo() {
   return (
     <Form style={{ maxWidth: "650px", margin: "50px auto" }} method="POST">
       <h1>Sposób dostawy</h1>

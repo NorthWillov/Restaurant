@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import MainNavbar from "./MainNavbar";
 import PizzasList from "./PizzasList";
 import LunchesList from "./LunchesList";
@@ -8,10 +8,12 @@ import Promotions from "./Promotions";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/landingStyles";
 
-function Landing(props) {
-  // const [lunchModalShow, setLunchModalShow] = useState(false);
+interface ILandingProps {
+  classes: { [key: string]: string };
+}
 
-  const { classes } = props;
+const Landing: FC<ILandingProps> = ({ classes }) => {
+  // const [lunchModalShow, setLunchModalShow] = useState(false);
 
   // const handleLunchModalOpen = (item) => {
   //   show && toggleShow();
@@ -42,6 +44,6 @@ function Landing(props) {
       )} */}
     </div>
   );
-}
+};
 
 export default withStyles(styles)(Landing);

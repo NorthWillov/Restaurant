@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
-function Admin(props) {
+const Admin: FC = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -37,22 +37,21 @@ function Admin(props) {
           <div>
             {" "}
             ZAMÓWIENIE:
-            {order.products.map((product, idx) => (
-              <div
-                key={idx}
-                style={{ border: "3px solid green", margin: "4px" }}
-              >
-                <p>PRODUCT: {product.name}</p>
-                <p>CENA: {product.price}</p>
-                <p>ILOŚĆ: {product.quantity}</p>
-              </div>
-            ))}
+            {order.products.map(
+              (product: { name: string; price: number; quantity: number }) => (
+                <div style={{ border: "3px solid green", margin: "4px" }}>
+                  <p>PRODUCT: {product.name}</p>
+                  <p>CENA: {product.price}</p>
+                  <p>ILOŚĆ: {product.quantity}</p>
+                </div>
+              )
+            )}
           </div>
           <p>DO ZAPŁATY: {order.totalamount} zł</p>
         </div>
       ))}
     </div>
   );
-}
+};
 
 export default Admin;

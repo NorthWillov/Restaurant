@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/PromotionsStyles";
 
-function Promotions(props) {
+interface PromotionProps {
+  classes: { [key: string]: string };
+}
+
+const Promotions: FC<PromotionProps> = ({ classes }) => {
   const [promos, setPromos] = useState([]);
-  const { classes } = props;
 
   useEffect(() => {
     const getPromos = async () => {
@@ -40,6 +43,6 @@ function Promotions(props) {
       </Carousel>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(Promotions);

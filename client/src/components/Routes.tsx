@@ -9,11 +9,7 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/" render={() => <Landing />} />
-      <Route
-        exact
-        path="/admin"
-        render={(routeProps) => <Admin {...routeProps} />}
-      />
+      <Route exact path="/admin" render={() => <Admin />} />
       <Route
         exact
         path="/cart"
@@ -22,7 +18,7 @@ const Routes: React.FC = () => {
       <Route
         exact
         path="/cart/contactinfo"
-        render={(routeProps) => <ContactInfo {...routeProps} />}
+        render={(routeProps) => <ContactInfo />}
       />
       <Redirect to="/" />
     </Switch>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   incrementQuantity,
@@ -11,11 +11,14 @@ import ArrowIcon from "./icons/ArrowIcon";
 import { Link } from "react-router-dom";
 import styles from "../styles/cartStyles";
 
-function Cart(props) {
+interface CartProps {
+  classes: { [key: string]: string };
+  history: any;
+}
+
+const Cart: FC<CartProps> = ({ classes, history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-
-  const { classes } = props;
 
   // useEffect(() => {
   //   let counter = 0;
@@ -133,7 +136,7 @@ function Cart(props) {
       <div className={classes.finalBtns}>
         <Button
           variant="outline-secondary"
-          onClick={() => props.history.push("/")}
+          onClick={() => history.push("/")}
           className="mr-3"
           size="lg"
         >
@@ -153,6 +156,6 @@ function Cart(props) {
       </div>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(Cart);

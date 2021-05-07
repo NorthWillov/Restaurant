@@ -12,7 +12,7 @@ interface Pizza {
   type: string;
   size?: string;
   dough?: string;
-  price: number | {};
+  price: any;
   ingredients: Array<string>;
   image: string;
 }
