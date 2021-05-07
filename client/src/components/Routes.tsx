@@ -5,7 +5,7 @@ import Cart from "./Cart";
 import Admin from "./Admin";
 import ContactInfo from "./ContactInfo";
 
-function Routes(props) {
+const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/" render={() => <Landing />} />
@@ -27,6 +27,6 @@ function Routes(props) {
       <Redirect to="/" />
     </Switch>
   );
-}
+};
 
 export default Routes;
