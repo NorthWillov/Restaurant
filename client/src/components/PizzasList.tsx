@@ -1,20 +1,19 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { openPizzaModal } from "../redux/reducers/pizzaModalSlice";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaListStyles";
-import { RootState } from "../redux/store";
 
 interface IPizzaListProps {
-  classes: any;
+  classes: { [key: string]: string };
 }
 
 const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const pizzas = useSelector((state: RootState) => state.pizzas.pizzas);
+  const pizzas = useAppSelector((state) => state.pizzas.pizzas);
 
   const handlePizzaClick = (pizza) => {
     dispatch(openPizzaModal(pizza));

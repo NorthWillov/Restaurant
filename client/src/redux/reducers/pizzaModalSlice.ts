@@ -1,6 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface PizzasState {
+  isModalOpen: boolean;
+  pizzaInModal: object;
+  currPizzaSize: string;
+  currPizzaDough: string;
+  removedIngredients: string[];
+  extraIngredients: [];
+  fantazjaIngredientChoices: {};
+}
+
+const initialState: PizzasState = {
   isModalOpen: false,
   pizzaInModal: null,
   currPizzaSize: "20cm",
@@ -14,31 +24,31 @@ const pizzaModalSlice = createSlice({
   name: "pizzaModal",
   initialState,
   reducers: {
-    openPizzaModal(state, action) {
+    openPizzaModal(state, action: PayloadAction<{}>) {
       state.isModalOpen = true;
       state.pizzaInModal = action.payload;
     },
     hidePizzaModal() {
       return initialState;
     },
-    changePizzaSize(state, action) {
+    changePizzaSize(state, action: PayloadAction<string>) {
       state.currPizzaSize = action.payload;
     },
-    changePizzaDough(state, action) {
+    changePizzaDough(state, action: PayloadAction<string>) {
       state.currPizzaDough = action.payload;
     },
-    removeIngredient(state, action) {
+    removeIngredient(state, action: PayloadAction<string>) {
       state.removedIngredients.push(action.payload);
     },
-    returnRemovedIngredient(state, action) {
+    returnRemovedIngredient(state, action: PayloadAction<string>) {
       state.removedIngredients = state.removedIngredients.filter(
         (ingredient) => ingredient !== action.payload
       );
     },
-    addExtraIngredient(state, action) {
+    addExtraIngredient(state, action: PayloadAction<object>) {
       state.extraIngredients.push(action.payload);
     },
-    removeExtraIngredient(state, action) {
+    removeExtraIngredient(state, action: PayloadAction<string>) {
       state.extraIngredients = state.extraIngredients.filter(
         (ingredient) => ingredient.uniqId !== action.payload
       );
