@@ -6,8 +6,8 @@ interface PizzasState {
   currPizzaSize: string;
   currPizzaDough: string;
   removedIngredients: string[];
-  extraIngredients: [];
-  fantazjaIngredientChoices: {};
+  extraIngredients: object[];
+  fantazjaIngredientChoices: { [key: string]: string };
 }
 
 const initialState: PizzasState = {
@@ -50,11 +50,11 @@ const pizzaModalSlice = createSlice({
     },
     removeExtraIngredient(state, action: PayloadAction<string>) {
       state.extraIngredients = state.extraIngredients.filter(
-        (ingredient) => ingredient.uniqId !== action.payload
+        (ingredient: { uniqId: string }) => ingredient.uniqId !== action.payload
       );
     },
     addExtraFantazyIngredient: {
-      reducer(state, action) {
+      reducer(state, action: PayloadAction<{ ing: string; form: string }>) {
         const { ing, form } = action.payload;
         state.fantazjaIngredientChoices[form] = ing;
       },
