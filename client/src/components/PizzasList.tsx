@@ -6,6 +6,17 @@ import { openPizzaModal } from "../redux/reducers/pizzaModalSlice";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaListStyles";
 
+interface Pizza {
+  _id: string;
+  name: string;
+  type: string;
+  size?: string;
+  dough?: string;
+  price: number | {};
+  ingredients: Array<string>;
+  image: string;
+}
+
 interface IPizzaListProps {
   classes: { [key: string]: string };
 }
@@ -15,7 +26,7 @@ const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
 
   const pizzas = useAppSelector((state) => state.pizzas.pizzas);
 
-  const handlePizzaClick = (pizza) => {
+  const handlePizzaClick = (pizza: Pizza) => {
     dispatch(openPizzaModal(pizza));
   };
 
@@ -23,7 +34,7 @@ const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
     <section id="pizzas">
       <h3 className="title pt-5 mb-4">Pizzy:</h3>
       <Row>
-        {pizzas.map((pizza) => (
+        {pizzas.map((pizza: Pizza) => (
           <React.Fragment key={pizza._id}>
             <Col xs={6} md={4} lg={4} xl={3}>
               <Card className={`mb-3 ${classes.Card}`}>
@@ -53,7 +64,6 @@ const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
                 <Card.Footer style={{ padding: "12px" }}>
                   <div className={classes.checkout}>
                     <span className={classes.checkoutPrice}>
-                      od{" "}
                       {pizza.name === "Calzone (Pierog)"
                         ? formatter.format(pizza.price)
                         : formatter.format(pizza.price["20cm"])}
