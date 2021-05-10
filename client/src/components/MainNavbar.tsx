@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/mainNavbarStyles";
 
 interface MainNavbarProps {

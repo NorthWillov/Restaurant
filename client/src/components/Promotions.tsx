@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/PromotionsStyles";
 
 interface PromotionProps {

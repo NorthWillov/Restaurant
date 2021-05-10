@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
 import {
   changePizzaSize,

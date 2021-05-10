@@ -5,7 +5,7 @@ import {
   removeExtraFantazyIngredient,
 } from "../redux/reducers/pizzaModalSlice";
 import { Form } from "react-bootstrap";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
 function OrderModalFantazjaCase(props) {

@@ -5,7 +5,7 @@ import LunchesList from "./LunchesList";
 import PizzaOrderModal from "./PizzaOrderModal";
 import LunchesOrderModal from "./LunchesOrderModal";
 import Promotions from "./Promotions";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/landingStyles";
 
 interface ILandingProps {

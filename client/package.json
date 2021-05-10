@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@material-ui/styles": "^4.11.3",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",

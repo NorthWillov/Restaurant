@@ -6,7 +6,7 @@ import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
-import { withStyles } from "@material-ui/styles";
+import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalStyles";
 import CartIcon from "./icons/CartIcon";
 import ArrowIcon from "./icons/ArrowIcon";
