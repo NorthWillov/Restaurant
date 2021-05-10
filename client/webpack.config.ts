@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
 console.log("DEVELOPMENT MODE: ", isDev);
 
-const filename = (ext) =>
+const filename = (ext: string) =>
   isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
 const plugins = [
@@ -65,9 +65,10 @@ module.exports = {
             presets: ["@babel/preset-env", "@babel/preset-typescript"],
           },
         },
+        exclude: /node_modules/,
       },
       {
-        test: /\.tsx?$/,
+        test: /\.tsx$/,
         use: {
           loader: "babel-loader",
           options: {
