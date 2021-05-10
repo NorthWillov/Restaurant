@@ -17,15 +17,15 @@ interface CartProduct {
   productType: string;
   name: string;
   quantity: number;
-  size: string;
-  dough: string;
-  removedIng: string[];
-  extras: [{ name: string }] | [];
+  size?: string;
+  dough?: string;
+  removedIng?: string[];
+  extras?: [{ name: string }] | [];
   price: number;
   image: string;
-  first: string;
-  second: string;
-  meat: string;
+  first?: string;
+  second?: string;
+  meat?: string;
 }
 
 interface CartProps {

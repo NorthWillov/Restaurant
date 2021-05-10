@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-function Contact() {
+const Contact: FC = () => {
   return (
     <section
       id="contact"
@@ -34,6 +34,6 @@ function Contact() {
       </Container>
     </section>
   );
-}
+};
 
 export default Contact;

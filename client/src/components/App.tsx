@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { getCart } from "../redux/actions/cartActions";
 import {
@@ -12,7 +12,7 @@ import Routes from "./Routes";
 import { Container } from "react-bootstrap";
 import "../styles/App.css";
 
-const App: React.FC = () => {
+const App: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

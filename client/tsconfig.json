@@ -4,5 +4,8 @@
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-  }
+    "noImplicitAny": true,
+    "jsx": "react"
+  },
+  "include": ["./src/**/*"]
 }
