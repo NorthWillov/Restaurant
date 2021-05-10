@@ -18,7 +18,7 @@ const plugins = [
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: "[name].[contenthash].css",
+    filename: filename("css"),
   }),
 ];
 
@@ -58,11 +58,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ["@babel/preset-env", "@babel/preset-typescript"],
           },
         },
       },
