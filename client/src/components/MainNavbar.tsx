@@ -7,7 +7,7 @@ import {
   Container,
   Button,
 } from "react-bootstrap";
-import * as logo from "../assets/logo.png";
+import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/mainNavbarStyles";

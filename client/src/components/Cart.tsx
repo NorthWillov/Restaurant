@@ -1,15 +1,32 @@
 import React, { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   incrementQuantity,
   decrementQuantity,
 } from "../redux/actions/cartActions";
+import { Link } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
-import { withStyles } from "@material-ui/styles";
 import ArrowIcon from "./icons/ArrowIcon";
-import { Link } from "react-router-dom";
+import withStyles from "react-jss";
 import styles from "../styles/cartStyles";
+
+interface CartProduct {
+  _id: string;
+  productId: string;
+  productType: string;
+  name: string;
+  quantity: number;
+  size: string;
+  dough: string;
+  removedIng: string[];
+  extras: [{ name: string }] | [];
+  price: number;
+  image: string;
+  first: string;
+  second: string;
+  meat: string;
+}
 
 interface CartProps {
   classes: { [key: string]: string };
@@ -17,8 +34,8 @@ interface CartProps {
 }
 
 const Cart: FC<CartProps> = ({ classes, history }) => {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.cart);
 
   // useEffect(() => {
   //   let counter = 0;
@@ -34,7 +51,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
 
       {cart.products?.length === 0 && <h6>Koszyk jest pusty :(</h6>}
 
-      {cart.products?.map((product) => (
+      {cart.products?.map((product: CartProduct) => (
         <div key={product._id} className={classes.item}>
           <div className={classes.itemCard}>
             <div className="mr-3">
@@ -71,7 +88,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
                   <p>{product.second}</p>
                 </>
               )}
-              {product.productType === "salad" && (
+              {/* {product.productType === "salad" && (
                 <>
                   <p>{product.meat}</p>
                   <p>{product.sous}</p>
@@ -88,7 +105,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
                 <>
                   <p>{product.sous}</p>
                 </>
-              )}
+              )} */}
             </div>
           </div>
           <hr className="mt-3 mb-0" />
@@ -109,7 +126,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
               </Button>
               <Form.Control
                 type="text"
-                placeholder={product.quantity}
+                placeholder={product.quantity.toString()}
                 className={classes.numberProduct}
                 readOnly
               />
