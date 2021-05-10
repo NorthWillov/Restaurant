@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "declaration": true,
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
-    "jsx": "react"
+    "noImplicitAny": true
   },
   "include": ["./src/**/*"]
 }

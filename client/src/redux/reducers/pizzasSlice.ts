@@ -14,7 +14,7 @@ export const fetchPizzaIngredients = createAsyncThunk(
   }
 );
 
-interface PizzasSliceState {
+export interface PizzasSliceState {
   isLoading: boolean;
   pizzas: [];
   pizzaIngredients: [];

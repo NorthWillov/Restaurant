@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface PizzasState {
+export interface PizzasModalSliceState {
   isModalOpen: boolean;
   pizzaInModal: object;
   currPizzaSize: string;
@@ -10,7 +10,7 @@ interface PizzasState {
   fantazjaIngredientChoices: { [key: string]: string };
 }
 
-const initialState: PizzasState = {
+const initialState: PizzasModalSliceState = {
   isModalOpen: false,
   pizzaInModal: null,
   currPizzaSize: "20cm",
@@ -64,7 +64,7 @@ const pizzaModalSlice = createSlice({
         };
       },
     },
-    removeExtraFantazyIngredient(state, action) {
+    removeExtraFantazyIngredient(state, action: PayloadAction<string>) {
       delete state.fantazjaIngredientChoices[action.payload];
     },
   },
