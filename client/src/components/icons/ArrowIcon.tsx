@@ -1,6 +1,6 @@
 import React from "react";
 
-function ArrowIcon() {
+const ArrowIcon: React.FC = () => {
   return (
     <svg
       width="1em"
@@ -16,6 +16,6 @@ function ArrowIcon() {
       />
     </svg>
   );
-}
+};
 
 export default ArrowIcon;

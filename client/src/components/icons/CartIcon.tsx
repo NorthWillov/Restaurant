@@ -1,12 +1,12 @@
 import React from "react";
 
-function CartIcon(props) {
+const CartIcon: React.FC<{ [key: string]: string }> = ({ styles }) => {
   return (
     <svg
       width="1em"
       height="1em"
       viewBox="0 0 16 16"
-      className={`bi bi-cart2 ${props.styles}`}
+      className={`bi bi-cart2 ${styles}`}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -16,6 +16,6 @@ function CartIcon(props) {
       />
     </svg>
   );
-}
+};
 
 export default CartIcon;

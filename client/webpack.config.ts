@@ -1,9 +1,9 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+import path from "path";
+import HTMLWebpackPlugin from "html-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
@@ -26,7 +26,7 @@ if (isProd) {
   plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = {
+const webpack = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
@@ -95,3 +95,5 @@ module.exports = {
     ],
   },
 };
+
+export default webpack;

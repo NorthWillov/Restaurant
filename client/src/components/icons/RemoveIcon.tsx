@@ -1,12 +1,12 @@
 import React from "react";
 
-function RemoveIcon(props) {
+const RemoveIcon: React.FC<{ [key: string]: string }> = ({ styles }) => {
   return (
     <svg
       width="1em"
       height="1em"
       viewBox="0 0 16 16"
-      className={`bi bi-dash-circle ${props.styles}`}
+      className={`bi bi-dash-circle ${styles}`}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -20,6 +20,6 @@ function RemoveIcon(props) {
       />
     </svg>
   );
-}
+};
 
 export default RemoveIcon;
