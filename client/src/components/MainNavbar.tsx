@@ -88,9 +88,10 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
               >
                 Koszyk
                 {cart.products.length !== 0 &&
-                  ` | ${cart.products
-                    .map((product) => product.quantity)
-                    .reduce((a, b) => a + b, 0)}`}
+                  ` | ${cart.products.reduce(
+                    (acc, el) => acc + el.quantity,
+                    0
+                  )}`}
               </Button>
             </Link>
           </Nav>

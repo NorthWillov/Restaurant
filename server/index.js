@@ -115,11 +115,10 @@ app.post("/cart/contactinfo", urlencodedParser, async (req, res) => {
   const newOrder = {
     ...req.body,
     products: cart.products,
-    totalamount: cart.products
-      .map((product) => product.price * product.quantity)
-      .reduce((a, b) => {
-        return a + b;
-      }, 0),
+    totalamount: cart.products.reduce(
+      (acc, el) => acc + el.price * el.quantity,
+      0
+    ),
   };
   const order = new Order(newOrder);
   await order.save();

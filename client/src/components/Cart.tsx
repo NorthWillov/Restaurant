@@ -129,9 +129,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
       <h4 className={classes.sumToPay}>
         Do zapłaty:{" "}
         {formatter.format(
-          cart.products
-            .map((product) => product.price * product.quantity)
-            .reduce((a, b) => a + b, 0)
+          cart.products.reduce((acc, el) => acc + el.price * el.quantity, 0)
         )}
         PLN
       </h4>
