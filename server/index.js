@@ -129,11 +129,24 @@ app.post("/cart/contactinfo", urlencodedParser, async (req, res) => {
   res.end();
 });
 
-app.put("/api/changeQuantity", jsonParser, async (req, res) => {
+app.put("/api/incrementProductQuantity", jsonParser, async (req, res) => {
+  const cart = await Cart.findOne({ _id: req.session.cartId });
+  let newProducts = [];
+
+  cart.products.map((product) => {
+    if (product._id.toString() === req.body.productId) {
+      const newProd = product;
+      newProd.quantity++;
+      newProducts.push(newProd);
+    } else {
+      newProducts.push(product);
+    }
+  });
+
   await Cart.findByIdAndUpdate(
     req.session.cartId,
     {
-      products: req.body.products,
+      products: newProducts,
     },
     (err, cart) => {
       if (err) throw new Error(err);

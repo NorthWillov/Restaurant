@@ -1,32 +1,12 @@
 import React, { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import {
-  incrementQuantity,
-  decrementQuantity,
-} from "../redux/actions/cartActions";
+import { incrementQuantity, CartProduct } from "../redux/reducers/cartSlice";
 import { Link } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import ArrowIcon from "./icons/ArrowIcon";
 import withStyles from "react-jss";
 import styles from "../styles/cartStyles";
-
-interface CartProduct {
-  _id: string;
-  productId: string;
-  productType: string;
-  name: string;
-  quantity: number;
-  size?: string;
-  dough?: string;
-  removedIng?: string[];
-  extras?: [{ name: string }] | [];
-  price: number;
-  image: string;
-  first?: string;
-  second?: string;
-  meat?: string;
-}
 
 interface CartProps {
   classes: { [key: string]: string };
@@ -115,9 +95,9 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
             </h5>
             <div className={classes.productCount}>
               <Button
-                onClick={() =>
-                  dispatch(decrementQuantity(product, cart.products))
-                }
+                // onClick={() =>
+                //   dispatch(decrementQuantity(product, cart.products))
+                // }
                 className={classes.buttonCount}
                 variant="primary"
                 size="sm"
@@ -132,9 +112,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
               />
 
               <Button
-                onClick={() =>
-                  dispatch(incrementQuantity(product._id, cart.products))
-                }
+                onClick={() => dispatch(incrementQuantity(product._id))}
                 variant="primary"
                 size="sm"
                 className={classes.buttonCount}

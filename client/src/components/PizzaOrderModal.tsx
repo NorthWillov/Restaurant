@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { hidePizzaModal } from "../redux/reducers/pizzaModalSlice";
-import { addProductToCart } from "../redux/actions/cartActions";
+import { addProductToCart } from "../redux/reducers/cartSlice";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
 import { Modal, Button, Row, Col } from "react-bootstrap";

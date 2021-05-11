@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from "react";
 import { useAppDispatch } from "../redux/hooks";
-import { getCart } from "../redux/actions/cartActions";
 import {
   fetchPizzas,
   fetchPizzaIngredients,
 } from "../redux/reducers/pizzasSlice";
+import { fetchCart } from "../redux/reducers/cartSlice";
 import Routes from "./Routes";
 // import { ToastProvider } from "../contexts/ToastContext";
 // import { NewItemProvider } from "../contexts/NewItemContext";
@@ -18,7 +18,7 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(fetchPizzas());
     dispatch(fetchPizzaIngredients());
-    dispatch(getCart());
+    dispatch(fetchCart());
   }, []);
 
   return (
