@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useAppSelector } from "../redux/hooks";
 import {
   Toast,
   Navbar,
@@ -17,6 +18,8 @@ interface MainNavbarProps {
 }
 
 const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
+  const cart = useAppSelector((state) => state.cart.cart);
+
   return (
     <Navbar
       className={classes.navbar}
@@ -84,6 +87,10 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
                 variant="dark"
               >
                 Koszyk
+                {cart.products.length !== 0 &&
+                  ` | ${cart.products
+                    .map((product) => product.quantity)
+                    .reduce((a, b) => a + b, 0)}`}
               </Button>
             </Link>
           </Nav>
