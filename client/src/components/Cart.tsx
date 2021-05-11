@@ -143,7 +143,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
         <Link to="/cart/contactinfo">
           <Button
             size="lg"
-            disabled={cart.length === 0}
+            disabled={cart.products.length === 0}
             variant="success"
             type="button"
           >

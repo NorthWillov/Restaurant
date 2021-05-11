@@ -9,7 +9,7 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
 
 export const addProductToCart = createAsyncThunk(
   "cart/addProductToCart",
-  async (product, { dispatch }) => {
+  async (product: CartProduct, { dispatch }) => {
     await axios.post("/api/addProduct", { product });
     await dispatch(fetchCart());
     dispatch(hidePizzaModal());
@@ -18,7 +18,7 @@ export const addProductToCart = createAsyncThunk(
 
 export const incrementQuantity = createAsyncThunk(
   "cart/incrementQuantity",
-  async (productId) => {
+  async (productId: string) => {
     await axios.put("/api/incrementProductQuantity", { productId });
     return productId;
   }
@@ -26,7 +26,7 @@ export const incrementQuantity = createAsyncThunk(
 
 export const decrementQuantity = createAsyncThunk(
   "cart/decrementQuantity",
-  async (productId) => {
+  async (productId: string) => {
     await axios.put("/api/decrementProductQuantity", { productId });
     return productId;
   }
@@ -52,17 +52,17 @@ export interface CartProduct {
 export interface Cart {
   active: boolean;
   _id: string;
-  products: CartProduct;
+  products: CartProduct[];
 }
 
 export interface CartSliceState {
   isCartLoading: boolean;
-  cart: Cart | {};
+  cart: Cart;
 }
 
 const initialState: CartSliceState = {
   isCartLoading: false,
-  cart: {},
+  cart: { active: false, _id: "", products: [] },
 };
 
 const cartSlice = createSlice({
@@ -74,31 +74,42 @@ const cartSlice = createSlice({
       .addCase(fetchCart.pending, (state) => {
         state.isCartLoading = true;
       })
-      .addCase(fetchCart.fulfilled, (state, action) => {
-        state.cart = action.payload;
+      .addCase(fetchCart.fulfilled, (state, action: PayloadAction<Cart>) => {
+        if (action.payload) {
+          state.cart = action.payload;
+        }
         state.isCartLoading = false;
       })
-      .addCase(incrementQuantity.fulfilled, (state, action) => {
-        state.cart.products = state.cart.products.map((product) =>
-          product._id === action.payload
-            ? { ...product, quantity: product.quantity + 1 }
-            : product
-        );
-      })
-      .addCase(decrementQuantity.fulfilled, (state, action) => {
-        let newProducts = [];
+      .addCase(
+        incrementQuantity.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.cart.products = state.cart.products.map((product) =>
+            product._id === action.payload
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          );
+        }
+      )
+      .addCase(
+        decrementQuantity.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          let newProducts: Array<CartProduct> = [];
 
-        state.cart.products.map((product) => {
-          if (product._id === action.payload) {
-            product.quantity !== 1 &&
-              newProducts.push({ ...product, quantity: product.quantity - 1 });
-          } else {
-            newProducts.push(product);
-          }
-        });
+          state.cart.products.map((product) => {
+            if (product._id === action.payload) {
+              product.quantity !== 1 &&
+                newProducts.push({
+                  ...product,
+                  quantity: product.quantity - 1,
+                });
+            } else {
+              newProducts.push(product);
+            }
+          });
 
-        state.cart.products = newProducts;
-      });
+          state.cart.products = newProducts;
+        }
+      );
   },
 });
 
