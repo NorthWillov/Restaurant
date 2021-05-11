@@ -1,6 +1,10 @@
 import React, { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { incrementQuantity, CartProduct } from "../redux/reducers/cartSlice";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  CartProduct,
+} from "../redux/reducers/cartSlice";
 import { Link } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
@@ -95,9 +99,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
             </h5>
             <div className={classes.productCount}>
               <Button
-                // onClick={() =>
-                //   dispatch(decrementQuantity(product, cart.products))
-                // }
+                onClick={() => dispatch(decrementQuantity(product._id))}
                 className={classes.buttonCount}
                 variant="primary"
                 size="sm"

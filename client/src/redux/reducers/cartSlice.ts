@@ -24,6 +24,14 @@ export const incrementQuantity = createAsyncThunk(
   }
 );
 
+export const decrementQuantity = createAsyncThunk(
+  "cart/decrementQuantity",
+  async (productId) => {
+    await axios.put("/api/decrementProductQuantity", { productId });
+    return productId;
+  }
+);
+
 export interface CartProduct {
   _id: string;
   productId: string;
@@ -76,6 +84,20 @@ const cartSlice = createSlice({
             ? { ...product, quantity: product.quantity + 1 }
             : product
         );
+      })
+      .addCase(decrementQuantity.fulfilled, (state, action) => {
+        let newProducts = [];
+
+        state.cart.products.map((product) => {
+          if (product._id === action.payload) {
+            product.quantity !== 1 &&
+              newProducts.push({ ...product, quantity: product.quantity - 1 });
+          } else {
+            newProducts.push(product);
+          }
+        });
+
+        state.cart.products = newProducts;
       });
   },
 });

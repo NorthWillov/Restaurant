@@ -155,6 +155,33 @@ app.put("/api/incrementProductQuantity", jsonParser, async (req, res) => {
   res.end();
 });
 
+app.put("/api/decrementProductQuantity", jsonParser, async (req, res) => {
+  const cart = await Cart.findOne({ _id: req.session.cartId });
+  let newProducts = [];
+
+  cart.products.map((product) => {
+    if (product._id.toString() === req.body.productId) {
+      const newProd = product;
+      newProd.quantity--;
+
+      newProd.quantity !== 0 && newProducts.push(newProd);
+    } else {
+      newProducts.push(product);
+    }
+  });
+
+  await Cart.findByIdAndUpdate(
+    req.session.cartId,
+    {
+      products: newProducts,
+    },
+    (err, cart) => {
+      if (err) throw new Error(err);
+    }
+  );
+  res.end();
+});
+
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
