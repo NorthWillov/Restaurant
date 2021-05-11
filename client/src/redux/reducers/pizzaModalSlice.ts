@@ -1,12 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export interface ExtraIngredients {
+  name: string;
+  price: any;
+  uniqId: string;
+  _id: string;
+}
+
+export interface Pizza {
+  _id: string;
+  name: string;
+  type: string;
+  size?: string;
+  dough?: string;
+  price: any;
+  ingredients: Array<string>;
+  image: string;
+}
+
 export interface PizzasModalSliceState {
   isModalOpen: boolean;
-  pizzaInModal: object;
+  pizzaInModal: Pizza;
   currPizzaSize: string;
   currPizzaDough: string;
   removedIngredients: string[];
-  extraIngredients: object[];
+  extraIngredients: ExtraIngredients[];
   fantazjaIngredientChoices: { [key: string]: string };
 }
 
@@ -24,7 +42,7 @@ const pizzaModalSlice = createSlice({
   name: "pizzaModal",
   initialState,
   reducers: {
-    openPizzaModal(state, action: PayloadAction<{}>) {
+    openPizzaModal(state, action: PayloadAction<Pizza>) {
       state.isModalOpen = true;
       state.pizzaInModal = action.payload;
     },
@@ -45,7 +63,7 @@ const pizzaModalSlice = createSlice({
         (ingredient) => ingredient !== action.payload
       );
     },
-    addExtraIngredient(state, action: PayloadAction<object>) {
+    addExtraIngredient(state, action: PayloadAction<ExtraIngredients>) {
       state.extraIngredients.push(action.payload);
     },
     removeExtraIngredient(state, action: PayloadAction<string>) {

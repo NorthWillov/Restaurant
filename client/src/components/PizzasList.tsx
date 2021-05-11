@@ -2,20 +2,13 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
-import { openPizzaModal } from "../redux/reducers/pizzaModalSlice";
+import {
+  changePizzaSize,
+  openPizzaModal,
+  Pizza,
+} from "../redux/reducers/pizzaModalSlice";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaListStyles";
-
-interface Pizza {
-  _id: string;
-  name: string;
-  type: string;
-  size?: string;
-  dough?: string;
-  price: any;
-  ingredients: Array<string>;
-  image: string;
-}
 
 interface IPizzaListProps {
   classes: { [key: string]: string };
@@ -28,6 +21,9 @@ const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
 
   const handlePizzaClick = (pizza: Pizza) => {
     dispatch(openPizzaModal(pizza));
+    if (pizza.name === "Calzone (Pierog)") {
+      dispatch(changePizzaSize("28cm"));
+    }
   };
 
   return (

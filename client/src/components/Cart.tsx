@@ -21,14 +21,6 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
 
-  // useEffect(() => {
-  //   let counter = 0;
-  //   cart.products.map(
-  //     (product) => (counter = counter + product.price * product.quantity)
-  //   );
-  //   setSum(formatter.format(counter));
-  // }, [cart]);
-
   return (
     <div className={classes.root}>
       <h1 className="mt-5 mb-5">Koszyk:</h1>
@@ -59,7 +51,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
                     <p>
                       Dodaj:{" "}
                       {product.extras.map((e, idx) =>
-                        product.extras[idx + 1] ? e.name + "," : e.name
+                        product.extras[idx + 1] ? e + "," : e
                       )}
                     </p>
                   )}

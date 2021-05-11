@@ -33,8 +33,7 @@ export const decrementQuantity = createAsyncThunk(
 );
 
 export interface CartProduct {
-  _id: string;
-  productId: string;
+  _id?: string;
   productType: string;
   name: string;
   quantity: number;
@@ -43,7 +42,7 @@ export interface CartProduct {
   size?: string;
   dough?: string;
   removedIng?: string[];
-  extras?: [{ name: string }] | [];
+  extras?: string[];
   first?: string;
   second?: string;
   meat?: string;

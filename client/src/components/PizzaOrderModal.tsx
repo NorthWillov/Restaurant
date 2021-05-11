@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FC, useMemo } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hidePizzaModal } from "../redux/reducers/pizzaModalSlice";
-import { addProductToCart } from "../redux/reducers/cartSlice";
+import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice";
 import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
 import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
 import { Modal, Button, Row, Col } from "react-bootstrap";
@@ -11,10 +11,14 @@ import styles from "../styles/pizzaOrderModalStyles";
 import CartIcon from "./icons/CartIcon";
 import ArrowIcon from "./icons/ArrowIcon";
 
-function PizzaOrderModal(props) {
-  const { classes } = props;
-  const dispatch = useDispatch();
-  const pizzaModal = useSelector((state) => state.pizzaModal);
+interface PizzaOrderModalProps {
+  classes: { [key: string]: string };
+}
+
+const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
+  const dispatch = useAppDispatch();
+  const pizzaModal = useAppSelector((state) => state.pizzaModal);
+
   const {
     isModalOpen,
     pizzaInModal,
@@ -25,28 +29,17 @@ function PizzaOrderModal(props) {
     fantazjaIngredientChoices,
   } = pizzaModal;
 
-  const extraIngredientsSumPrice = useMemo(() => {
-    return extraIngredients
-      .map((ing) => ing.price[currPizzaSize])
-      .reduce((a, b) => a + b, 0);
+  const extraIngredientsSumPrice: number = useMemo(() => {
+    return extraIngredients.reduce(
+      (acc, el) => acc + el.price[currPizzaSize],
+      0
+    );
   }, [extraIngredients, currPizzaSize]);
 
-  const pizzaPrice = useMemo(() => {
+  const pizzaPrice: number = useMemo(() => {
     return pizzaInModal?.name === "Calzone (Pierog)"
-      ? formatter.format(pizzaInModal?.price + extraIngredientsSumPrice)
-      : currPizzaSize === "20cm"
-      ? formatter.format(
-          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
-        )
-      : currPizzaSize === "28cm"
-      ? formatter.format(
-          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
-        )
-      : currPizzaSize === "50cm"
-      ? formatter.format(
-          pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
-        )
-      : 0;
+      ? pizzaInModal?.price + extraIngredientsSumPrice
+      : pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice;
   }, [extraIngredients, currPizzaSize, isModalOpen]);
 
   const handleModalClose = () => {
@@ -54,7 +47,7 @@ function PizzaOrderModal(props) {
   };
 
   const handleModalSubmit = () => {
-    const product = {
+    const product: CartProduct = {
       name: pizzaInModal.name,
       image: pizzaInModal.image,
       productType: pizzaInModal.type,
@@ -119,7 +112,7 @@ function PizzaOrderModal(props) {
                 Wroć
               </Button>
               <span className={classes.modalPrice}>
-                {pizzaPrice}
+                {formatter.format(pizzaPrice)}
                 zł
               </span>
 
@@ -136,6 +129,6 @@ function PizzaOrderModal(props) {
       </Modal.Body>
     </Modal>
   );
-}
+};
 
 export default withStyles(styles)(PizzaOrderModal);
