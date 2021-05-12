@@ -14,10 +14,16 @@ export const fetchPizzaIngredients = createAsyncThunk(
   }
 );
 
+export interface PizzaIngredient {
+  _id: string;
+  name: string;
+  price: any;
+}
+
 export interface PizzasSliceState {
   isLoading: boolean;
   pizzas: [];
-  pizzaIngredients: [];
+  pizzaIngredients: PizzaIngredient[];
 }
 
 const initialState: PizzasSliceState = {

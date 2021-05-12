@@ -30,6 +30,7 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
   } = pizzaModal;
 
   const extraIngredientsSumPrice: number = useMemo(() => {
+    console.log("PIZZA_ORDER_MODAL");
     return extraIngredients.reduce(
       (acc, el) => acc + el.price[currPizzaSize],
       0

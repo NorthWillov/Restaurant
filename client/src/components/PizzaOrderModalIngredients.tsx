@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FC } from "react";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import {
   removeIngredient,
   removeExtraIngredient,
@@ -15,15 +15,19 @@ import BackIcon from "./icons/BackIcon";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
-function PizzaOrderModalIngredients(props) {
-  const { classes } = props;
+interface PizzaOrderModalIngredientsProps {
+  classes: { [key: string]: string };
+}
 
-  const dispatch = useDispatch();
+const PizzaOrderModalIngredients: FC<PizzaOrderModalIngredientsProps> = ({
+  classes,
+}) => {
+  const dispatch = useAppDispatch();
 
-  const pizzaIngredients = useSelector(
+  const pizzaIngredients = useAppSelector(
     (state) => state.pizzas.pizzaIngredients
   );
-  const pizzaModal = useSelector((state) => state.pizzaModal);
+  const pizzaModal = useAppSelector((state) => state.pizzaModal);
   const {
     pizzaInModal,
     removedIngredients,
@@ -36,7 +40,9 @@ function PizzaOrderModalIngredients(props) {
     pizzaInModal?.name === "Fantazja" ? " płatny" : ""
   } składnik`;
 
-  const handleExtraIngredientInputClick = (e) => {
+  const handleExtraIngredientInputClick = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (e.target.value !== inputPlaceholder) {
       dispatch(
         addExtraIngredient({
@@ -127,6 +133,6 @@ function PizzaOrderModalIngredients(props) {
       </Form>
     </>
   );
-}
+};
 
 export default withStyles(styles)(PizzaOrderModalIngredients);

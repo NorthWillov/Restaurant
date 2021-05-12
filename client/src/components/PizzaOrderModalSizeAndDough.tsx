@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FC } from "react";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
 import {
@@ -7,22 +7,30 @@ import {
   changePizzaDough,
 } from "../redux/reducers/pizzaModalSlice";
 
-function PizzaOrderModalSizeAndDough(props) {
-  const { classes } = props;
+interface PizzaOrderModalSizeAndDoughProps {
+  classes: { [key: string]: string };
+}
 
-  const currPizzaSize = useSelector((state) => state.pizzaModal.currPizzaSize);
-  const currPizzaDough = useSelector(
+const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
+  classes,
+}) => {
+  const currPizzaSize = useAppSelector(
+    (state) => state.pizzaModal.currPizzaSize
+  );
+  const currPizzaDough = useAppSelector(
     (state) => state.pizzaModal.currPizzaDough
   );
-  const pizzaInModal = useSelector((state) => state.pizzaModal.pizzaInModal);
-  const dispatch = useDispatch();
+  const pizzaInModal = useAppSelector((state) => state.pizzaModal.pizzaInModal);
+  const dispatch = useAppDispatch();
 
   return (
     <div className={classes.root}>
       <h6>Rozmiar:</h6>
       <div
         className={classes.group}
-        onChange={(e) => dispatch(changePizzaSize(e.target.value))}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(changePizzaSize(e.target.value))
+        }
       >
         <input
           className={classes.input}
@@ -72,7 +80,9 @@ function PizzaOrderModalSizeAndDough(props) {
       <h6>Ciasto:</h6>
       <div
         className={classes.group}
-        onChange={(e) => dispatch(changePizzaDough(e.target.value))}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(changePizzaDough(e.target.value))
+        }
       >
         <input
           className={classes.input}
@@ -121,6 +131,6 @@ function PizzaOrderModalSizeAndDough(props) {
       </div>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(PizzaOrderModalSizeAndDough);

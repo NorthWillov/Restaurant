@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ChangeEvent, FC } from "react";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import {
   addExtraFantazyIngredient,
   removeExtraFantazyIngredient,
@@ -8,13 +8,13 @@ import { Form } from "react-bootstrap";
 import withStyles from "react-jss";
 import styles from "../styles/pizzaOrderModalIngredientsStyles";
 
-function OrderModalFantazjaCase(props) {
-  const pizzaIngredients = useSelector(
+const OrderModalFantazjaCase: FC = () => {
+  const pizzaIngredients = useAppSelector(
     (state) => state.pizzas.pizzaIngredients
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "Wybierz składnik") {
       dispatch(removeExtraFantazyIngredient(e.target.name));
     } else {
@@ -100,6 +100,6 @@ function OrderModalFantazjaCase(props) {
       </Form>
     </>
   );
-}
+};
 
 export default withStyles(styles)(OrderModalFantazjaCase);
