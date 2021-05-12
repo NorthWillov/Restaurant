@@ -5,12 +5,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieSession = require("cookie-session");
 const Promotion = require("./models/Promotion");
-const Pizza = require("./models/Pizza");
 const Lunch = require("./models/Lunch");
 const User = require("./models/User");
 const Cart = require("./models/Cart");
 const Order = require("./models/Order");
-const PizzaIngredient = require("./models/PizzaIngredient");
+
+const pizzaRoutes = require("./routes/pizza");
 
 dotenv.config();
 
@@ -47,6 +47,8 @@ app.use(
   })
 );
 
+app.use(pizzaRoutes);
+
 app.get("/api/getCart", async (req, res) => {
   await Cart.findById(req.session.cartId, (err, cart) => {
     if (err) return console.log(err);
@@ -58,20 +60,6 @@ app.get("/api/getPromos", async (req, res) => {
   await Promotion.find((err, promos) => {
     if (err) return console.log(err);
     res.json(promos);
-  });
-});
-
-app.get("/api/getPizzas", async (req, res) => {
-  await Pizza.find((err, pizzas) => {
-    if (err) return console.log(err);
-    res.json(pizzas);
-  });
-});
-
-app.get("/api/getPizzaIngredients", async (req, res) => {
-  await PizzaIngredient.find({}, (err, ingredients) => {
-    if (err) return console.log(err);
-    res.json(ingredients);
   });
 });
 
