@@ -11,6 +11,7 @@ const Cart = require("./models/Cart");
 const Order = require("./models/Order");
 
 const pizzaRoutes = require("./routes/pizza");
+const cartRoutes = require("./routes/cart");
 
 dotenv.config();
 
@@ -48,13 +49,7 @@ app.use(
 );
 
 app.use(pizzaRoutes);
-
-app.get("/api/getCart", async (req, res) => {
-  await Cart.findById(req.session.cartId, (err, cart) => {
-    if (err) return console.log(err);
-    res.json(cart);
-  });
-});
+app.use(cartRoutes);
 
 app.get("/api/getPromos", async (req, res) => {
   await Promotion.find((err, promos) => {
@@ -77,27 +72,6 @@ app.get("/api/getOrders", async (req, res) => {
   });
 });
 
-app.post("/api/addProduct", jsonParser, async (req, res) => {
-  const { product } = req.body;
-  if (!req.session.cartId) {
-    const cart = new Cart({
-      products: [product],
-    });
-    await cart.save();
-    req.session.cartId = cart._id;
-  } else {
-    try {
-      const cart = await Cart.findOne({ _id: req.session.cartId });
-      cart.products = [...cart.products, product];
-      await cart.save();
-    } catch (err) {
-      console.log("CART NOT FOUND");
-      req.session = null;
-    }
-  }
-  res.end();
-});
-
 app.post("/cart/contactinfo", urlencodedParser, async (req, res) => {
   const cart = await Cart.findOne({ _id: req.session.cartId });
   const newOrder = {
@@ -113,59 +87,6 @@ app.post("/cart/contactinfo", urlencodedParser, async (req, res) => {
   await Cart.deleteOne({ _id: req.session.cartId });
   req.session = null;
   res.send("ZAMÓWIENIE ZOSTAŁO PRZYJĘTE DO REALIZACJI, DZIĘKUJEMY!");
-  res.end();
-});
-
-app.put("/api/incrementProductQuantity", jsonParser, async (req, res) => {
-  const cart = await Cart.findOne({ _id: req.session.cartId });
-  let newProducts = [];
-
-  cart.products.map((product) => {
-    if (product._id.toString() === req.body.productId) {
-      const newProd = product;
-      newProd.quantity++;
-      newProducts.push(newProd);
-    } else {
-      newProducts.push(product);
-    }
-  });
-
-  await Cart.findByIdAndUpdate(
-    req.session.cartId,
-    {
-      products: newProducts,
-    },
-    (err, cart) => {
-      if (err) throw new Error(err);
-    }
-  );
-  res.end();
-});
-
-app.put("/api/decrementProductQuantity", jsonParser, async (req, res) => {
-  const cart = await Cart.findOne({ _id: req.session.cartId });
-  let newProducts = [];
-
-  cart.products.map((product) => {
-    if (product._id.toString() === req.body.productId) {
-      const newProd = product;
-      newProd.quantity--;
-
-      newProd.quantity !== 0 && newProducts.push(newProd);
-    } else {
-      newProducts.push(product);
-    }
-  });
-
-  await Cart.findByIdAndUpdate(
-    req.session.cartId,
-    {
-      products: newProducts,
-    },
-    (err, cart) => {
-      if (err) throw new Error(err);
-    }
-  );
   res.end();
 });
 
