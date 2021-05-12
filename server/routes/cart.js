@@ -14,21 +14,25 @@ router.get("/api/getCart", async (req, res) => {
 
 router.post("/api/addProduct", jsonParser, async (req, res) => {
   const { product } = req.body;
+
+  // CREATE NEW CART IF DON'T HAVE
   if (!req.session.cartId) {
     const cart = new Cart({
       products: [product],
     });
     await cart.save();
     req.session.cartId = cart._id;
-  } else {
-    try {
-      const cart = await Cart.findOne({ _id: req.session.cartId });
-      cart.products = [...cart.products, product];
-      await cart.save();
-    } catch (err) {
-      console.log("CART NOT FOUND");
-      req.session = null;
-    }
+    res.end();
+  }
+
+  try {
+    const cart = await Cart.findOne({ _id: req.session.cartId });
+
+    cart.products = [...cart.products, product];
+    await cart.save();
+  } catch (err) {
+    console.log("CART NOT FOUND");
+    req.session = null;
   }
   res.end();
 });
