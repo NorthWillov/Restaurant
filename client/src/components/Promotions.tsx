@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import axios from "axios";
+import React, { FC } from "react";
+import { useAppSelector } from "../redux/hooks";
 import { Carousel } from "react-bootstrap";
 import withStyles from "react-jss";
 import styles from "../styles/PromotionsStyles";
@@ -9,19 +9,7 @@ interface PromotionProps {
 }
 
 const Promotions: FC<PromotionProps> = ({ classes }) => {
-  const [promos, setPromos] = useState([]);
-
-  useEffect(() => {
-    const getPromos = async () => {
-      try {
-        const response = await axios.get("/api/getPromos");
-        setPromos(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getPromos();
-  }, []);
+  const promos = useAppSelector((state) => state.promos.promos);
 
   return (
     <div id="promocje" style={{ paddingTop: "120px" }}>

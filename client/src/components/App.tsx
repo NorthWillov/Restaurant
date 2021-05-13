@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { useAppDispatch } from "../redux/hooks";
+import { fetchPromos } from "../redux/reducers/promoSlice";
 import {
   fetchPizzas,
   fetchPizzaIngredients,
@@ -16,6 +17,7 @@ const App: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(fetchPromos());
     dispatch(fetchPizzas());
     dispatch(fetchPizzaIngredients());
     dispatch(fetchCart());
