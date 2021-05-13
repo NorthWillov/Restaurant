@@ -5,10 +5,9 @@ import {
   handleOptionsSubmit,
 } from "../redux/reducers/contactInfoSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { RouteComponentProps } from "react-router";
 
-export interface ContactInfoProps {
-  history: any;
-}
+export interface ContactInfoProps extends RouteComponentProps {}
 
 const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
   const dispatch = useAppDispatch();

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Landing from "./Landing";
 import Cart from "./Cart";
 import Admin from "./Admin";
 import ContactInfo from "./ContactInfo";
 
-const Routes: React.FC = () => {
+const Routes: FC = () => {
   return (
     <Switch>
       <Route exact path="/" render={() => <Landing />} />

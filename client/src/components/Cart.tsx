@@ -5,16 +5,15 @@ import {
   decrementQuantity,
   CartProduct,
 } from "../redux/reducers/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import ArrowIcon from "./icons/ArrowIcon";
 import withStyles from "react-jss";
 import styles from "../styles/cartStyles";
 
-interface CartProps {
+export interface CartProps extends RouteComponentProps {
   classes: { [key: string]: string };
-  history: any;
 }
 
 const Cart: FC<CartProps> = ({ classes, history }) => {
