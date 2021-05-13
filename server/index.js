@@ -72,7 +72,7 @@ app.get("/api/getOrders", async (req, res) => {
   });
 });
 
-app.post("/cart/contactinfo", urlencodedParser, async (req, res) => {
+app.post("/api/createOrder", jsonParser, async (req, res) => {
   const cart = await Cart.findOne({ _id: req.session.cartId });
   const newOrder = {
     ...req.body,

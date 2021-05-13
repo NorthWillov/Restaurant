@@ -2,8 +2,16 @@ import React, { FC } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 
 const ContactInfo: FC = () => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("SUBMITTED!!!");
+  };
+
   return (
-    <Form style={{ maxWidth: "650px", margin: "50px auto" }} method="POST">
+    <Form
+      style={{ maxWidth: "650px", margin: "50px auto" }}
+      onSubmit={handleSubmit}
+    >
       <h1>Sposób dostawy</h1>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridSelectShip">
