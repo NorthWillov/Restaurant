@@ -1,1 +1,1 @@
-To run a project run `npm install` on both "client" and "server", then create `.env` file in server directory and paste given MongoDB password `MONGO_PASSWORD=PASTE_PASSWORD_HERE`
+To open a project in your browser first run this command `npm install` on both "client" and "server" directories, then create `.env` file in server directory and paste given MongoDB password `MONGO_PASSWORD=PASTE_PASSWORD_HERE`. Now you can run a project by `npm run dev` command in server directory, also don't forget to include your IP adress in your MongoDB cluster.
