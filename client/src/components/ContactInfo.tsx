@@ -1,10 +1,18 @@
 import React, { FC } from "react";
 import { Form, Col, Button } from "react-bootstrap";
+import { handleOptionsChange } from "../redux/reducers/contactInfoSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 const ContactInfo: FC = () => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("SUBMITTED!!!");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(handleOptionsChange(e.target.name, e.target.value));
   };
 
   return (
@@ -15,13 +23,23 @@ const ContactInfo: FC = () => {
       <h1>Sposób dostawy</h1>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridSelectShip">
-          <Form.Control name="deliveryoption" as="select" defaultValue="Dowóz">
+          <Form.Control
+            onChange={handleChange}
+            name="deliveryoption"
+            as="select"
+            defaultValue="Dowóz"
+          >
             <option>Dowóz</option>
             <option>Odbiór osobisty</option>
           </Form.Control>
         </Form.Group>
         <Form.Group as={Col} controlId="formGridTimeShip">
-          <Form.Control name="time" as="select" defaultValue="Jak najszybciej">
+          <Form.Control
+            onChange={handleChange}
+            name="time"
+            as="select"
+            defaultValue="Jak najszybciej"
+          >
             <option>Jak najszybciej</option>
             <option>20:00</option>
           </Form.Control>
@@ -34,6 +52,7 @@ const ContactInfo: FC = () => {
           name="nameandsurname"
           type="name"
           placeholder="Imię i nazwisko"
+          onChange={handleChange}
         />
       </Form.Group>
 
@@ -43,11 +62,18 @@ const ContactInfo: FC = () => {
           name="phonenumber"
           type="tel"
           placeholder="Numer telefonu"
+          onChange={handleChange}
         />
       </Form.Group>
 
       <Form.Group controlId="formGridEmail">
-        <Form.Control required name="email" type="email" placeholder="Email" />
+        <Form.Control
+          required
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
       </Form.Group>
       <h1>Adres dostawy</h1>
       <Form.Row>
@@ -57,6 +83,7 @@ const ContactInfo: FC = () => {
             name="street"
             type="text"
             placeholder="Ulica"
+            onChange={handleChange}
           />
         </Form.Group>
         <Form.Group as={Col} controlId="formGridAddressNumber">
@@ -65,13 +92,20 @@ const ContactInfo: FC = () => {
             name="streetnumber"
             type="number"
             placeholder="Numer ulicy"
+            onChange={handleChange}
           />
         </Form.Group>
       </Form.Row>
 
       <Form.Row>
         <Form.Group as={Col} controlId="formGridCity">
-          <Form.Control required type="text" name="town" placeholder="Miasto" />
+          <Form.Control
+            required
+            type="text"
+            name="town"
+            placeholder="Miasto"
+            onChange={handleChange}
+          />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridFlat">
@@ -80,6 +114,7 @@ const ContactInfo: FC = () => {
             type="number"
             name="flat"
             placeholder="Lokal"
+            onChange={handleChange}
           />
         </Form.Group>
 
@@ -88,6 +123,7 @@ const ContactInfo: FC = () => {
             type="number"
             name="floor"
             placeholder="Piętro (opcjonalne)"
+            onChange={handleChange}
           />
         </Form.Group>
       </Form.Row>
@@ -97,6 +133,7 @@ const ContactInfo: FC = () => {
           name="note"
           type="text"
           placeholder="Dodaj notatkę (opcjonalne)"
+          onChange={handleChange}
         />
       </Form.Group>
 
@@ -107,6 +144,7 @@ const ContactInfo: FC = () => {
           required
           as="select"
           defaultValue="Wybierz formę płatnośni"
+          onChange={handleChange}
         >
           <option>Wybierz formę płatności</option>
           <option>Karta (przy odbiorze)</option>

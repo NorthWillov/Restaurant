@@ -1,26 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartProduct } from "./cartSlice";
 
 export interface Order {
-  deliveryoption: string;
-  time: string;
-  nameandsurname: string;
-  phonenumber: number;
-  email: string;
-  street: string;
-  streetnumber: number;
-  town: string;
-  flat: number;
-  floor: number;
-  note: string;
-  payment: string;
-  products: CartProduct[];
-  totalamount: number;
+  [key: string]: string | number;
 }
 
 const initialState: Order = {
-  deliveryoption: "",
-  time: "",
+  deliveryoption: "Dowóz",
+  time: "Jak najczybciej",
   nameandsurname: "",
   phonenumber: 0,
   email: "",
@@ -31,16 +17,29 @@ const initialState: Order = {
   floor: 0,
   note: "",
   payment: "",
-  products: [],
-  totalamount: 0,
 };
 
 const contactInfoSlice = createSlice({
   name: "contactInfo",
   initialState,
-  reducers: {},
+  reducers: {
+    handleOptionsChange: {
+      reducer(
+        state,
+        action: PayloadAction<{ name: string; value: string | number }>
+      ) {
+        const { name, value } = action.payload;
+        state[name] = value;
+      },
+      prepare(name, value) {
+        return {
+          payload: { name, value },
+        };
+      },
+    },
+  },
 });
 
-export const {} = contactInfoSlice.actions;
+export const { handleOptionsChange } = contactInfoSlice.actions;
 
 export default contactInfoSlice.reducer;
