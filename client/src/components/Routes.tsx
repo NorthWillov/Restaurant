@@ -18,7 +18,7 @@ const Routes: React.FC = () => {
       <Route
         exact
         path="/cart/contactinfo"
-        render={(routeProps) => <ContactInfo />}
+        render={(routeProps) => <ContactInfo {...routeProps} />}
       />
       <Redirect to="/" />
     </Switch>

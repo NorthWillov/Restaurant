@@ -23,6 +23,7 @@ router.post("/api/addProduct", jsonParser, async (req, res) => {
     await cart.save();
     req.session.cartId = cart._id;
     res.end();
+    return;
   }
 
   try {

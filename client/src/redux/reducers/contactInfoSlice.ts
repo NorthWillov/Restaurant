@@ -1,12 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import { resetCart } from "./cartSlice";
 
-export interface Order {
+export const handleOptionsSubmit = createAsyncThunk(
+  "contactInfo/createOrder",
+  async (contactInfo: ContactInfo, { dispatch }) => {
+    await axios.post("/api/createOrder", { contactInfo });
+    dispatch(resetCart());
+  }
+);
+
+export interface ContactInfo {
   [key: string]: string | number;
 }
 
-const initialState: Order = {
+const initialState: ContactInfo = {
   deliveryoption: "Dowóz",
-  time: "Jak najczybciej",
+  time: "Jak najszybciej",
   nameandsurname: "",
   phonenumber: 0,
   email: "",
@@ -38,6 +48,10 @@ const contactInfoSlice = createSlice({
       },
     },
   },
+  extraReducers: (builder) =>
+    builder.addCase(handleOptionsSubmit.fulfilled, () => {
+      return initialState;
+    }),
 });
 
 export const { handleOptionsChange } = contactInfoSlice.actions;

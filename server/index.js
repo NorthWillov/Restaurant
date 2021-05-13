@@ -75,7 +75,7 @@ app.get("/api/getOrders", async (req, res) => {
 app.post("/api/createOrder", jsonParser, async (req, res) => {
   const cart = await Cart.findOne({ _id: req.session.cartId });
   const newOrder = {
-    ...req.body,
+    ...req.body.contactInfo,
     products: cart.products,
     totalamount: cart.products.reduce(
       (acc, el) => acc + el.price * el.quantity,
@@ -86,7 +86,6 @@ app.post("/api/createOrder", jsonParser, async (req, res) => {
   await order.save();
   await Cart.deleteOne({ _id: req.session.cartId });
   req.session = null;
-  res.send("ZAMÓWIENIE ZOSTAŁO PRZYJĘTE DO REALIZACJI, DZIĘKUJEMY!");
   res.end();
 });
 

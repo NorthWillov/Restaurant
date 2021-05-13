@@ -1,14 +1,23 @@
 import React, { FC } from "react";
 import { Form, Col, Button } from "react-bootstrap";
-import { handleOptionsChange } from "../redux/reducers/contactInfoSlice";
-import { useAppDispatch } from "../redux/hooks";
+import {
+  handleOptionsChange,
+  handleOptionsSubmit,
+} from "../redux/reducers/contactInfoSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-const ContactInfo: FC = () => {
+export interface ContactInfoProps {
+  history: any;
+}
+
+const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
   const dispatch = useAppDispatch();
+  const contactInfo = useAppSelector((state) => state.contactInfo);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("SUBMITTED!!!");
+    dispatch(handleOptionsSubmit(contactInfo));
+    history.push("/");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
