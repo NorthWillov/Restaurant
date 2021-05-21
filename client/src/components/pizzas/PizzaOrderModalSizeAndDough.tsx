@@ -1,15 +1,14 @@
 import React, { FC } from "react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../../styles/pizzaOrderModalSizeAndDoughStyles";
 import {
   changePizzaSize,
   changePizzaDough,
 } from "../../redux/reducers/pizzaModalSlice";
 
-interface PizzaOrderModalSizeAndDoughProps {
-  classes: { [key: string]: string };
-}
+interface PizzaOrderModalSizeAndDoughProps
+  extends WithStylesProps<typeof styles> {}
 
 const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
   classes,

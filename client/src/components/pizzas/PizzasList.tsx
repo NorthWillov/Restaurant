@@ -7,12 +7,10 @@ import {
   openPizzaModal,
   Pizza,
 } from "../../redux/reducers/pizzaModalSlice";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../../styles/pizzaListStyles";
 
-interface IPizzaListProps {
-  classes: { [key: string]: string };
-}
+interface IPizzaListProps extends WithStylesProps<typeof styles> {}
 
 const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
   const dispatch = useAppDispatch();

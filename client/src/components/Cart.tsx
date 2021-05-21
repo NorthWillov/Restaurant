@@ -19,6 +19,7 @@ export interface CartProps
 const Cart: FC<CartProps> = ({ classes, history }) => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.cart);
+  const isCartLoading = useAppSelector((state) => state.cart.isCartLoading);
 
   return (
     <div className={classes.root}>
@@ -91,6 +92,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
             <div className={classes.productCount}>
               <Button
                 onClick={() => dispatch(decrementQuantity(product._id))}
+                disabled={isCartLoading}
                 className={classes.buttonCount}
                 variant="primary"
                 size="sm"
@@ -106,6 +108,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
 
               <Button
                 onClick={() => dispatch(incrementQuantity(product._id))}
+                disabled={isCartLoading}
                 variant="primary"
                 size="sm"
                 className={classes.buttonCount}

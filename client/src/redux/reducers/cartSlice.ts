@@ -83,6 +83,9 @@ const cartSlice = createSlice({
         }
         state.isCartLoading = false;
       })
+      .addCase(incrementQuantity.pending, (state) => {
+        state.isCartLoading = true;
+      })
       .addCase(
         incrementQuantity.fulfilled,
         (state, action: PayloadAction<string>) => {
@@ -91,8 +94,12 @@ const cartSlice = createSlice({
               ? { ...product, quantity: product.quantity + 1 }
               : product
           );
+          state.isCartLoading = false;
         }
       )
+      .addCase(decrementQuantity.pending, (state) => {
+        state.isCartLoading = true;
+      })
       .addCase(
         decrementQuantity.fulfilled,
         (state, action: PayloadAction<string>) => {
@@ -111,6 +118,7 @@ const cartSlice = createSlice({
           });
 
           state.cart.products = newProducts;
+          state.isCartLoading = false;
         }
       );
   },

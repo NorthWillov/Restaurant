@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useAppSelector } from "../redux/hooks";
 import MainNavbar from "./MainNavbar";
 import PizzasList from "./pizzas/PizzasList";
 // import LunchesList from "./LunchesList";
@@ -19,6 +20,8 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
   //   setLunchModalShow(true);
   // };
 
+  const isModalOpen = useAppSelector((state) => state.pizzaModal.isModalOpen);
+
   return (
     <div className={classes.root}>
       <MainNavbar />
@@ -29,7 +32,7 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
 
       {/* <LunchesList handleLunchModalOpen={handleLunchModalOpen} /> */}
 
-      <PizzaOrderModal />
+      {isModalOpen && <PizzaOrderModal />}
 
       {/* {newItem && (
         <>

@@ -12,12 +12,11 @@ import { v4 as uuidv4 } from "uuid";
 import { formatter } from "../../utils/formatter";
 import RemoveIcon from "../icons/RemoveIcon";
 import BackIcon from "../icons/BackIcon";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../../styles/pizzaOrderModalIngredientsStyles";
 
-interface PizzaOrderModalIngredientsProps {
-  classes: { [key: string]: string };
-}
+interface PizzaOrderModalIngredientsProps
+  extends WithStylesProps<typeof styles> {}
 
 const PizzaOrderModalIngredients: FC<PizzaOrderModalIngredientsProps> = ({
   classes,
