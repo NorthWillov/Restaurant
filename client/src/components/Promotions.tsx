@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { Carousel } from "react-bootstrap";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/PromotionsStyles";
 
-interface PromotionProps {
-  classes: { [key: string]: string };
-}
+interface PromotionProps extends WithStylesProps<typeof styles> {}
 
 const Promotions: FC<PromotionProps> = ({ classes }) => {
   const promos = useAppSelector((state) => state.promos.promos);

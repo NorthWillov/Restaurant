@@ -9,12 +9,12 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { formatter } from "../utils/formatter";
 import ArrowIcon from "./icons/ArrowIcon";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/cartStyles";
 
-export interface CartProps extends RouteComponentProps {
-  classes: { [key: string]: string };
-}
+export interface CartProps
+  extends RouteComponentProps,
+    WithStylesProps<typeof styles> {}
 
 const Cart: FC<CartProps> = ({ classes, history }) => {
   const dispatch = useAppDispatch();

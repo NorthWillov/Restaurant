@@ -10,12 +10,10 @@ import {
 } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import withStyles from "react-jss";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/mainNavbarStyles";
 
-interface MainNavbarProps {
-  classes: { [key: string]: string };
-}
+interface MainNavbarProps extends WithStylesProps<typeof styles> {}
 
 const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
   const cart = useAppSelector((state) => state.cart.cart);
