@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import withStyles from "react-jss";
-import styles from "../styles/pizzaOrderModalSizeAndDoughStyles";
+import styles from "../../styles/pizzaOrderModalSizeAndDoughStyles";
 import {
   changePizzaSize,
   changePizzaDough,
-} from "../redux/reducers/pizzaModalSlice";
+} from "../../redux/reducers/pizzaModalSlice";
 
 interface PizzaOrderModalSizeAndDoughProps {
   classes: { [key: string]: string };

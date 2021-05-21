@@ -1,19 +1,19 @@
 import React, { FC } from "react";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   removeIngredient,
   removeExtraIngredient,
   returnRemovedIngredient,
   addExtraIngredient,
-} from "../redux/reducers/pizzaModalSlice";
+} from "../../redux/reducers/pizzaModalSlice";
 import { Form } from "react-bootstrap";
 import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
 import { v4 as uuidv4 } from "uuid";
-import { formatter } from "../utils/formatter";
-import RemoveIcon from "./icons/RemoveIcon";
-import BackIcon from "./icons/BackIcon";
+import { formatter } from "../../utils/formatter";
+import RemoveIcon from "../icons/RemoveIcon";
+import BackIcon from "../icons/BackIcon";
 import withStyles from "react-jss";
-import styles from "../styles/pizzaOrderModalIngredientsStyles";
+import styles from "../../styles/pizzaOrderModalIngredientsStyles";
 
 interface PizzaOrderModalIngredientsProps {
   classes: { [key: string]: string };

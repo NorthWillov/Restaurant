@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchPromos } from "../redux/reducers/promoSlice";
 import {
@@ -26,7 +27,9 @@ const App: FC = () => {
   return (
     <div className="App" id="home">
       <Container fluid="lg">
-        <Routes />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </Container>
     </div>
   );

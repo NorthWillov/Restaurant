@@ -1,14 +1,14 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { formatter } from "../utils/formatter";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { formatter } from "../../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import {
   changePizzaSize,
   openPizzaModal,
   Pizza,
-} from "../redux/reducers/pizzaModalSlice";
+} from "../../redux/reducers/pizzaModalSlice";
 import withStyles from "react-jss";
-import styles from "../styles/pizzaListStyles";
+import styles from "../../styles/pizzaListStyles";
 
 interface IPizzaListProps {
   classes: { [key: string]: string };

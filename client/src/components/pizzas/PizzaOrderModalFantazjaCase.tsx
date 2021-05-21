@@ -1,12 +1,12 @@
-import React, { ChangeEvent, FC } from "react";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import React, { FC } from "react";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   addExtraFantazyIngredient,
   removeExtraFantazyIngredient,
-} from "../redux/reducers/pizzaModalSlice";
+} from "../../redux/reducers/pizzaModalSlice";
 import { Form } from "react-bootstrap";
 import withStyles from "react-jss";
-import styles from "../styles/pizzaOrderModalIngredientsStyles";
+import styles from "../../styles/pizzaOrderModalIngredientsStyles";
 
 const OrderModalFantazjaCase: FC = () => {
   const pizzaIngredients = useAppSelector(
