@@ -6,6 +6,7 @@ import {
 } from "../redux/reducers/contactInfoSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { RouteComponentProps } from "react-router";
+import ArrowIcon from "./icons/ArrowIcon";
 
 export interface ContactInfoProps extends RouteComponentProps {}
 
@@ -160,6 +161,14 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
           <option>PayU</option>
         </Form.Control>
       </Form.Group>
+      <Button
+        variant="outline-secondary"
+        onClick={() => history.goBack()}
+        className="mr-3"
+      >
+        <ArrowIcon />
+        Wroć
+      </Button>
       <Button type="submit">Zamawiam</Button>
     </Form>
   );
