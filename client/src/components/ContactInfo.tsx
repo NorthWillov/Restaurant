@@ -50,7 +50,17 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
             defaultValue="Jak najszybciej"
           >
             <option>Jak najszybciej</option>
+            <option>12:00</option>
+            <option>13:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+            <option>18:00</option>
+            <option>19:00</option>
             <option>20:00</option>
+            <option>21:00</option>
+            <option>22:00</option>
           </Form.Control>
         </Form.Group>
       </Form.Row>
@@ -99,7 +109,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
           <Form.Control
             required
             name="streetnumber"
-            type="number"
+            type="text"
             placeholder="Numer ulicy"
             onChange={handleChange}
           />
@@ -120,7 +130,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         <Form.Group as={Col} controlId="formGridFlat">
           <Form.Control
             required
-            type="number"
+            type="text"
             name="flat"
             placeholder="Lokal"
             onChange={handleChange}
@@ -148,16 +158,15 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
 
       <h1>Płatność</h1>
       <Form.Group controlId="formGridPayment">
+        <Form.Label>Wybierz formę płatności: </Form.Label>
         <Form.Control
           name="payment"
-          required
           as="select"
-          defaultValue="Wybierz formę płatnośni"
+          required
           onChange={handleChange}
         >
-          <option>Wybierz formę płatności</option>
-          <option>Karta (przy odbiorze)</option>
           <option>Gotówka</option>
+          <option>Karta (przy odbiorze)</option>
           <option>PayU</option>
         </Form.Control>
       </Form.Group>
