@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Form, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import {
   handleOptionsChange,
   handleOptionsSubmit,
@@ -14,21 +15,12 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
   const dispatch = useAppDispatch();
   const contactInfo = useAppSelector((state) => state.contactInfo);
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(handleOptionsSubmit(contactInfo));
-    history.push("/");
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(handleOptionsChange(e.target.name, e.target.value));
   };
 
   return (
-    <Form
-      style={{ maxWidth: "650px", margin: "50px auto" }}
-      onSubmit={handleSubmit}
-    >
+    <Form style={{ maxWidth: "650px", margin: "50px auto" }}>
       <h1>Sposób dostawy</h1>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridSelectShip">
@@ -178,7 +170,11 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         <ArrowIcon />
         Wroć
       </Button>
-      <Button type="submit">Zamawiam</Button>
+      <Link to="/thanks">
+        <Button onClick={() => dispatch(handleOptionsSubmit(contactInfo))}>
+          Zamawiam
+        </Button>
+      </Link>
     </Form>
   );
 };
