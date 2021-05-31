@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useAppSelector } from "../redux/hooks";
 import MainNavbar from "./MainNavbar";
 import PizzasList from "./pizzas/PizzasList";
-// import LunchesList from "./LunchesList";
+import LunchesList from "./LunchesList";
 import PizzaOrderModal from "./pizzas/PizzaOrderModal";
 // import LunchesOrderModal from "./LunchesOrderModal";
 import Promotions from "./Promotions";
@@ -12,14 +12,6 @@ import styles from "../styles/landingStyles";
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
 const Landing: FC<ILandingProps> = ({ classes }) => {
-  // const [lunchModalShow, setLunchModalShow] = useState(false);
-
-  // const handleLunchModalOpen = (item) => {
-  //   show && toggleShow();
-  //   setNewItem(item);
-  //   setLunchModalShow(true);
-  // };
-
   const isModalOpen = useAppSelector((state) => state.pizzaModal.isModalOpen);
 
   return (
@@ -30,7 +22,7 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
 
       <PizzasList />
 
-      {/* <LunchesList handleLunchModalOpen={handleLunchModalOpen} /> */}
+      <LunchesList />
 
       {isModalOpen && <PizzaOrderModal />}
 

@@ -6,6 +6,7 @@ import {
   fetchPizzas,
   fetchPizzaIngredients,
 } from "../redux/reducers/pizzasSlice";
+import { fetchLunches } from "../redux/reducers/lunchSlice";
 import { fetchCart } from "../redux/reducers/cartSlice";
 import Routes from "./Routes";
 // import { ToastProvider } from "../contexts/ToastContext";
@@ -20,6 +21,7 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(fetchPromos());
     dispatch(fetchPizzas());
+    dispatch(fetchLunches());
     dispatch(fetchPizzaIngredients());
     dispatch(fetchCart());
   }, []);

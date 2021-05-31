@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { useAppSelector } from "../redux/hooks";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
-import { withStyles } from "@material-ui/styles";
+import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/lunchesListStyles";
 
-function LunchesList(props) {
-  const [lunches, setLunches] = useState([]);
-  const { classes } = props;
+interface ILunchesListProps extends WithStylesProps<typeof styles> {}
 
-  useEffect(() => {
-    const getLunches = async () => {
-      try {
-        const response = await axios.get("/api/getLunches");
-        setLunches(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getLunches();
-  }, []);
-
-  const handleLunchPick = (lunch) => {
-    props.handleLunchModalOpen(lunch);
-  };
+const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
+  const lunches = useAppSelector((state) => state.lunches.lunches);
 
   return (
     <section id="zestawy">
@@ -34,7 +19,7 @@ function LunchesList(props) {
             <Col xs={6} md={4} lg={4} xl={3}>
               <Card className="mb-3">
                 <Card.Img
-                  onClick={() => handleLunchPick(lunch)}
+                  // onClick={() => handleLunchPick(lunch)}
                   variant="top"
                   src={lunch.image}
                   alt={lunch.name}
@@ -51,7 +36,7 @@ function LunchesList(props) {
                     </p>
                     <Button
                       variant="outline-dark"
-                      onClick={() => handleLunchPick(lunch)}
+                      // onClick={() => handleLunchPick(lunch)}
                       size="sm"
                       className="ml-1"
                     >
@@ -66,6 +51,6 @@ function LunchesList(props) {
       </Row>
     </section>
   );
-}
+};
 
 export default withStyles(styles)(LunchesList);

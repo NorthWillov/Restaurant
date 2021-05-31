@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { formatter } from "../utils/formatter";
 import { Modal, Row, Col, Button, Form } from "react-bootstrap";
-import { ToastContext } from "../contexts/ToastContext";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/lunchesOrderModalStyles";
 
