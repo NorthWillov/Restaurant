@@ -58,7 +58,7 @@ app.get("/api/getPromos", async (req, res) => {
   });
 });
 
-app.get("/api/getLunches", async (req, res) => {
+app.get("/api/fetchLunches", async (req, res) => {
   await Lunch.find((err, lunches) => {
     if (err) return console.log(err);
     res.json(lunches);
