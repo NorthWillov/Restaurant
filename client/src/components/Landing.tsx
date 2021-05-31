@@ -4,7 +4,7 @@ import MainNavbar from "./MainNavbar";
 import PizzasList from "./pizzas/PizzasList";
 import LunchesList from "./LunchesList";
 import PizzaOrderModal from "./pizzas/PizzaOrderModal";
-// import LunchesOrderModal from "./LunchesOrderModal";
+import LunchesOrderModal from "./LunchesOrderModal";
 import Promotions from "./Promotions";
 import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/landingStyles";
@@ -12,7 +12,12 @@ import styles from "../styles/landingStyles";
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
 const Landing: FC<ILandingProps> = ({ classes }) => {
-  const isModalOpen = useAppSelector((state) => state.pizzaModal.isModalOpen);
+  const isPizzaModalOpen = useAppSelector(
+    (state) => state.pizzaModal.isModalOpen
+  );
+  const isLunchModalOpen = useAppSelector(
+    (state) => state.lunchModalSlice.isModalOpen
+  );
 
   return (
     <div className={classes.root}>
@@ -24,17 +29,8 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
 
       <LunchesList />
 
-      {isModalOpen && <PizzaOrderModal />}
-
-      {/* {newItem && (
-        <>
-          <LunchesOrderModal
-            lunch={newItem}
-            show={lunchModalShow}
-            onHide={() => setLunchModalShow(false)}
-          />
-        </>
-      )} */}
+      {isPizzaModalOpen && <PizzaOrderModal />}
+      {isLunchModalOpen && <LunchesOrderModal />}
     </div>
   );
 };

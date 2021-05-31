@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { hidePizzaModal } from "./pizzaModalSlice";
 import axios from "axios";
 
 export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
@@ -12,7 +11,6 @@ export const addProductToCart = createAsyncThunk(
   async (product: CartProduct, { dispatch }) => {
     await axios.post("/api/addProduct", { product });
     await dispatch(fetchCart());
-    dispatch(hidePizzaModal());
   }
 );
 

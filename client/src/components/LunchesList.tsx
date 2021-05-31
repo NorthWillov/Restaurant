@@ -1,5 +1,7 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Lunch } from "../redux/reducers/lunchSlice";
+import { openLunchModal } from "../redux/reducers/lunchModalSlice";
 import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import withStyles, { WithStylesProps } from "react-jss";
@@ -9,6 +11,11 @@ interface ILunchesListProps extends WithStylesProps<typeof styles> {}
 
 const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
   const lunches = useAppSelector((state) => state.lunches.lunches);
+  const dispatch = useAppDispatch();
+
+  const handleLunchPick = (lunch: Lunch) => {
+    dispatch(openLunchModal(lunch));
+  };
 
   return (
     <section id="zestawy">
@@ -19,7 +26,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
             <Col xs={6} md={4} lg={4} xl={3}>
               <Card className="mb-3">
                 <Card.Img
-                  // onClick={() => handleLunchPick(lunch)}
+                  onClick={() => handleLunchPick(lunch)}
                   variant="top"
                   src={lunch.image}
                   alt={lunch.name}
@@ -36,7 +43,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
                     </p>
                     <Button
                       variant="outline-dark"
-                      // onClick={() => handleLunchPick(lunch)}
+                      onClick={() => handleLunchPick(lunch)}
                       size="sm"
                       className="ml-1"
                     >

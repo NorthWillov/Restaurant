@@ -62,6 +62,7 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
       price: pizzaPrice,
     };
     dispatch(addProductToCart(product));
+    dispatch(hidePizzaModal());
   };
 
   return (
