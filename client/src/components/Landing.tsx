@@ -4,6 +4,8 @@ import MainNavbar from "./MainNavbar";
 import PizzasList from "./pizzas/PizzasList";
 import LunchesList from "./LunchesList";
 import MakaronsList from "./MakaronsList";
+import About from "./About";
+import Contact from "./Contact";
 import PizzaOrderModal from "./pizzas/PizzaOrderModal";
 import LunchesOrderModal from "./LunchesOrderModal";
 import Promotions from "./Promotions";
@@ -27,6 +29,8 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
       <PizzasList />
       <LunchesList />
       <MakaronsList />
+      <About />
+      <Contact />
 
       {isPizzaModalOpen && <PizzaOrderModal />}
       {isLunchModalOpen && <LunchesOrderModal />}
