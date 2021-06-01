@@ -6,12 +6,13 @@ const dotenv = require("dotenv");
 const cookieSession = require("cookie-session");
 const Promotion = require("./models/Promotion");
 const Lunch = require("./models/Lunch");
-const User = require("./models/User");
 const Cart = require("./models/Cart");
 const Order = require("./models/Order");
+const Makaron = require("./models/Makaron");
 
 const pizzaRoutes = require("./routes/pizza");
 const cartRoutes = require("./routes/cart");
+const { readdirSync } = require("fs");
 
 dotenv.config();
 
@@ -62,6 +63,13 @@ app.get("/api/fetchLunches", async (req, res) => {
   await Lunch.find((err, lunches) => {
     if (err) return console.log(err);
     res.json(lunches);
+  });
+});
+
+app.get("/api/fetchMakarons", async (req, res) => {
+  await Makaron.find((err, makarons) => {
+    if (err) return console.log(err);
+    res.json(makarons);
   });
 });
 

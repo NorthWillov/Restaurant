@@ -3,6 +3,7 @@ import { useAppSelector } from "../redux/hooks";
 import MainNavbar from "./MainNavbar";
 import PizzasList from "./pizzas/PizzasList";
 import LunchesList from "./LunchesList";
+import MakaronsList from "./MakaronsList";
 import PizzaOrderModal from "./pizzas/PizzaOrderModal";
 import LunchesOrderModal from "./LunchesOrderModal";
 import Promotions from "./Promotions";
@@ -22,12 +23,10 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
   return (
     <div className={classes.root}>
       <MainNavbar />
-
       <Promotions />
-
       <PizzasList />
-
       <LunchesList />
+      <MakaronsList />
 
       {isPizzaModalOpen && <PizzaOrderModal />}
       {isLunchModalOpen && <LunchesOrderModal />}
