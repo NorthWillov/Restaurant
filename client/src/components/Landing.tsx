@@ -8,6 +8,7 @@ import About from "./About";
 import Contact from "./Contact";
 import PizzaOrderModal from "./pizzas/PizzaOrderModal";
 import LunchesOrderModal from "./LunchesOrderModal";
+import ProductAddModal from "./ProductAddModal";
 import Promotions from "./Promotions";
 import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/landingStyles";
@@ -21,6 +22,7 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
   const isLunchModalOpen = useAppSelector(
     (state) => state.lunchModalSlice.isModalOpen
   );
+  const isCartModalOpen = useAppSelector((state) => state.cart.isModalOpen);
 
   return (
     <div className={classes.root}>
@@ -34,6 +36,7 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
 
       {isPizzaModalOpen && <PizzaOrderModal />}
       {isLunchModalOpen && <LunchesOrderModal />}
+      {isCartModalOpen && <ProductAddModal />}
     </div>
   );
 };

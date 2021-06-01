@@ -54,11 +54,13 @@ export interface Cart {
 
 export interface CartSliceState {
   isCartLoading: boolean;
+  isModalOpen: boolean;
   cart: Cart;
 }
 
 const initialState: CartSliceState = {
   isCartLoading: false,
+  isModalOpen: false,
   cart: { active: false, _id: "", products: [] },
 };
 
@@ -68,6 +70,9 @@ const cartSlice = createSlice({
   reducers: {
     resetCart() {
       return initialState;
+    },
+    closeModal(state) {
+      state.isModalOpen = false;
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +85,9 @@ const cartSlice = createSlice({
           state.cart = action.payload;
         }
         state.isCartLoading = false;
+      })
+      .addCase(addProductToCart.fulfilled, (state) => {
+        state.isModalOpen = true;
       })
       .addCase(incrementQuantity.pending, (state) => {
         state.isCartLoading = true;
@@ -122,6 +130,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { resetCart } = cartSlice.actions;
+export const { resetCart, closeModal } = cartSlice.actions;
 
 export default cartSlice.reducer;
