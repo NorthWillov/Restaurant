@@ -1,13 +1,6 @@
 import React, { FC } from "react";
 import { useAppSelector } from "../redux/hooks";
-import {
-  Toast,
-  Navbar,
-  NavDropdown,
-  Nav,
-  Container,
-  Button,
-} from "react-bootstrap";
+import { Navbar, NavDropdown, Nav, Container, Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import withStyles, { WithStylesProps } from "react-jss";
@@ -36,18 +29,7 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
             right: "31px",
             top: "90px",
           }}
-        >
-          {/* <Toast show={show} onClose={toggleShow} delay={3000} autohide>
-            <Toast.Header>
-              <span style={{ color: "black", fontSize: "15px" }}>
-                {cart.length !== 0 &&
-                  `+1 ${cart[cart.length - 1].name} ${formatter.format(
-                    cart[cart.length - 1].price
-                  )}zł`}
-              </span>
-            </Toast.Header>
-          </Toast> */}
-        </div>
+        ></div>
 
         <Navbar.Brand href="#home">
           <img className={classes.logo} srcSet={logo} alt="riccardo-logo" />
@@ -61,17 +43,6 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
                 Zestawy obiadowe
               </NavDropdown.Item>
               <NavDropdown.Item href="#makarony">Makarony</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#salatki">Sałatki</NavDropdown.Item>
-              <NavDropdown.Item href="#nalesnikisweet">
-                Naleśniki na słodko
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#nalesnikisalt">
-                Naleśniki na słono
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#startery">Startery</NavDropdown.Item>
-              <NavDropdown.Item href="#sosy">Sosy</NavDropdown.Item>
-              <NavDropdown.Item href="#napoje">Napoje</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#about">O nas</Nav.Link>
             <Nav.Link href="#promocje">Promocje</Nav.Link>
