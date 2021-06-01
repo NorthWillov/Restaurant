@@ -86,8 +86,12 @@ const cartSlice = createSlice({
         }
         state.isCartLoading = false;
       })
-      .addCase(addProductToCart.fulfilled, (state) => {
+      .addCase(addProductToCart.pending, (state) => {
         state.isModalOpen = true;
+        state.isCartLoading = true;
+      })
+      .addCase(addProductToCart.fulfilled, (state) => {
+        state.isCartLoading = false;
       })
       .addCase(incrementQuantity.pending, (state) => {
         state.isCartLoading = true;

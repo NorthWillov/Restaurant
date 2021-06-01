@@ -1,11 +1,16 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { closeModal } from "../redux/reducers/cartSlice";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Spinner } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import ArrowIcon from "./icons/ArrowIcon";
+import CartIcon from "./icons/CartIcon";
 
 const ProductAddModal = () => {
-  const isModalOpen = useAppSelector((state) => state.cart.isModalOpen);
+  const { isModalOpen, isCartLoading } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+
+  const history = useHistory();
 
   return (
     <Modal
@@ -15,22 +20,39 @@ const ProductAddModal = () => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => dispatch(closeModal())}>Close</Button>
-      </Modal.Footer>
+      {isCartLoading ? (
+        <Modal.Body style={{ display: "flex", justifyContent: "center" }}>
+          <Spinner animation="border" variant="success" />
+        </Modal.Body>
+      ) : (
+        <>
+          <Modal.Body>
+            <h4 style={{ textAlign: "center", padding: "35px 0" }}>
+              Product został poprawnie dodany do koszyka ;)
+            </h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="outline-secondary"
+              onClick={() => dispatch(closeModal())}
+              className="mr-3"
+            >
+              <ArrowIcon />
+              Wroć
+            </Button>
+            <Button
+              variant="success"
+              onClick={() => {
+                dispatch(closeModal());
+                history.push("/cart");
+              }}
+              type="button"
+            >
+              Przejdź do koszyka <CartIcon />
+            </Button>
+          </Modal.Footer>
+        </>
+      )}
     </Modal>
   );
 };
