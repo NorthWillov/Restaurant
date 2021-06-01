@@ -12,7 +12,6 @@ const Makaron = require("./models/Makaron");
 
 const pizzaRoutes = require("./routes/pizza");
 const cartRoutes = require("./routes/cart");
-const { readdirSync } = require("fs");
 
 dotenv.config();
 
@@ -39,7 +38,6 @@ async function start() {
   }
 }
 
-app.use(express.static(path.join(__dirname, "client/build")));
 app.set("trust proxy", 1); // trust first proxy
 
 app.use(
@@ -51,6 +49,14 @@ app.use(
 
 app.use(pizzaRoutes);
 app.use(cartRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use("/", express.static(path.join(__dirname, "dist")));
+
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+  });
+}
 
 app.get("/api/getPromos", async (req, res) => {
   await Promotion.find((err, promos) => {

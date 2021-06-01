@@ -17,7 +17,9 @@ interface Makaron {
 interface IMakaronsList extends WithStylesProps<typeof styles> {}
 
 const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
-  const [makarons, setMakarons] = useState([]);
+  const [makarons, setMakarons] = useState([
+    { name: "", type: "", image: "", price: 0 },
+  ]);
 
   const dispatch = useAppDispatch();
 
