@@ -15,7 +15,13 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
   const dispatch = useAppDispatch();
 
   const handleMakaronPick = (makaron: any) => {
-    let newMakaron = { ...makaron, quantity: 1 };
+    const newMakaron: any = {
+      name: makaron.name,
+      image: makaron.image,
+      price: makaron.price,
+      type: makaron.type,
+      quantity: 1,
+    };
     dispatch(addProductToCart(newMakaron));
   };
 
@@ -46,7 +52,7 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
                 />
                 <Card.Body className={classes.CardBody}>
                   <Card.Title className={classes.title}>
-                    {makaron.id}. {makaron.name}
+                    {makaron.name}
                   </Card.Title>
                 </Card.Body>
                 <Card.Footer style={{ padding: "12px" }}>
