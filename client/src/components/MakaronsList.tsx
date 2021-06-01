@@ -5,7 +5,14 @@ import { formatter } from "../utils/formatter";
 import { Row, Col, Button, Card } from "react-bootstrap";
 import withStyles, { WithStylesProps } from "react-jss";
 import styles from "../styles/lunchesListStyles";
-import { addProductToCart } from "../redux/reducers/cartSlice";
+import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice";
+
+interface Makaron {
+  name: string;
+  type: string;
+  image: string;
+  price: number;
+}
 
 interface IMakaronsList extends WithStylesProps<typeof styles> {}
 
@@ -14,12 +21,12 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
 
   const dispatch = useAppDispatch();
 
-  const handleMakaronPick = (makaron: any) => {
-    const newMakaron: any = {
+  const handleMakaronPick = (makaron: Makaron) => {
+    const newMakaron: CartProduct = {
       name: makaron.name,
       image: makaron.image,
       price: makaron.price,
-      type: makaron.type,
+      productType: makaron.type,
       quantity: 1,
     };
     dispatch(addProductToCart(newMakaron));
