@@ -29,7 +29,7 @@ const styles = {
   },
   productCount: {
     display: "flex",
-    marginTop: "25px",
+    marginTop: "30px",
     "& a": {
       textDecoration: "none",
       fontWeight: "700",
