@@ -1,22 +1,20 @@
-import React, { FC, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { hidePizzaModal } from "../../redux/reducers/pizzaModalSlice";
-import { addProductToCart, CartProduct } from "../../redux/reducers/cartSlice";
-import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough";
-import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients";
-import { Modal, Button, Row, Col } from "react-bootstrap";
-import { formatter } from "../../utils/formatter";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../../styles/pizzaOrderModalStyles";
-import CartIcon from "../icons/CartIcon";
-import ArrowIcon from "../icons/ArrowIcon";
+import React, { FC, useMemo } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { hidePizzaModal } from "../../redux/reducers/pizzaModalSlice"
+import { addProductToCart, CartProduct } from "../../redux/reducers/cartSlice"
+import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough"
+import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients"
+import { Modal, Button, Row, Col } from "react-bootstrap"
+import { formatter } from "../../utils/formatter"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../../styles/pizzaOrderModalStyles"
+import CartIcon from "../icons/CartIcon"
+import ArrowIcon from "../icons/ArrowIcon"
 
 interface PizzaOrderModalProps extends WithStylesProps<typeof styles> {}
 
 const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
-  const dispatch = useAppDispatch();
-  const pizzaModal = useAppSelector((state) => state.pizzaModal);
-
+  const dispatch = useAppDispatch()
   const {
     isModalOpen,
     pizzaInModal,
@@ -25,24 +23,24 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
     extraIngredients,
     removedIngredients,
     fantazjaIngredientChoices,
-  } = pizzaModal;
+  } = useAppSelector((state) => state.pizzaModal)
 
   const extraIngredientsSumPrice: number = useMemo(() => {
     return extraIngredients.reduce(
       (acc, el) => acc + el.price[currPizzaSize],
       0
-    );
-  }, [extraIngredients, currPizzaSize]);
+    )
+  }, [extraIngredients, currPizzaSize])
 
   const pizzaPrice: number = useMemo(() => {
     return pizzaInModal?.name === "Calzone (Pierog)"
       ? pizzaInModal?.price + extraIngredientsSumPrice
-      : pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice;
-  }, [extraIngredients, currPizzaSize, isModalOpen]);
+      : pizzaInModal?.price[currPizzaSize] + extraIngredientsSumPrice
+  }, [extraIngredients, currPizzaSize, isModalOpen])
 
   const handleModalClose = () => {
-    dispatch(hidePizzaModal());
-  };
+    dispatch(hidePizzaModal())
+  }
 
   const handleModalSubmit = () => {
     const product: CartProduct = {
@@ -60,10 +58,10 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
           : extraIngredients.map((ing) => ing.name),
       removedIng: removedIngredients,
       price: pizzaPrice,
-    };
-    dispatch(addProductToCart(product));
-    dispatch(hidePizzaModal());
-  };
+    }
+    dispatch(addProductToCart(product))
+    dispatch(hidePizzaModal())
+  }
 
   return (
     <Modal
@@ -127,7 +125,7 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
         </Row>
       </Modal.Body>
     </Modal>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(PizzaOrderModal);
+export default withStyles(styles)(PizzaOrderModal)

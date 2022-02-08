@@ -1,28 +1,29 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { formatter } from "../../utils/formatter";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import React, { FC } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { formatter } from "../../utils/formatter"
+import { Row, Col, Button, Card } from "react-bootstrap"
 import {
   changePizzaSize,
   openPizzaModal,
   Pizza,
-} from "../../redux/reducers/pizzaModalSlice";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../../styles/pizzaListStyles";
+} from "../../redux/reducers/pizzaModalSlice"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../../styles/pizzaListStyles"
 
 interface IPizzaListProps extends WithStylesProps<typeof styles> {}
 
-const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
-  const dispatch = useAppDispatch();
+const PizzasList: FC<IPizzaListProps> = ({ classes }) => {
+  const dispatch = useAppDispatch()
 
-  const pizzas = useAppSelector((state) => state.pizzas.pizzas);
+  const pizzas = useAppSelector((state) => state.pizzas.pizzas)
 
   const handlePizzaClick = (pizza: Pizza) => {
-    dispatch(openPizzaModal(pizza));
+    dispatch(openPizzaModal(pizza))
+
     if (pizza.name === "Calzone (Pierog)") {
-      dispatch(changePizzaSize("28cm"));
+      dispatch(changePizzaSize("28cm"))
     }
-  };
+  }
 
   return (
     <section id="pizzas">
@@ -79,7 +80,7 @@ const PizzasList: React.FC<IPizzaListProps> = ({ classes }) => {
         ))}
       </Row>
     </section>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(PizzasList);
+export default withStyles(styles)(PizzasList)
