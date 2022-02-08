@@ -1,23 +1,23 @@
-import React, { FC } from "react";
-import { Form, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { FC } from "react"
+import { Form, Col, Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import {
   handleOptionsChange,
   handleOptionsSubmit,
-} from "../redux/reducers/contactInfoSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { RouteComponentProps } from "react-router";
-import ArrowIcon from "./icons/ArrowIcon";
+} from "../redux/reducers/contactInfoSlice"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { RouteComponentProps } from "react-router"
+import ArrowIcon from "./icons/ArrowIcon"
 
 export interface ContactInfoProps extends RouteComponentProps {}
 
 const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
-  const dispatch = useAppDispatch();
-  const contactInfo = useAppSelector((state) => state.contactInfo);
+  const dispatch = useAppDispatch()
+  const contactInfo = useAppSelector((state) => state.contactInfo)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleOptionsChange(e.target.name, e.target.value));
-  };
+    dispatch(handleOptionsChange(e.target.name, e.target.value))
+  }
 
   return (
     <Form style={{ maxWidth: "650px", margin: "50px auto" }}>
@@ -101,7 +101,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
           <Form.Control
             required
             name="streetnumber"
-            type="text"
+            type="number"
             placeholder="Numer ulicy"
             onChange={handleChange}
           />
@@ -176,7 +176,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         </Button>
       </Link>
     </Form>
-  );
-};
+  )
+}
 
-export default ContactInfo;
+export default ContactInfo

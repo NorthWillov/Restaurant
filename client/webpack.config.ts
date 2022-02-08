@@ -1,16 +1,16 @@
-import path from "path";
-import HTMLWebpackPlugin from "html-webpack-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import path from "path"
+import HTMLWebpackPlugin from "html-webpack-plugin"
+import { CleanWebpackPlugin } from "clean-webpack-plugin"
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
 
-const isDev = process.env.NODE_ENV === "development";
-const isProd = !isDev;
-console.log("DEVELOPMENT MODE: ", isDev);
+const isDev = process.env.NODE_ENV === "development"
+const isProd = !isDev
+console.log("DEVELOPMENT MODE: ", isDev)
 
 const filename = (ext: string) =>
-  isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+  isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
 const plugins = [
   new HTMLWebpackPlugin({
@@ -20,10 +20,10 @@ const plugins = [
   new MiniCssExtractPlugin({
     filename: filename("css"),
   }),
-];
+]
 
 if (isProd) {
-  plugins.push(new BundleAnalyzerPlugin());
+  plugins.push(new BundleAnalyzerPlugin())
 }
 
 const webpack = {
@@ -95,6 +95,6 @@ const webpack = {
       },
     ],
   },
-};
+}
 
-export default webpack;
+export default webpack
