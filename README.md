@@ -1,1 +1,6 @@
-To open a project in your browser first run this command `npm install` on both "client" and "server" directories, then create `.env` file in server directory and paste given MongoDB password `MONGO_PASSWORD=PASTE_PASSWORD_HERE`. Now you can run a project by `npm run dev` command in server directory.
+## Launch project
+
+To open a project in your browser: 
+ - Run `npm install && npm install --prefix ./client && touch .env` in root directory.
+ - Ask for MongoDB password from northwillov@gmail.com and paste `MONGO_PASSWORD=PASTE_YOUR_PASSWORD_HERE` to .env file in root directory. 
+ - For development enviroment run `npm run dev` and for build version run `npm run build`
