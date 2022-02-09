@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee&display=swap");
+body {
+  font-family: "ABeeZee", sans-serif;
+}
 .navbar-light .navbar-nav .nav-link {
   color: rgb(0, 0, 0);
   margin-left: 15px;
