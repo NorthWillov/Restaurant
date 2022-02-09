@@ -19,7 +19,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
 
   return (
     <section id="zestawy">
-      <h3 className="title pt-5 mb-4">Zestawy obiadowe:</h3>
+      <h2 className="title pt-5 mb-4">Zestawy obiadowe:</h2>
       <Row>
         {lunches.map((lunch) => (
           <React.Fragment key={lunch._id}>

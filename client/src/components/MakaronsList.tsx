@@ -48,7 +48,7 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
 
   return (
     <section id="makarony">
-      <h3 className="pt-5 mb-4">Makarony:</h3>
+      <h2 className="pt-5 mb-4">Makarony:</h2>
       <Row>
         {makarons.map((makaron) => (
           <React.Fragment key={makaron.name}>

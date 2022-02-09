@@ -11,7 +11,7 @@ const PizzasList: FC = () => {
 
   return (
     <section id="pizzas">
-      <h3 className="title pt-5 mb-4">Pizzy:</h3>
+      <h2 className="title pt-5 mb-4">Pizzy:</h2>
       <Row>
         {pizzas.map((pizza: IPizza) => (
           <Pizza pizza={pizza} key={pizza._id} />
