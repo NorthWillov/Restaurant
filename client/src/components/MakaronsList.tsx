@@ -1,17 +1,17 @@
-import React, { FC, useEffect, useState } from "react";
-import { useAppDispatch } from "../redux/hooks";
-import axios from "axios";
-import { formatter } from "../utils/formatter";
-import { Row, Col, Button, Card } from "react-bootstrap";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/lunchesListStyles";
-import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice";
+import React, { FC, useEffect, useState } from "react"
+import { useAppDispatch } from "../redux/hooks"
+import axios from "axios"
+import { formatter } from "../utils/formatter"
+import { Row, Col, Button, Card } from "react-bootstrap"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/lunchesListStyles"
+import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice"
 
 interface Makaron {
-  name: string;
-  type: string;
-  image: string;
-  price: number;
+  name: string
+  type: string
+  image: string
+  price: number
 }
 
 interface IMakaronsList extends WithStylesProps<typeof styles> {}
@@ -19,9 +19,9 @@ interface IMakaronsList extends WithStylesProps<typeof styles> {}
 const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
   const [makarons, setMakarons] = useState([
     { name: "", type: "", image: "", price: 0 },
-  ]);
+  ])
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handleMakaronPick = (makaron: Makaron) => {
     const newMakaron: CartProduct = {
@@ -30,21 +30,21 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
       price: makaron.price,
       productType: makaron.type,
       quantity: 1,
-    };
-    dispatch(addProductToCart(newMakaron));
-  };
+    }
+    dispatch(addProductToCart(newMakaron))
+  }
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("/api/fetchMakarons");
-        setMakarons(res.data);
+        const res = await axios.get("/api/fetchMakarons")
+        setMakarons(res.data)
       } catch (err) {
-        throw new Error(err);
+        throw new Error(err)
       }
-    };
-    getData();
-  }, []);
+    }
+    getData()
+  }, [])
 
   return (
     <section id="makarony">
@@ -70,13 +70,13 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
                       {formatter.format(makaron.price)}zł
                     </p>
                     <Button
-                      variant="success"
+                      variant="outline-secondary"
                       onClick={() => handleMakaronPick(makaron)}
                       type="button"
                       size="sm"
-                      className="ml-2"
+                      className={`ml-2 ${classes.pickBtn}`}
                     >
-                      Dodaj
+                      Wybierz
                     </Button>
                   </div>
                 </Card.Footer>
@@ -86,7 +86,7 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
         ))}
       </Row>
     </section>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(MakaronsList);
+export default withStyles(styles)(MakaronsList)

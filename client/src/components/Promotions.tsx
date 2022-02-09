@@ -1,16 +1,16 @@
-import React, { FC } from "react";
-import { useAppSelector } from "../redux/hooks";
-import { Carousel } from "react-bootstrap";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/PromotionsStyles";
+import React, { FC } from "react"
+import { useAppSelector } from "../redux/hooks"
+import { Carousel } from "react-bootstrap"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/PromotionsStyles"
 
 interface PromotionProps extends WithStylesProps<typeof styles> {}
 
 const Promotions: FC<PromotionProps> = ({ classes }) => {
-  const promos = useAppSelector((state) => state.promos.promos);
+  const promos = useAppSelector((state) => state.promos.promos)
 
   return (
-    <div id="promocje" style={{ paddingTop: "120px" }}>
+    <div id="promocje" className={classes.promotion}>
       <h3 className="title pb-4">Promocje:</h3>
       <Carousel>
         {promos.map((promo) => (
@@ -28,7 +28,7 @@ const Promotions: FC<PromotionProps> = ({ classes }) => {
         ))}
       </Carousel>
     </div>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(Promotions);
+export default withStyles(styles)(Promotions)

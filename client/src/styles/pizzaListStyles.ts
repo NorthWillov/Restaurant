@@ -1,12 +1,14 @@
 const styles = {
   title: {
+    fontSize: "23px",
     "@media (max-width: 767.98px)": {
-      fontSize: "16px",
+      fontSize: "20px",
     },
   },
   subtitle: {
+    fontSize: "19px",
     "@media (max-width: 767.98px)": {
-      fontSize: "13px",
+      fontSize: "16px",
     },
   },
   checkout: {
@@ -15,11 +17,11 @@ const styles = {
     alignItems: "flex-end",
   },
   checkoutPrice: {
-    fontSize: "20px",
+    fontSize: "23px",
     margin: "0",
     fontWeight: "700",
     "@media (max-width: 767.98px)": {
-      fontSize: "14px",
+      fontSize: "17px",
     },
   },
   Card: {
@@ -31,6 +33,13 @@ const styles = {
       height: "135px",
     },
   },
-};
+  pickBtn: {
+    padding: "5px 10px",
+    fontSize: "18px",
+    "@media (max-width: 767.98px)": {
+      fontSize: "12px",
+    },
+  },
+}
 
-export default styles;
+export default styles

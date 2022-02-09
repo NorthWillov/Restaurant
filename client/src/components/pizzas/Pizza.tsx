@@ -58,9 +58,9 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
               </span>
               <Button
                 onClick={() => handlePizzaClick(pizza)}
-                variant="outline-dark"
+                variant="outline-secondary"
                 size="sm"
-                className="ml-2"
+                className={`ml-2 ${classes.pickBtn}`}
               >
                 Wybierz
               </Button>

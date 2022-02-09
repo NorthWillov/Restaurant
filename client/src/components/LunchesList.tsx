@@ -1,21 +1,21 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Lunch } from "../redux/reducers/lunchSlice";
-import { openLunchModal } from "../redux/reducers/lunchModalSlice";
-import { formatter } from "../utils/formatter";
-import { Row, Col, Button, Card } from "react-bootstrap";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/lunchesListStyles";
+import React from "react"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { Lunch } from "../redux/reducers/lunchSlice"
+import { openLunchModal } from "../redux/reducers/lunchModalSlice"
+import { formatter } from "../utils/formatter"
+import { Row, Col, Button, Card } from "react-bootstrap"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/lunchesListStyles"
 
 interface ILunchesListProps extends WithStylesProps<typeof styles> {}
 
 const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
-  const lunches = useAppSelector((state) => state.lunches.lunches);
-  const dispatch = useAppDispatch();
+  const lunches = useAppSelector((state) => state.lunches.lunches)
+  const dispatch = useAppDispatch()
 
   const handleLunchPick = (lunch: Lunch) => {
-    dispatch(openLunchModal(lunch));
-  };
+    dispatch(openLunchModal(lunch))
+  }
 
   return (
     <section id="zestawy">
@@ -42,10 +42,10 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
                       {formatter.format(lunch.price)}zł
                     </p>
                     <Button
-                      variant="outline-dark"
+                      variant="outline-secondary"
                       onClick={() => handleLunchPick(lunch)}
                       size="sm"
-                      className="ml-1"
+                      className={`ml-1 ${classes.pickBtn}`}
                     >
                       Wybierz
                     </Button>
@@ -57,7 +57,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
         ))}
       </Row>
     </section>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(LunchesList);
+export default withStyles(styles)(LunchesList)

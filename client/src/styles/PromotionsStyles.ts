@@ -1,4 +1,7 @@
 const styles = {
+  promotion: {
+    marginTop: "120px",
+  },
   title: {
     "@media (max-width: 767.98px)": {
       marginBottom: "0",
@@ -11,6 +14,6 @@ const styles = {
       fontSize: "14px",
     },
   },
-};
+}
 
-export default styles;
+export default styles
