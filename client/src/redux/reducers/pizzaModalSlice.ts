@@ -7,7 +7,7 @@ export interface ExtraIngredients {
   _id: string;
 }
 
-export interface Pizza {
+export interface IPizza {
   _id: string;
   name: string;
   type: string;
@@ -20,7 +20,7 @@ export interface Pizza {
 
 export interface PizzasModalSliceState {
   isModalOpen: boolean;
-  pizzaInModal: Pizza;
+  pizzaInModal: IPizza;
   currPizzaSize: string;
   currPizzaDough: string;
   removedIngredients: string[];
@@ -42,7 +42,7 @@ const pizzaModalSlice = createSlice({
   name: "pizzaModal",
   initialState,
   reducers: {
-    openPizzaModal(state, action: PayloadAction<Pizza>) {
+    openPizzaModal(state, action: PayloadAction<IPizza>) {
       state.isModalOpen = true;
       state.pizzaInModal = action.payload;
     },

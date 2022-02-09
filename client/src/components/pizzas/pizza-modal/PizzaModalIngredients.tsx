@@ -1,19 +1,19 @@
-import React, { FC } from "react";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import React, { FC } from "react"
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks"
 import {
   removeIngredient,
   removeExtraIngredient,
   returnRemovedIngredient,
   addExtraIngredient,
-} from "../../redux/reducers/pizzaModalSlice";
-import { Form } from "react-bootstrap";
-import PizzaOrderModalFantazjaCase from "./PizzaOrderModalFantazjaCase";
-import { v4 as uuidv4 } from "uuid";
-import { formatter } from "../../utils/formatter";
-import RemoveIcon from "../icons/RemoveIcon";
-import BackIcon from "../icons/BackIcon";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../../styles/pizzaOrderModalIngredientsStyles";
+} from "../../../redux/reducers/pizzaModalSlice"
+import { Form } from "react-bootstrap"
+import PizzaOrderModalFantazjaCase from "./PizzaModalFantazja"
+import { v4 as uuidv4 } from "uuid"
+import { formatter } from "../../../utils/formatter"
+import RemoveIcon from "../../icons/RemoveIcon"
+import BackIcon from "../../icons/BackIcon"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../../../styles/pizzaOrderModalIngredientsStyles"
 
 interface PizzaOrderModalIngredientsProps
   extends WithStylesProps<typeof styles> {}
@@ -21,23 +21,23 @@ interface PizzaOrderModalIngredientsProps
 const PizzaOrderModalIngredients: FC<PizzaOrderModalIngredientsProps> = ({
   classes,
 }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const pizzaIngredients = useAppSelector(
     (state) => state.pizzas.pizzaIngredients
-  );
-  const pizzaModal = useAppSelector((state) => state.pizzaModal);
+  )
+  const pizzaModal = useAppSelector((state) => state.pizzaModal)
   const {
     pizzaInModal,
     removedIngredients,
     extraIngredients,
     currPizzaSize,
     fantazjaIngredientChoices,
-  } = pizzaModal;
+  } = pizzaModal
 
   const inputPlaceholder = `Dodaj${
     pizzaInModal?.name === "Fantazja" ? " płatny" : ""
-  } składnik`;
+  } składnik`
 
   const handleExtraIngredientInputClick = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -48,10 +48,10 @@ const PizzaOrderModalIngredients: FC<PizzaOrderModalIngredientsProps> = ({
           ...pizzaIngredients.find((ing) => ing.name === e.target.value),
           uniqId: uuidv4(),
         })
-      );
-      e.target.value = inputPlaceholder;
+      )
+      e.target.value = inputPlaceholder
     }
-  };
+  }
 
   return (
     <>
@@ -131,7 +131,7 @@ const PizzaOrderModalIngredients: FC<PizzaOrderModalIngredientsProps> = ({
         </Form.Group>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(PizzaOrderModalIngredients);
+export default withStyles(styles)(PizzaOrderModalIngredients)

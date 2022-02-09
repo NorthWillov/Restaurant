@@ -1,15 +1,18 @@
 import React, { FC, useMemo } from "react"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { hidePizzaModal } from "../../redux/reducers/pizzaModalSlice"
-import { addProductToCart, CartProduct } from "../../redux/reducers/cartSlice"
-import PizzaOrderModalSizeAndDough from "./PizzaOrderModalSizeAndDough"
-import PizzaOrderModalIngredients from "./PizzaOrderModalIngredients"
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
+import { hidePizzaModal } from "../../../redux/reducers/pizzaModalSlice"
+import {
+  addProductToCart,
+  CartProduct,
+} from "../../../redux/reducers/cartSlice"
+import PizzaOrderModalSizeAndDough from "./PizzaModalSizeAndDough"
+import PizzaOrderModalIngredients from "./PizzaModalIngredients"
 import { Modal, Button, Row, Col } from "react-bootstrap"
-import { formatter } from "../../utils/formatter"
+import { formatter } from "../../../utils/formatter"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../../styles/pizzaOrderModalStyles"
-import CartIcon from "../icons/CartIcon"
-import ArrowIcon from "../icons/ArrowIcon"
+import styles from "../../../styles/pizzaOrderModalStyles"
+import CartIcon from "../../icons/CartIcon"
+import ArrowIcon from "../../icons/ArrowIcon"
 
 interface PizzaOrderModalProps extends WithStylesProps<typeof styles> {}
 

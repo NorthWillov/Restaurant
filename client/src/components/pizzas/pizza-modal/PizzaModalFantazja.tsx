@@ -1,26 +1,26 @@
-import React, { FC } from "react";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import React, { FC } from "react"
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks"
 import {
   addExtraFantazyIngredient,
   removeExtraFantazyIngredient,
-} from "../../redux/reducers/pizzaModalSlice";
-import { Form } from "react-bootstrap";
-import withStyles from "react-jss";
-import styles from "../../styles/pizzaOrderModalIngredientsStyles";
+} from "../../../redux/reducers/pizzaModalSlice"
+import { Form } from "react-bootstrap"
+import withStyles from "react-jss"
+import styles from "../../../styles/pizzaOrderModalIngredientsStyles"
 
 const OrderModalFantazjaCase: FC = () => {
   const pizzaIngredients = useAppSelector(
     (state) => state.pizzas.pizzaIngredients
-  );
-  const dispatch = useAppDispatch();
+  )
+  const dispatch = useAppDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "Wybierz składnik") {
-      dispatch(removeExtraFantazyIngredient(e.target.name));
+      dispatch(removeExtraFantazyIngredient(e.target.name))
     } else {
-      dispatch(addExtraFantazyIngredient(e.target.value, e.target.name));
+      dispatch(addExtraFantazyIngredient(e.target.value, e.target.name))
     }
-  };
+  }
 
   return (
     <>
@@ -99,7 +99,7 @@ const OrderModalFantazjaCase: FC = () => {
         </Form.Group>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(OrderModalFantazjaCase);
+export default withStyles(styles)(OrderModalFantazjaCase)

@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../../styles/pizzaOrderModalSizeAndDoughStyles";
+import React, { FC } from "react"
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../../../styles/pizzaOrderModalSizeAndDoughStyles"
 import {
   changePizzaSize,
   changePizzaDough,
-} from "../../redux/reducers/pizzaModalSlice";
+} from "../../../redux/reducers/pizzaModalSlice"
 
 interface PizzaOrderModalSizeAndDoughProps
   extends WithStylesProps<typeof styles> {}
@@ -15,12 +15,12 @@ const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
 }) => {
   const currPizzaSize = useAppSelector(
     (state) => state.pizzaModal.currPizzaSize
-  );
+  )
   const currPizzaDough = useAppSelector(
     (state) => state.pizzaModal.currPizzaDough
-  );
-  const pizzaInModal = useAppSelector((state) => state.pizzaModal.pizzaInModal);
-  const dispatch = useAppDispatch();
+  )
+  const pizzaInModal = useAppSelector((state) => state.pizzaModal.pizzaInModal)
+  const dispatch = useAppDispatch()
 
   return (
     <div className={classes.root}>
@@ -129,7 +129,7 @@ const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
         </label>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(PizzaOrderModalSizeAndDough);
+export default withStyles(styles)(PizzaOrderModalSizeAndDough)

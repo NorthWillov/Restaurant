@@ -1,28 +1,28 @@
-import React, { FC } from "react";
-import { useAppSelector } from "../redux/hooks";
-import MainNavbar from "./MainNavbar";
-import PizzasList from "./pizzas/PizzasList";
-import LunchesList from "./LunchesList";
-import MakaronsList from "./MakaronsList";
-import About from "./About";
-import Contact from "./Contact";
-import PizzaOrderModal from "./pizzas/PizzaOrderModal";
-import LunchesOrderModal from "./LunchesOrderModal";
-import ProductAddModal from "./ProductAddModal";
-import Promotions from "./Promotions";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/landingStyles";
+import React, { FC } from "react"
+import { useAppSelector } from "../redux/hooks"
+import MainNavbar from "./MainNavbar"
+import PizzasList from "./pizzas/PizzasList"
+import LunchesList from "./LunchesList"
+import MakaronsList from "./MakaronsList"
+import About from "./About"
+import Contact from "./Contact"
+import PizzaOrderModal from "./pizzas/pizza-modal/PizzaModal"
+import LunchesOrderModal from "./LunchesOrderModal"
+import ProductAddModal from "./ProductAddModal"
+import Promotions from "./Promotions"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/landingStyles"
 
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
 const Landing: FC<ILandingProps> = ({ classes }) => {
   const isPizzaModalOpen = useAppSelector(
     (state) => state.pizzaModal.isModalOpen
-  );
+  )
   const isLunchModalOpen = useAppSelector(
     (state) => state.lunchModalSlice.isModalOpen
-  );
-  const isCartModalOpen = useAppSelector((state) => state.cart.isModalOpen);
+  )
+  const isCartModalOpen = useAppSelector((state) => state.cart.isModalOpen)
 
   return (
     <div className={classes.root}>
@@ -38,7 +38,7 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
       {isLunchModalOpen && <LunchesOrderModal />}
       {isCartModalOpen && <ProductAddModal />}
     </div>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(Landing);
+export default withStyles(styles)(Landing)
