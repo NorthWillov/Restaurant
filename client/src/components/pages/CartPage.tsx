@@ -5,18 +5,18 @@ import {
   decrementQuantity,
   CartProduct,
 } from "../../redux/reducers/cartSlice"
-import { Link, RouteComponentProps } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { Button, Form } from "react-bootstrap"
 import { formatter } from "../../utils/formatter"
 import ArrowIcon from "../icons/ArrowIcon"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/pages/cartPage"
 
-export interface CartProps
-  extends RouteComponentProps,
-    WithStylesProps<typeof styles> {}
+export interface CartProps extends WithStylesProps<typeof styles> {}
 
-const Cart: FC<CartProps> = ({ classes, history }) => {
+const Cart: FC<CartProps> = ({ classes }) => {
+  let history = useHistory()
+
   const dispatch = useAppDispatch()
   const cart = useAppSelector((state) => state.cart.cart)
   const isCartLoading = useAppSelector((state) => state.cart.isCartLoading)
@@ -60,24 +60,6 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
                   <p>{product.second}</p>
                 </>
               )}
-              {/* {product.productType === "salad" && (
-                <>
-                  <p>{product.meat}</p>
-                  <p>{product.sous}</p>
-                </>
-              )}
-              {product.productType === "sweetPancake" && (
-                <>
-                  <p>{product.way}</p>
-                  <p>{product.jam}</p>
-                  <p>{product.adds}</p>
-                </>
-              )}
-              {product.productType === "saltPancake" && (
-                <>
-                  <p>{product.sous}</p>
-                </>
-              )} */}
             </div>
           </div>
           <hr className="mt-3 mb-0" />

@@ -5,16 +5,16 @@ import {
   handleOptionsSubmit,
 } from "../../redux/reducers/contactInfoSlice"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { RouteComponentProps } from "react-router"
+import { useHistory } from "react-router-dom"
 import ArrowIcon from "../icons/ArrowIcon"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/deliveryForm"
 
-export interface ContactInfoProps
-  extends RouteComponentProps,
-    WithStylesProps<typeof styles> {}
+export interface ContactInfoProps extends WithStylesProps<typeof styles> {}
 
-const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
+const ContactInfo: FC<ContactInfoProps> = ({ classes }) => {
+  let history = useHistory()
+
   const [validated, setValidated] = useState(false)
 
   const dispatch = useAppDispatch()
@@ -43,11 +43,8 @@ const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
   }
 
   return (
-    <Form
-      validated={validated}
-      className={classes.root}
-    >
-      <h1>Sposób dostawy</h1>
+    <Form validated={validated} className={classes.root}>
+      <Form.Label>Sposób dostawy</Form.Label>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridSelectShip">
           <Form.Control
@@ -82,7 +79,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
           </Form.Control>
         </Form.Group>
       </Form.Row>
-      <h1>Kontakt</h1>
+      <Form.Label>Kontakt</Form.Label>
       <Form.Group controlId="formGridName">
         <Form.Control
           required
@@ -112,7 +109,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
           onChange={handleChange}
         />
       </Form.Group>
-      <h1>Adres dostawy</h1>
+      <Form.Label>Adres dostawy</Form.Label>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridAddress">
           <Form.Control
@@ -174,7 +171,6 @@ const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
         />
       </Form.Group>
 
-      <h1>Płatność</h1>
       <Form.Group controlId="formGridPayment">
         <Form.Label>Wybierz formę płatności: </Form.Label>
         <Form.Control
