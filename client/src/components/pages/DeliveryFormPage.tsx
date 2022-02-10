@@ -3,12 +3,12 @@ import { Form, Col, Button } from "react-bootstrap"
 import {
   handleOptionsChange,
   handleOptionsSubmit,
-} from "../redux/reducers/contactInfoSlice"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
+} from "../../redux/reducers/contactInfoSlice"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { RouteComponentProps } from "react-router"
-import ArrowIcon from "./icons/ArrowIcon"
+import ArrowIcon from "../icons/ArrowIcon"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/deliveryForm"
+import styles from "../../styles/deliveryForm"
 
 export interface ContactInfoProps
   extends RouteComponentProps,

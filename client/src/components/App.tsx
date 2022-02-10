@@ -9,9 +9,6 @@ import {
 import { fetchLunches } from "../redux/reducers/lunchSlice";
 import { fetchCart } from "../redux/reducers/cartSlice";
 import Routes from "./Routes";
-// import { ToastProvider } from "../contexts/ToastContext";
-// import { NewItemProvider } from "../contexts/NewItemContext";
-// import { CurrIngredientsProvider } from "../contexts/CurrIngredientsContext";
 import { Container } from "react-bootstrap";
 import "../styles/App.css";
 

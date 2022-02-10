@@ -1,27 +1,27 @@
 import React, { FC } from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
-import Landing from "./Landing"
-import Cart from "./Cart"
-import Admin from "./Admin"
-import DeliveryForm from "./DeliveryForm"
-import Thanks from "./Thanks"
+import LandingPage from "./pages/LandingPage"
+import CartPage from "./pages/CartPage"
+import AdminPage from "./pages/AdminPage"
+import DeliveryFormPage from "./pages/DeliveryFormPage"
+import ThanksPage from "./pages/ThanksPage"
 
 const Routes: FC = () => {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Landing />} />
-      <Route exact path="/admin" render={() => <Admin />} />
+      <Route exact path="/" render={() => <LandingPage />} />
+      <Route exact path="/admin" render={() => <AdminPage />} />
       <Route
         exact
         path="/cart"
-        render={(routeProps) => <Cart {...routeProps} />}
+        render={(routeProps) => <CartPage {...routeProps} />}
       />
       <Route
         exact
         path="/cart/delivery-info"
-        render={(routeProps) => <DeliveryForm {...routeProps} />}
+        render={(routeProps) => <DeliveryFormPage {...routeProps} />}
       />
-      <Route exact path="/thanks" render={() => <Thanks />} />
+      <Route exact path="/thanks" render={() => <ThanksPage />} />
       <Redirect to="/" />
     </Switch>
   )

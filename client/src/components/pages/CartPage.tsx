@@ -1,16 +1,16 @@
 import React, { FC } from "react"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import {
   incrementQuantity,
   decrementQuantity,
   CartProduct,
-} from "../redux/reducers/cartSlice"
+} from "../../redux/reducers/cartSlice"
 import { Link, RouteComponentProps } from "react-router-dom"
 import { Button, Form } from "react-bootstrap"
-import { formatter } from "../utils/formatter"
-import ArrowIcon from "./icons/ArrowIcon"
+import { formatter } from "../../utils/formatter"
+import ArrowIcon from "../icons/ArrowIcon"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/pages/cartPage"
+import styles from "../../styles/pages/cartPage"
 
 export interface CartProps
   extends RouteComponentProps,

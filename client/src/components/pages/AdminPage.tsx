@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { FC, useEffect, useState } from "react"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/pages/adminPage"
+import styles from "../../styles/pages/adminPage"
 
 interface IAdminProps extends WithStylesProps<typeof styles> {}
 
