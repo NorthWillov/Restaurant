@@ -24,10 +24,13 @@ const styles = {
       fontSize: "17px",
     },
   },
+  Card: {
+    boxShadow: "0px 0px 10px 3px lightgrey",
+  },
   CardBody: {
     padding: "15px 5px 10px 10px",
     "@media (min-width: 767.98px)": {
-      height: "100px",
+      height: "135px",
     },
   },
   pickBtn: {
@@ -37,6 +40,6 @@ const styles = {
       fontSize: "12px",
     },
   },
-};
+}
 
-export default styles;
+export default styles

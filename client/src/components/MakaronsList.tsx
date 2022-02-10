@@ -4,7 +4,7 @@ import axios from "axios"
 import { formatter } from "../utils/formatter"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/lunchesListStyles"
+import styles from "../styles/Card"
 import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice"
 
 interface Makaron {
@@ -53,7 +53,7 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
         {makarons.map((makaron) => (
           <React.Fragment key={makaron.name}>
             <Col xs={6} md={4} lg={4} xl={3}>
-              <Card className="mb-3">
+              <Card className={`mb-3 ${classes.Card}`}>
                 <Card.Img
                   variant="top"
                   src={makaron.image}

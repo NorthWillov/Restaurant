@@ -5,7 +5,7 @@ import { openLunchModal } from "../redux/reducers/lunchModalSlice"
 import { formatter } from "../utils/formatter"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/lunchesListStyles"
+import styles from "../styles/Card"
 
 interface ILunchesListProps extends WithStylesProps<typeof styles> {}
 
@@ -24,7 +24,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
         {lunches.map((lunch) => (
           <React.Fragment key={lunch._id}>
             <Col xs={6} md={4} lg={4} xl={3}>
-              <Card className="mb-3">
+              <Card className={`mb-3 ${classes.Card}`}>
                 <Card.Img
                   onClick={() => handleLunchPick(lunch)}
                   variant="top"
