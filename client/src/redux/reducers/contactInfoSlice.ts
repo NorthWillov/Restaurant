@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import { resetCart } from "./cartSlice";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import axios from "axios"
+import { resetCart } from "./cartSlice"
 
 export const handleOptionsSubmit = createAsyncThunk(
   "contactInfo/createOrder",
   async (contactInfo: ContactInfo, { dispatch }) => {
-    await axios.post("/api/createOrder", { contactInfo });
-    dispatch(resetCart());
+    await axios.post("/api/createOrder", { contactInfo })
+    dispatch(resetCart())
   }
-);
+)
 
 export interface ContactInfo {
-  [key: string]: string | number;
+  [key: string]: string | number
 }
 
 const initialState: ContactInfo = {
@@ -26,8 +26,8 @@ const initialState: ContactInfo = {
   flat: 0,
   floor: 0,
   note: "",
-  payment: "",
-};
+  payment: "Gotówka",
+}
 
 const contactInfoSlice = createSlice({
   name: "contactInfo",
@@ -38,22 +38,22 @@ const contactInfoSlice = createSlice({
         state,
         action: PayloadAction<{ name: string; value: string | number }>
       ) {
-        const { name, value } = action.payload;
-        state[name] = value;
+        const { name, value } = action.payload
+        state[name] = value
       },
       prepare(name, value) {
         return {
           payload: { name, value },
-        };
+        }
       },
     },
   },
   extraReducers: (builder) =>
     builder.addCase(handleOptionsSubmit.fulfilled, () => {
-      return initialState;
+      return initialState
     }),
-});
+})
 
-export const { handleOptionsChange } = contactInfoSlice.actions;
+export const { handleOptionsChange } = contactInfoSlice.actions
 
-export default contactInfoSlice.reducer;
+export default contactInfoSlice.reducer

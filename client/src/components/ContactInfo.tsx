@@ -1,6 +1,5 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { Form, Col, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
 import {
   handleOptionsChange,
   handleOptionsSubmit,
@@ -12,6 +11,8 @@ import ArrowIcon from "./icons/ArrowIcon"
 export interface ContactInfoProps extends RouteComponentProps {}
 
 const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
+  const [validated, setValidated] = useState(false)
+
   const dispatch = useAppDispatch()
   const contactInfo = useAppSelector((state) => state.contactInfo)
 
@@ -19,15 +20,28 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
     dispatch(handleOptionsChange(e.target.name, e.target.value))
   }
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = () => {
+    setValidated(true)
+
+    // Validate Inputs
+    for (const key in contactInfo) {
+      if (key === "floor" || key === "note") {
+        continue
+      }
+
+      if (!contactInfo[key]) {
+        return
+      }
+    }
+
     dispatch(handleOptionsSubmit(contactInfo))
+    history.push("/thanks")
   }
 
   return (
     <Form
       style={{ maxWidth: "650px", margin: "50px auto" }}
-      onSubmit={handleSubmit}
+      validated={validated}
     >
       <h1>Sposób dostawy</h1>
       <Form.Row>
@@ -162,6 +176,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         <Form.Control
           name="payment"
           as="select"
+          defaultValue="Gotówka"
           required
           onChange={handleChange}
         >
@@ -178,9 +193,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         <ArrowIcon />
         Wroć
       </Button>
-      <Link to="/thanks">
-        <Button type="submit">Zamawiam</Button>
-      </Link>
+      <Button onClick={handleSubmit}>Zamawiam</Button>
     </Form>
   )
 }
