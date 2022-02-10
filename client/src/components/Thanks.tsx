@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Spinner, Button } from "react-bootstrap";
 import ArrowIcon from "./icons/ArrowIcon";
 import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/thanksStyles";
+import styles from "../styles/pages/thanksPage";
 
 interface ThanksProps extends WithStylesProps<typeof styles> {}
 

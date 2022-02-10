@@ -4,7 +4,7 @@ import axios from "axios"
 import { formatter } from "../utils/formatter"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/Card"
+import styles from "../styles/productCard"
 import { addProductToCart, CartProduct } from "../redux/reducers/cartSlice"
 
 interface Makaron {

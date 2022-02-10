@@ -4,7 +4,7 @@ import { Navbar, NavDropdown, Nav, Container, Button } from "react-bootstrap"
 import logo from "../assets/logo.png"
 import { Link } from "react-router-dom"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/mainNavbarStyles"
+import styles from "../styles/mainNavbar"
 
 interface MainNavbarProps extends WithStylesProps<typeof styles> {}
 

@@ -11,7 +11,7 @@ import LunchesOrderModal from "./LunchesOrderModal"
 import ProductAddModal from "./ProductAddModal"
 import Promotions from "./Promotions"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/landingStyles"
+import styles from "../styles/pages/landingPage"
 
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 

@@ -6,7 +6,7 @@ import {
 } from "../../../redux/reducers/pizzaModalSlice"
 import { Form } from "react-bootstrap"
 import withStyles from "react-jss"
-import styles from "../../../styles/pizzaOrderModalIngredientsStyles"
+import styles from "../../../styles/modals/pizza/pizzaModalIngredients"
 
 const OrderModalFantazjaCase: FC = () => {
   const pizzaIngredients = useAppSelector(

@@ -5,7 +5,7 @@ import { openLunchModal } from "../redux/reducers/lunchModalSlice"
 import { formatter } from "../utils/formatter"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/Card"
+import styles from "../styles/productCard"
 
 interface ILunchesListProps extends WithStylesProps<typeof styles> {}
 

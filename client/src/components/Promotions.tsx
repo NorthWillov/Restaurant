@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { useAppSelector } from "../redux/hooks"
 import { Carousel } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/PromotionsStyles"
+import styles from "../styles/promo"
 
 interface PromotionProps extends WithStylesProps<typeof styles> {}
 

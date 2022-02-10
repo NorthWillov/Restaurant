@@ -10,7 +10,7 @@ import PizzaOrderModalIngredients from "./PizzaModalIngredients"
 import { Modal, Button, Row, Col } from "react-bootstrap"
 import { formatter } from "../../../utils/formatter"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../../../styles/pizzaOrderModalStyles"
+import styles from "../../../styles/modals/pizza/pizzaModal"
 import CartIcon from "../../icons/CartIcon"
 import ArrowIcon from "../../icons/ArrowIcon"
 

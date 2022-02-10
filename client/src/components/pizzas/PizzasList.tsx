@@ -3,8 +3,6 @@ import { useAppSelector } from "../../redux/hooks"
 import { Row } from "react-bootstrap"
 import { IPizza } from "../../redux/reducers/pizzaModalSlice"
 import Pizza from "./Pizza"
-import withStyles from "react-jss"
-import styles from "../../styles/Card"
 
 const PizzasList: FC = () => {
   const pizzas = useAppSelector((state) => state.pizzas.pizzas)
@@ -21,4 +19,4 @@ const PizzasList: FC = () => {
   )
 }
 
-export default withStyles(styles)(PizzasList)
+export default PizzasList

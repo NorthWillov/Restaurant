@@ -8,7 +8,7 @@ import {
   IPizza,
 } from "../../redux/reducers/pizzaModalSlice"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../../styles/Card"
+import styles from "../../styles/productCard"
 
 interface IPizzaProps extends WithStylesProps<typeof styles> {
   pizza: IPizza

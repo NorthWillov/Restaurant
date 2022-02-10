@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../../../styles/pizzaOrderModalSizeAndDoughStyles"
+import styles from "../../../styles/modals/pizza/pizzaModalSizeAndDough"
 import {
   changePizzaSize,
   changePizzaDough,

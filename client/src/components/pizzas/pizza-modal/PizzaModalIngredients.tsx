@@ -13,7 +13,7 @@ import { formatter } from "../../../utils/formatter"
 import RemoveIcon from "../../icons/RemoveIcon"
 import BackIcon from "../../icons/BackIcon"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../../../styles/pizzaOrderModalIngredientsStyles"
+import styles from "../../../styles/modals/pizza/pizzaModalIngredients"
 
 interface PizzaOrderModalIngredientsProps
   extends WithStylesProps<typeof styles> {}

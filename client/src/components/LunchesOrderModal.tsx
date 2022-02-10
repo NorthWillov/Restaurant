@@ -8,7 +8,7 @@ import {
 } from "../redux/reducers/lunchModalSlice";
 import { Modal, Row, Col, Button, Form } from "react-bootstrap";
 import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/lunchesOrderModalStyles";
+import styles from "../styles/modals/lunchModal";
 import CartIcon from "./icons/CartIcon";
 import ArrowIcon from "./icons/ArrowIcon";
 
