@@ -7,7 +7,7 @@ interface IAboutProps extends WithStylesProps<typeof styles> {}
 
 const About: FC<IAboutProps> = ({ classes }) => {
   return (
-    <section className={`mb-4 pt-5 ${classes.root}`} id="about">
+    <section className={`mb-4 mt-5 ${classes.root}`} id="about">
       <Container>
         <h1 className="pt-4">O nas:</h1>
         <p className="pb-4">
