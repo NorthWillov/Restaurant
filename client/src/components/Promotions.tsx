@@ -12,7 +12,7 @@ const Promotions: FC<PromotionProps> = ({ classes }) => {
   return (
     <div id="promocje" className={classes.promotion}>
       <h3 className="title pb-4">Promocje:</h3>
-      <Carousel>
+      <Carousel className={classes.carousel}>
         {promos.map((promo) => (
           <Carousel.Item key={promo._id} interval={5000}>
             <img
