@@ -1,16 +1,16 @@
 import React from "react"
-import { formatter } from "../utils/formatter"
-import { useAppSelector, useAppDispatch } from "../redux/hooks"
-import { CartProduct, addProductToCart } from "../redux/reducers/cartSlice"
+import { formatter } from "../../utils/formatter"
+import { useAppSelector, useAppDispatch } from "../../redux/hooks"
+import { CartProduct, addProductToCart } from "../../redux/reducers/cartSlice"
 import {
   hideLunchModal,
   changeLunchAddition,
-} from "../redux/reducers/lunchModalSlice"
+} from "../../redux/reducers/lunchModalSlice"
 import { Modal, Row, Col, Button, Form } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
-import styles from "../styles/modals/lunchModal"
-import CartIcon from "./icons/CartIcon"
-import ArrowIcon from "./icons/ArrowIcon"
+import styles from "../../styles/modals/lunchModal"
+import CartIcon from ".././icons/CartIcon"
+import ArrowIcon from ".././icons/ArrowIcon"
 
 interface LunchesOrderModalProps extends WithStylesProps<typeof styles> {}
 

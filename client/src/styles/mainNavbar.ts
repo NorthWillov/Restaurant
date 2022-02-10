@@ -1,6 +1,6 @@
 const styles = {
   logo: {
-    width: "180px",
+    width: "220px",
     padding: "15px",
   },
   navbar: {
