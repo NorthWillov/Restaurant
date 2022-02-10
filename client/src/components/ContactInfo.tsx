@@ -19,8 +19,16 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
     dispatch(handleOptionsChange(e.target.name, e.target.value))
   }
 
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    dispatch(handleOptionsSubmit(contactInfo))
+  }
+
   return (
-    <Form style={{ maxWidth: "650px", margin: "50px auto" }}>
+    <Form
+      style={{ maxWidth: "650px", margin: "50px auto" }}
+      onSubmit={handleSubmit}
+    >
       <h1>Sposób dostawy</h1>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridSelectShip">
@@ -171,9 +179,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
         Wroć
       </Button>
       <Link to="/thanks">
-        <Button onClick={() => dispatch(handleOptionsSubmit(contactInfo))}>
-          Zamawiam
-        </Button>
+        <Button type="submit">Zamawiam</Button>
       </Link>
     </Form>
   )
