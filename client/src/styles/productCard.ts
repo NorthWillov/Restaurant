@@ -1,14 +1,14 @@
 const styles = {
   title: {
-    fontSize: "23px",
+    fontSize: "21px",
     "@media (max-width: 767.98px)": {
-      fontSize: "20px",
+      fontSize: "18px",
     },
   },
   subtitle: {
-    fontSize: "19px",
+    fontSize: "17px",
     "@media (max-width: 767.98px)": {
-      fontSize: "16px",
+      fontSize: "14px",
     },
   },
   checkout: {
@@ -17,11 +17,11 @@ const styles = {
     alignItems: "flex-end",
   },
   checkoutPrice: {
-    fontSize: "23px",
+    fontSize: "21px",
     margin: "0",
     fontWeight: "700",
     "@media (max-width: 767.98px)": {
-      fontSize: "17px",
+      fontSize: "15px",
     },
   },
   Card: {
