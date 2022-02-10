@@ -23,6 +23,10 @@ const styles = {
       margin: "0",
     },
   },
+  img: {
+    width: "100px",
+    borderRadius: "0.5rem",
+  },
   itemCheckout: {
     display: "flex",
     justifyContent: "space-between",
@@ -64,6 +68,6 @@ const styles = {
     marginTop: "30px",
   },
   sumToPay: { display: "flex", justifyContent: "flex-end", marginTop: "30px" },
-};
+}
 
-export default styles;
+export default styles

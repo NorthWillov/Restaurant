@@ -36,7 +36,7 @@ const LunchesList: React.FC<ILunchesListProps> = ({ classes }) => {
                     {lunch.name}
                   </Card.Title>
                 </Card.Body>
-                <Card.Footer style={{ padding: "12px" }}>
+                <Card.Footer>
                   <div className={classes.checkout}>
                     <p className={classes.checkoutPrice}>
                       {formatter.format(lunch.price)}zł

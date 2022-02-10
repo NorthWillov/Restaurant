@@ -7,10 +7,14 @@ import {
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { RouteComponentProps } from "react-router"
 import ArrowIcon from "./icons/ArrowIcon"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/deliveryForm"
 
-export interface ContactInfoProps extends RouteComponentProps {}
+export interface ContactInfoProps
+  extends RouteComponentProps,
+    WithStylesProps<typeof styles> {}
 
-const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
+const ContactInfo: FC<ContactInfoProps> = ({ history, classes }) => {
   const [validated, setValidated] = useState(false)
 
   const dispatch = useAppDispatch()
@@ -40,8 +44,8 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
 
   return (
     <Form
-      style={{ maxWidth: "650px", margin: "50px auto" }}
       validated={validated}
+      className={classes.root}
     >
       <h1>Sposób dostawy</h1>
       <Form.Row>
@@ -198,4 +202,4 @@ const ContactInfo: FC<ContactInfoProps> = ({ history }) => {
   )
 }
 
-export default ContactInfo
+export default withStyles(styles)(ContactInfo)

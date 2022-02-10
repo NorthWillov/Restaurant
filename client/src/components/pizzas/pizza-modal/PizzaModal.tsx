@@ -76,53 +76,49 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
     >
       <Modal.Body>
         <Row>
-          <Col lg={7} style={{ display: "flex" }}>
+          <Col lg={7}>
             <img
               className={classes.modalPizzaImage}
               src={pizzaInModal?.image}
               alt="pizza"
             />
           </Col>
-          <Col
-            lg={5}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>
-              <Modal.Title>{pizzaInModal?.name}</Modal.Title>
-              <p>
-                {pizzaInModal?.name === "Calzone (Pierog)"
-                  ? "28cm, średnie"
-                  : `${currPizzaSize}, ${currPizzaDough}`}
-              </p>
-              <PizzaOrderModalIngredients />
+          <Col lg={5}>
+            <div className={classes.form}>
+              <div>
+                <Modal.Title>{pizzaInModal?.name}</Modal.Title>
+                <p>
+                  {pizzaInModal?.name === "Calzone (Pierog)"
+                    ? "28cm, średnie"
+                    : `${currPizzaSize}, ${currPizzaDough}`}
+                </p>
+                <PizzaOrderModalIngredients />
 
-              <PizzaOrderModalSizeAndDough />
-            </div>
-            <div className={classes.checkout}>
-              <Button
-                variant="outline-secondary"
-                onClick={handleModalClose}
-                className="mr-3"
-              >
-                <ArrowIcon />
-                Wroć
-              </Button>
-              <span className={classes.modalPrice}>
-                {formatter.format(pizzaPrice)}
-                zł
-              </span>
+                <PizzaOrderModalSizeAndDough />
+              </div>
+              <div className={classes.checkout}>
+                <Button
+                  variant="outline-secondary"
+                  onClick={handleModalClose}
+                  className="mr-3"
+                >
+                  <ArrowIcon />
+                  Wroć
+                </Button>
 
-              <Button
-                variant="success"
-                onClick={handleModalSubmit}
-                type="button"
-              >
-                Dodaj <CartIcon styles={classes.icon} />
-              </Button>
+                <span className={classes.modalPrice}>
+                  {formatter.format(pizzaPrice)}
+                  zł
+                </span>
+
+                <Button
+                  variant="success"
+                  onClick={handleModalSubmit}
+                  type="button"
+                >
+                  Dodaj <CartIcon styles={classes.icon} />
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>

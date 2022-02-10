@@ -1,17 +1,13 @@
-import React, { FC } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { FC } from "react"
+import { Container, Row, Col } from "react-bootstrap"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/contact"
 
-const Contact: FC = () => {
+interface IContactProps extends WithStylesProps<typeof styles> {}
+
+const Contact: FC<IContactProps> = ({ classes }) => {
   return (
-    <section
-      id="contact"
-      className="mb-5 mt-5 "
-      style={{
-        backgroundColor: "#d4d5d9",
-        borderRadius: "0.5rem",
-        scrollMarginTop: "90px",
-      }}
-    >
+    <section id="contact" className={`mb-5 mt-5 ${classes.root}`}>
       <Container>
         <h3 className="pt-4 mb-4">Kontakt:</h3>
         <Row>
@@ -33,7 +29,7 @@ const Contact: FC = () => {
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default Contact;
+export default withStyles(styles)(Contact)

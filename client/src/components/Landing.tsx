@@ -6,8 +6,8 @@ import LunchesList from "./LunchesList"
 import MakaronsList from "./MakaronsList"
 import About from "./About"
 import Contact from "./Contact"
-import PizzaOrderModal from "./pizzas/pizza-modal/PizzaModal"
-import LunchesOrderModal from "./LunchesOrderModal"
+import PizzaModal from "./pizzas/pizza-modal/PizzaModal"
+import LunchModal from "./LunchModal"
 import ProductAddModal from "./ProductAddModal"
 import Promotions from "./Promotions"
 import withStyles, { WithStylesProps } from "react-jss"
@@ -34,8 +34,8 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
       <About />
       <Contact />
 
-      {isPizzaModalOpen && <PizzaOrderModal />}
-      {isLunchModalOpen && <LunchesOrderModal />}
+      {isPizzaModalOpen && <PizzaModal />}
+      {isLunchModalOpen && <LunchModal />}
       {isCartModalOpen && <ProductAddModal />}
     </div>
   )

@@ -7,8 +7,7 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix ./client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "concurrently \"npm run build --prefix ./client\" \"npm start\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "restaurant",

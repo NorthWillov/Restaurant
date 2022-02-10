@@ -64,7 +64,7 @@ const MakaronsList: FC<IMakaronsList> = ({ classes }) => {
                     {makaron.name}
                   </Card.Title>
                 </Card.Body>
-                <Card.Footer style={{ padding: "12px" }}>
+                <Card.Footer>
                   <div className={classes.checkout}>
                     <p className={classes.checkoutPrice}>
                       {formatter.format(makaron.price)}zł

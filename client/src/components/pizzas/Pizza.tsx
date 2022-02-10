@@ -29,7 +29,6 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
     <Col xs={6} md={4} lg={4} xl={3}>
       <Card className={`mb-3 ${classes.Card}`}>
         <Card.Img
-          style={{ cursor: "pointer" }}
           variant="top"
           src={pizza.image}
           alt={pizza.name}
@@ -47,7 +46,7 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
               : "sos, ser, +5 własnych składników do wyboru"}
           </Card.Subtitle>
         </Card.Body>
-        <Card.Footer style={{ padding: "12px" }}>
+        <Card.Footer>
           <div className={classes.checkout}>
             <span className={classes.checkoutPrice}>
               {pizza.name === "Calzone (Pierog)"

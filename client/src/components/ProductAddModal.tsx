@@ -1,16 +1,16 @@
-import React from "react";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { closeModal } from "../redux/reducers/cartSlice";
-import { Modal, Button, Spinner } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import ArrowIcon from "./icons/ArrowIcon";
-import CartIcon from "./icons/CartIcon";
+import React from "react"
+import { useAppSelector, useAppDispatch } from "../redux/hooks"
+import { closeModal } from "../redux/reducers/cartSlice"
+import { Modal, Button, Spinner } from "react-bootstrap"
+import { useHistory } from "react-router-dom"
+import ArrowIcon from "./icons/ArrowIcon"
+import CartIcon from "./icons/CartIcon"
 
 const ProductAddModal = () => {
-  const { isModalOpen, isCartLoading } = useAppSelector((state) => state.cart);
-  const dispatch = useAppDispatch();
+  const { isModalOpen, isCartLoading } = useAppSelector((state) => state.cart)
+  const dispatch = useAppDispatch()
 
-  const history = useHistory();
+  const history = useHistory()
 
   return (
     <Modal
@@ -21,15 +21,13 @@ const ProductAddModal = () => {
       centered
     >
       {isCartLoading ? (
-        <Modal.Body style={{ display: "flex", justifyContent: "center" }}>
+        <Modal.Body>
           <Spinner animation="border" variant="success" />
         </Modal.Body>
       ) : (
         <>
           <Modal.Body>
-            <h4 style={{ textAlign: "center", padding: "35px 0" }}>
-              Product został poprawnie dodany do koszyka ;)
-            </h4>
+            <h4>Product został poprawnie dodany do koszyka ;)</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -38,13 +36,13 @@ const ProductAddModal = () => {
               className="mr-3"
             >
               <ArrowIcon />
-              Wroć
+              Kontynuuj zakupy
             </Button>
             <Button
               variant="success"
               onClick={() => {
-                dispatch(closeModal());
-                history.push("/cart");
+                dispatch(closeModal())
+                history.push("/cart")
               }}
               type="button"
             >
@@ -54,7 +52,7 @@ const ProductAddModal = () => {
         </>
       )}
     </Modal>
-  );
-};
+  )
+}
 
-export default ProductAddModal;
+export default ProductAddModal

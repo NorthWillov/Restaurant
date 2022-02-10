@@ -1,25 +1,25 @@
-import React, { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import React, { FC } from "react"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import {
   incrementQuantity,
   decrementQuantity,
   CartProduct,
-} from "../redux/reducers/cartSlice";
-import { Link, RouteComponentProps } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
-import { formatter } from "../utils/formatter";
-import ArrowIcon from "./icons/ArrowIcon";
-import withStyles, { WithStylesProps } from "react-jss";
-import styles from "../styles/pages/cartPage";
+} from "../redux/reducers/cartSlice"
+import { Link, RouteComponentProps } from "react-router-dom"
+import { Button, Form } from "react-bootstrap"
+import { formatter } from "../utils/formatter"
+import ArrowIcon from "./icons/ArrowIcon"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/pages/cartPage"
 
 export interface CartProps
   extends RouteComponentProps,
     WithStylesProps<typeof styles> {}
 
 const Cart: FC<CartProps> = ({ classes, history }) => {
-  const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart.cart);
-  const isCartLoading = useAppSelector((state) => state.cart.isCartLoading);
+  const dispatch = useAppDispatch()
+  const cart = useAppSelector((state) => state.cart.cart)
+  const isCartLoading = useAppSelector((state) => state.cart.isCartLoading)
 
   return (
     <div className={classes.root}>
@@ -31,11 +31,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
         <div key={product._id} className={classes.item}>
           <div className={classes.itemCard}>
             <div className="mr-3">
-              <img
-                style={{ width: "100px", borderRadius: "0.5rem" }}
-                src={product.image}
-                alt="product"
-              />
+              <img src={product.image} alt="product" className={classes.img} />
             </div>
             <div>
               <h6>{product.name}</h6>
@@ -140,7 +136,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
           <ArrowIcon />
           Wroć
         </Button>
-        <Link to="/cart/contactinfo">
+        <Link to="/cart/delivery-info">
           <Button
             size="lg"
             disabled={cart.products.length === 0}
@@ -152,7 +148,7 @@ const Cart: FC<CartProps> = ({ classes, history }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(Cart);
+export default withStyles(styles)(Cart)

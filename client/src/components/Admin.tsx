@@ -1,26 +1,30 @@
-import axios from "axios";
-import React, { FC, useEffect, useState } from "react";
+import axios from "axios"
+import React, { FC, useEffect, useState } from "react"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/pages/adminPage"
 
-const Admin: FC = () => {
-  console.log("Admin");
-  const [orders, setOrders] = useState([]);
+interface IAdminProps extends WithStylesProps<typeof styles> {}
+
+const Admin: FC<IAdminProps> = ({ classes }) => {
+  console.log("Admin")
+  const [orders, setOrders] = useState([])
 
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const res = await axios.get("/api/getOrders");
-        setOrders(res.data);
+        const res = await axios.get("/api/getOrders")
+        setOrders(res.data)
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
-    };
-    getOrders();
-  }, []);
+    }
+    getOrders()
+  }, [])
 
   return (
     <div>
       {orders.map((order, idx) => (
-        <div key={idx} style={{ border: "6px solid red" }}>
+        <div key={idx} className={classes.order}>
           <p>IMIE I NAZWISKO: {order.nameandsurname}</p>
           <p>NUMER TELEFONU: {order.phonenumber}</p>
           <p>ULICA: {order.street}</p>
@@ -40,7 +44,7 @@ const Admin: FC = () => {
             ZAMÓWIENIE:
             {order.products.map(
               (product: { name: string; price: number; quantity: number }) => (
-                <div style={{ border: "3px solid green", margin: "4px" }}>
+                <div className={classes.products}>
                   <p>PRODUCT: {product.name}</p>
                   <p>CENA: {product.price}</p>
                   <p>ILOŚĆ: {product.quantity}</p>
@@ -52,7 +56,7 @@ const Admin: FC = () => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Admin;
+export default withStyles(styles)(Admin)

@@ -20,17 +20,7 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
       fixed="top"
       collapseOnSelect
     >
-      <Container style={{ position: "relative" }} fluid="lg">
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          style={{
-            position: "absolute",
-            right: "31px",
-            top: "90px",
-          }}
-        ></div>
-
+      <Container fluid="lg">
         <Navbar.Brand href="#home">
           <img className={classes.logo} srcSet={logo} alt="riccardo-logo" />
         </Navbar.Brand>

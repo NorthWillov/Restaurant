@@ -19,6 +19,12 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
   },
-};
+  form: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+}
 
-export default styles;
+export default styles
