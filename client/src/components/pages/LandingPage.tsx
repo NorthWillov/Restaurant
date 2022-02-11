@@ -1,17 +1,19 @@
-import React, { FC } from "react"
+import React, { FC, Suspense, lazy } from "react"
 import { useAppSelector } from "../../redux/hooks"
-import MainNavbar from "../MainNavbar"
-import PizzasList from "../pizzas/PizzasList"
-import LunchesList from "../lunches/LunchesList"
-import MakaronsList from "../makarons/MakaronsList"
-import About from "../About"
-import Contact from "../Contact"
 import PizzaModal from "../pizzas/pizza-modal/PizzaModal"
 import LunchModal from "../lunches/LunchModal"
 import ProductAddModal from "../ProductAddModal"
-import Promotions from "../Promotions"
+import { Spinner } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/pages/landingPage"
+
+const MainNavbar = lazy(() => import("../MainNavbar"))
+const Promotions = lazy(() => import("../Promotions"))
+const PizzasList = lazy(() => import("../pizzas/PizzasList"))
+const LunchesList = lazy(() => import("../lunches/LunchesList"))
+const MakaronsList = lazy(() => import("../makarons/MakaronsList"))
+const About = lazy(() => import("../About"))
+const Contact = lazy(() => import("../Contact"))
 
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
@@ -26,13 +28,15 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
 
   return (
     <div className={classes.root}>
-      <MainNavbar />
-      <Promotions />
-      <PizzasList />
-      <LunchesList />
-      <MakaronsList />
-      <About />
-      <Contact />
+      <Suspense fallback={<Spinner animation="border" variant="success" />}>
+        <MainNavbar />
+        <Promotions />
+        <PizzasList />
+        <LunchesList />
+        <MakaronsList />
+        <About />
+        <Contact />
+      </Suspense>
 
       {isPizzaModalOpen && <PizzaModal />}
       {isLunchModalOpen && <LunchModal />}
