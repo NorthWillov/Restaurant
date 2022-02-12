@@ -4,7 +4,7 @@ import { formatter } from "../../utils/formatter"
 import { Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/productCard"
-import { addProductToCart, CartProduct } from "../../redux/reducers/cartSlice"
+import { addProductToCart, ICartProduct } from "../../redux/reducers/cartSlice"
 import { IMakaron } from "./MakaronsList"
 
 interface IMakaronProps extends WithStylesProps<typeof styles> {
@@ -15,7 +15,7 @@ const Makaron: FC<IMakaronProps> = ({ classes, makaron }) => {
   const dispatch = useAppDispatch()
 
   const handleMakaronPick = () => {
-    const newMakaron: CartProduct = {
+    const newMakaron: ICartProduct = {
       name: makaron.name,
       image: makaron.image,
       price: makaron.price,

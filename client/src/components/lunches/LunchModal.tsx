@@ -1,7 +1,7 @@
 import React from "react"
 import { formatter } from "../../utils/formatter"
 import { useAppSelector, useAppDispatch } from "../../redux/hooks"
-import { CartProduct, addProductToCart } from "../../redux/reducers/cartSlice"
+import { ICartProduct, addProductToCart } from "../../redux/reducers/cartSlice"
 import {
   hideLunchModal,
   changeLunchAddition,
@@ -30,7 +30,7 @@ const LunchesOrderModal: React.FC<LunchesOrderModalProps> = ({ classes }) => {
   }
 
   const handleSubmit = async () => {
-    const product: CartProduct = {
+    const product: ICartProduct = {
       name: lunchInModal.name,
       image: lunchInModal.image,
       productType: lunchInModal.type,

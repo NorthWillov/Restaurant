@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import { hidePizzaModal } from "../../../redux/reducers/pizzaModalSlice"
 import {
   addProductToCart,
-  CartProduct,
+  ICartProduct,
 } from "../../../redux/reducers/cartSlice"
 import PizzaOrderModalSizeAndDough from "./PizzaModalSizeAndDough"
 import PizzaOrderModalIngredients from "./PizzaModalIngredients"
@@ -46,7 +46,7 @@ const PizzaOrderModal: FC<PizzaOrderModalProps> = ({ classes }) => {
   }
 
   const handleModalSubmit = () => {
-    const product: CartProduct = {
+    const product: ICartProduct = {
       name: pizzaInModal.name,
       image: pizzaInModal.image,
       productType: pizzaInModal.type,
