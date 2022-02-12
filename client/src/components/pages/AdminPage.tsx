@@ -23,8 +23,8 @@ const Admin: FC<IAdminProps> = ({ classes }) => {
 
   return (
     <div>
-      {orders.map((order, idx) => (
-        <div key={idx} className={classes.order}>
+      {orders.map((order) => (
+        <div key={order._id} className={classes.order}>
           <p>IMIE I NAZWISKO: {order.nameandsurname}</p>
           <p>NUMER TELEFONU: {order.phonenumber}</p>
           <p>ULICA: {order.street}</p>
