@@ -14,7 +14,7 @@ interface ILunchProps extends WithStylesProps<typeof styles> {
 const Lunch: FC<ILunchProps> = ({ classes, lunch }) => {
   const dispatch = useAppDispatch()
 
-  const handleLunchPick = (lunch: ILunch) => {
+  const handleLunchPick = () => {
     dispatch(openLunchModal(lunch))
   }
 
@@ -22,7 +22,7 @@ const Lunch: FC<ILunchProps> = ({ classes, lunch }) => {
     <Col xs={6} md={4} lg={4} xl={3}>
       <Card className={`mb-3 ${classes.Card}`}>
         <Card.Img
-          onClick={() => handleLunchPick(lunch)}
+          onClick={handleLunchPick}
           variant="top"
           src={lunch.image}
           alt={lunch.name}
@@ -37,7 +37,7 @@ const Lunch: FC<ILunchProps> = ({ classes, lunch }) => {
             </p>
             <Button
               variant="outline-secondary"
-              onClick={() => handleLunchPick(lunch)}
+              onClick={handleLunchPick}
               size="sm"
               className={`ml-1 ${classes.pickBtn}`}
             >
