@@ -5,13 +5,7 @@ import { Col, Button, Card } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/productCard"
 import { addProductToCart, CartProduct } from "../../redux/reducers/cartSlice"
-
-export interface IMakaron {
-  name: string
-  type: string
-  image: string
-  price: number
-}
+import { IMakaron } from "./MakaronsList"
 
 interface IMakaronProps extends WithStylesProps<typeof styles> {
   makaron: IMakaron
@@ -20,7 +14,7 @@ interface IMakaronProps extends WithStylesProps<typeof styles> {
 const Makaron: FC<IMakaronProps> = ({ classes, makaron }) => {
   const dispatch = useAppDispatch()
 
-  const handleMakaronPick = (makaron: IMakaron) => {
+  const handleMakaronPick = () => {
     const newMakaron: CartProduct = {
       name: makaron.name,
       image: makaron.image,
@@ -45,7 +39,7 @@ const Makaron: FC<IMakaronProps> = ({ classes, makaron }) => {
             </p>
             <Button
               variant="outline-secondary"
-              onClick={() => handleMakaronPick(makaron)}
+              onClick={handleMakaronPick}
               type="button"
               size="sm"
               className={`ml-2 ${classes.pickBtn}`}

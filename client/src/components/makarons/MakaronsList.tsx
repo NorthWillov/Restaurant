@@ -1,7 +1,14 @@
 import React, { FC, useEffect, useState } from "react"
 import axios from "axios"
 import { Row } from "react-bootstrap"
-import Makaron, { IMakaron } from "./Makaron"
+import Makaron from "./Makaron"
+
+export interface IMakaron {
+  name: string
+  type: string
+  image: string
+  price: number
+}
 
 const MakaronsList: FC = () => {
   const [makarons, setMakarons] = useState<IMakaron[]>([
