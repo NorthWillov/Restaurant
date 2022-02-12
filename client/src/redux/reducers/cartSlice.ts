@@ -8,7 +8,7 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
 
 export const addProductToCart = createAsyncThunk(
   "cart/addProductToCart",
-  async (product: CartProduct, { dispatch }) => {
+  async (product: ICartProduct, { dispatch }) => {
     await axios.post("/api/addProduct", { product });
     await dispatch(fetchCart());
   }
@@ -30,7 +30,7 @@ export const decrementQuantity = createAsyncThunk(
   }
 );
 
-export interface CartProduct {
+export interface ICartProduct {
   _id?: string;
   productType: string;
   name: string;
@@ -49,7 +49,7 @@ export interface CartProduct {
 export interface Cart {
   active: boolean;
   _id: string;
-  products: CartProduct[];
+  products: ICartProduct[];
 }
 
 export interface CartSliceState {
@@ -113,7 +113,7 @@ const cartSlice = createSlice({
       .addCase(
         decrementQuantity.fulfilled,
         (state, action: PayloadAction<string>) => {
-          let newProducts: Array<CartProduct> = [];
+          let newProducts: Array<ICartProduct> = [];
 
           state.cart.products.map((product) => {
             if (product._id === action.payload) {
