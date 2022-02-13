@@ -19,8 +19,8 @@ const Lunch: FC<ILunchProps> = ({ classes, lunch }) => {
   }
 
   return (
-    <Col xs={6} md={4} lg={4} xl={3}>
-      <Card className={`mb-3 ${classes.Card}`}>
+    <Col xs={6} sm={4} xl={3}>
+      <Card className={`mb-3 ${classes.root}`}>
         <Card.Img
           onClick={handleLunchPick}
           variant="top"

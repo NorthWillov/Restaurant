@@ -1,4 +1,9 @@
 const styles = {
+  root: {
+    boxShadow: "0px 0px 10px 3px lightgrey",
+    padding: 0,
+    marginBottom: "28px !important",
+  },
   title: {
     fontSize: "21px",
     "@media (max-width: 767.98px)": {
@@ -23,9 +28,6 @@ const styles = {
     "@media (max-width: 767.98px)": {
       fontSize: "15px",
     },
-  },
-  Card: {
-    boxShadow: "0px 0px 10px 3px lightgrey",
   },
   CardBody: {
     padding: "15px 5px 10px 10px",

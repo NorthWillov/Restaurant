@@ -26,8 +26,8 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
   }
 
   return (
-    <Col xs={6} md={4} lg={4} xl={3}>
-      <Card className={`mb-3 ${classes.Card}`}>
+    <Col xs={6} sm={4} xl={3}>
+      <Card className={`mb-3 ${classes.root}`}>
         <Card.Img
           variant="top"
           src={pizza.image}
