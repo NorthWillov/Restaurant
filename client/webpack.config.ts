@@ -15,7 +15,7 @@ const filename = (ext: string) =>
 const plugins = [
   new HTMLWebpackPlugin({
     template: "../public/index.html",
-    favicon: "../public/favicon.ico"
+    favicon: "../public/favicon.ico",
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
@@ -91,7 +91,7 @@ const webpack = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.png$/,
+        test: /\.(png|gif)$/,
         use: ["file-loader"],
       },
     ],

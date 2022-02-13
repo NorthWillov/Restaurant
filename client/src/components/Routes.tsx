@@ -1,7 +1,7 @@
 import React, { FC, Suspense, lazy } from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
-import { Spinner } from "react-bootstrap"
 import ErrorBoundary from "./ErrorBoundary"
+import LoadingPage from "./pages/LoadingPage"
 
 const LandingPage = lazy(() => import("./pages/LandingPage"))
 const CartPage = lazy(() => import("./pages/CartPage"))
@@ -12,7 +12,7 @@ const ThanksPage = lazy(() => import("./pages/ThanksPage"))
 const Routes: FC = () => {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<Spinner animation="border" variant="success" />}>
+      <Suspense fallback={<LoadingPage />}>
         <Switch>
           <Route exact path="/">
             <LandingPage />

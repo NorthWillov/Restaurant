@@ -2,7 +2,7 @@ import React, { FC, Suspense, lazy } from "react"
 import PizzaModal from "../pizzas/pizza-modal/PizzaModal"
 import LunchModal from "../lunches/LunchModal"
 import ProductAddModal from "../ProductAddModal"
-import { Spinner } from "react-bootstrap"
+import LoadingPage from "./LoadingPage"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../../styles/pages/landingPage"
 
@@ -17,10 +17,9 @@ const Contact = lazy(() => import("../Contact"))
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
 const Landing: FC<ILandingProps> = ({ classes }) => {
-
   return (
     <div className={classes.root}>
-      <Suspense fallback={<Spinner animation="border" variant="success" />}>
+      <Suspense fallback={<LoadingPage />}>
         <MainNavbar />
         <Promotions />
         <PizzasList />
