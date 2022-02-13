@@ -15,6 +15,7 @@ const filename = (ext: string) =>
 const plugins = [
   new HTMLWebpackPlugin({
     template: "../public/index.html",
+    favicon: "../public/favicon.ico"
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
