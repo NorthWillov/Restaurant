@@ -47,10 +47,10 @@ const webpack = {
     minimizer: [`...`, new CssMinimizerPlugin()],
   },
   devServer: {
-    port: 4200,
+    port: 3000,
     hot: isDev,
     proxy: {
-      "/api": "http://localhost:5000",
+      "/api": "http://localhost:8080",
     },
     historyApiFallback: true,
   },

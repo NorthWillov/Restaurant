@@ -55,16 +55,17 @@ const LunchesOrderModal: React.FC<LunchesOrderModalProps> = ({ classes }) => {
           <Col lg={7}>
             <img
               className={classes.modalLunchImage}
-              src={lunchInModal.image}
+              src={lunchInModal?.image}
               alt="obiad"
             />
           </Col>
           <Col lg={5}>
             <div className={classes.form}>
               <Form>
-                <h4>{lunchInModal.name}</h4>
+                <h4>{lunchInModal?.name}</h4>
 
-                {lunchInModal.name === "Szwajcar (pierś lub schab z serem)" && (
+                {lunchInModal?.name ===
+                  "Szwajcar (pierś lub schab z serem)" && (
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>rodzaj mięsa:</Form.Label>
                     <Form.Control
@@ -78,7 +79,7 @@ const LunchesOrderModal: React.FC<LunchesOrderModalProps> = ({ classes }) => {
                   </Form.Group>
                 )}
 
-                {lunchInModal.name !== "Placek po węgiersku 🌶" && (
+                {lunchInModal?.name !== "Placek po węgiersku 🌶" && (
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>dodatek do dania:</Form.Label>
                     <Form.Control
@@ -97,7 +98,7 @@ const LunchesOrderModal: React.FC<LunchesOrderModalProps> = ({ classes }) => {
                   </Form.Group>
                 )}
 
-                {lunchInModal.name !== "Warzywa zasmażane z kurczakiem" && (
+                {lunchInModal?.name !== "Warzywa zasmażane z kurczakiem" && (
                   <Form.Group controlId="exampleForm.ControlSelect2">
                     <Form.Label>dodatek warzywny:</Form.Label>
                     <Form.Control
@@ -123,7 +124,7 @@ const LunchesOrderModal: React.FC<LunchesOrderModalProps> = ({ classes }) => {
                   Wroć
                 </Button>
                 <span className={classes.modalPrice}>
-                  {formatter.format(lunchInModal.price)}zł
+                  {formatter.format(lunchInModal?.price)}zł
                 </span>
                 <Button onClick={handleSubmit} variant="success" type="button">
                   Dodaj <CartIcon styles={classes.icon} />

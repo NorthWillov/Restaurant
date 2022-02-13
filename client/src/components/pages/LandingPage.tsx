@@ -1,5 +1,4 @@
 import React, { FC, Suspense, lazy } from "react"
-import { useAppSelector } from "../../redux/hooks"
 import PizzaModal from "../pizzas/pizza-modal/PizzaModal"
 import LunchModal from "../lunches/LunchModal"
 import ProductAddModal from "../ProductAddModal"
@@ -18,13 +17,6 @@ const Contact = lazy(() => import("../Contact"))
 interface ILandingProps extends WithStylesProps<typeof styles> {}
 
 const Landing: FC<ILandingProps> = ({ classes }) => {
-  const isPizzaModalOpen = useAppSelector(
-    (state) => state.pizzaModal.isModalOpen
-  )
-  const isLunchModalOpen = useAppSelector(
-    (state) => state.lunchModalSlice.isModalOpen
-  )
-  const isCartModalOpen = useAppSelector((state) => state.cart.isModalOpen)
 
   return (
     <div className={classes.root}>
@@ -38,9 +30,9 @@ const Landing: FC<ILandingProps> = ({ classes }) => {
         <Contact />
       </Suspense>
 
-      {isPizzaModalOpen && <PizzaModal />}
-      {isLunchModalOpen && <LunchModal />}
-      {isCartModalOpen && <ProductAddModal />}
+      <PizzaModal />
+      <LunchModal />
+      <ProductAddModal />
     </div>
   )
 }
