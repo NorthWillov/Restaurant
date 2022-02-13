@@ -47,6 +47,9 @@ const webpack = {
     minimize: isProd,
     minimizer: [`...`, new CssMinimizerPlugin()],
   },
+  watchOptions: {
+    poll: false,
+  },
   devServer: {
     port: 3000,
     hot: isDev,

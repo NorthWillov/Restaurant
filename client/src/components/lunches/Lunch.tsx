@@ -21,12 +21,15 @@ const Lunch: FC<ILunchProps> = ({ classes, lunch }) => {
   return (
     <Col xs={6} sm={4} xl={3}>
       <Card className={`mb-3 ${classes.root}`}>
-        <Card.Img
-          onClick={handleLunchPick}
-          variant="top"
-          src={lunch.image}
-          alt={lunch.name}
-        />
+        <div className={classes.imgOveflow}>
+          <Card.Img
+            onClick={handleLunchPick}
+            variant="top"
+            src={lunch.image}
+            alt={lunch.name}
+            className={classes.img}
+          />
+        </div>
         <Card.Body className={classes.CardBody}>
           <Card.Title className={classes.title}>{lunch.name}</Card.Title>
         </Card.Body>

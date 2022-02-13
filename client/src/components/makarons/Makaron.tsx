@@ -28,7 +28,14 @@ const Makaron: FC<IMakaronProps> = ({ classes, makaron }) => {
   return (
     <Col xs={6} sm={4} xl={3}>
       <Card className={`mb-3 ${classes.root}`}>
-        <Card.Img variant="top" src={makaron.image} alt={makaron.name} />
+        <div className={classes.imgOveflow}>
+          <Card.Img
+            variant="top"
+            src={makaron.image}
+            alt={makaron.name}
+            className={classes.img}
+          />
+        </div>
         <Card.Body className={classes.CardBody}>
           <Card.Title className={classes.title}>{makaron.name}</Card.Title>
         </Card.Body>

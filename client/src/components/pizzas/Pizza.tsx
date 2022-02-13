@@ -17,7 +17,7 @@ interface IPizzaProps extends WithStylesProps<typeof styles> {
 const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
   const dispatch = useAppDispatch()
 
-  const handlePizzaClick = (pizza: IPizza) => {
+  const handlePizzaClick = () => {
     dispatch(openPizzaModal(pizza))
 
     if (pizza.name === "Calzone (Pierog)") {
@@ -28,12 +28,16 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
   return (
     <Col xs={6} sm={4} xl={3}>
       <Card className={`mb-3 ${classes.root}`}>
-        <Card.Img
-          variant="top"
-          src={pizza.image}
-          alt={pizza.name}
-          onClick={() => handlePizzaClick(pizza)}
-        />
+        <div className={classes.imgOveflow}>
+          <Card.Img
+            variant="top"
+            src={pizza.image}
+            alt={pizza.name}
+            onClick={handlePizzaClick}
+            className={classes.img}
+          />
+        </div>
+
         <Card.Body className={classes.CardBody}>
           <Card.Title className={classes.title}>{pizza.name}</Card.Title>
           <Card.Subtitle className={`mb-2 text-muted ${classes.subtitle}`}>
@@ -55,7 +59,7 @@ const Pizza: FC<IPizzaProps> = ({ classes, pizza }) => {
               zł
             </span>
             <Button
-              onClick={() => handlePizzaClick(pizza)}
+              onClick={handlePizzaClick}
               variant="outline-secondary"
               size="sm"
               className={`ml-2 ${classes.pickBtn}`}

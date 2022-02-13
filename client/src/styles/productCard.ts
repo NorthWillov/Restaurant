@@ -4,6 +4,16 @@ const styles = {
     padding: 0,
     marginBottom: "28px !important",
   },
+  imgOveflow: {
+    overflow: "hidden",
+  },
+  img: {
+    cursor: "pointer",
+    transition: "transform .4s ease",
+    "&:hover": {
+      transform: "scale(110%)",
+    },
+  },
   title: {
     fontSize: "21px",
     "@media (max-width: 767.98px)": {
