@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../styles/contact"
@@ -32,4 +32,4 @@ const Contact: FC<IContactProps> = ({ classes }) => {
   )
 }
 
-export default withStyles(styles)(Contact)
+export default withStyles(styles)(memo(Contact))

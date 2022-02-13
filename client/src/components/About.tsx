@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import { Container } from "react-bootstrap"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../styles/about"
@@ -27,4 +27,4 @@ const About: FC<IAboutProps> = ({ classes }) => {
   )
 }
 
-export default withStyles(styles)(About)
+export default withStyles(styles)(memo(About))

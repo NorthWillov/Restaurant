@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import { useAppSelector } from "../../redux/hooks"
 import { Row } from "react-bootstrap"
 import { IPizza } from "../../redux/reducers/pizzaModalSlice"
@@ -19,4 +19,4 @@ const PizzasList: FC = () => {
   )
 }
 
-export default PizzasList
+export default memo(PizzasList)

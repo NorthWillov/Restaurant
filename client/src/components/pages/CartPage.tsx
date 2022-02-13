@@ -20,11 +20,13 @@ const Cart: FC<CartProps> = ({ classes }) => {
     <div className={classes.root}>
       <h1 className="mt-5 mb-5">Koszyk:</h1>
 
-      {cart.products?.length === 0 && <h6>Koszyk jest pusty :(</h6>}
-
-      {cart.products?.map((product: ICartProduct) => (
-        <CartProduct key={product._id} product={product} />
-      ))}
+      {cart.products?.length === 0 ? (
+        <h6>Koszyk jest pusty :(</h6>
+      ) : (
+        cart.products?.map((product: ICartProduct) => (
+          <CartProduct key={product._id} product={product} />
+        ))
+      )}
 
       <h4 className={classes.sumToPay}>
         Do zapłaty:{" "}

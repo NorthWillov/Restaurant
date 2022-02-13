@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useState, memo } from "react"
 import axios from "axios"
 import { Row } from "react-bootstrap"
 import Makaron from "./Makaron"
@@ -39,4 +39,4 @@ const MakaronsList: FC = () => {
   )
 }
 
-export default MakaronsList
+export default memo(MakaronsList)

@@ -22,15 +22,18 @@ const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
   const pizzaInModal = useAppSelector((state) => state.pizzaModal.pizzaInModal)
   const dispatch = useAppDispatch()
 
+  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePizzaSize(e.target.value))
+  }
+
+  const handleDoughChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changePizzaDough(e.target.value))
+  }
+
   return (
     <div className={classes.root}>
       <h6>Rozmiar:</h6>
-      <div
-        className={classes.group}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(changePizzaSize(e.target.value))
-        }
-      >
+      <div className={classes.group} onChange={handleSizeChange}>
         <input
           className={classes.input}
           type="radio"
@@ -77,12 +80,7 @@ const PizzaOrderModalSizeAndDough: FC<PizzaOrderModalSizeAndDoughProps> = ({
         </label>
       </div>
       <h6>Ciasto:</h6>
-      <div
-        className={classes.group}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(changePizzaDough(e.target.value))
-        }
-      >
+      <div className={classes.group} onChange={handleDoughChange}>
         <input
           className={classes.input}
           type="radio"

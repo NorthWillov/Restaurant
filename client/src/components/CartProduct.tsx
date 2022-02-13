@@ -13,7 +13,6 @@ import styles from "../styles/pages/cartPage"
 export interface CartProductProps extends WithStylesProps<typeof styles> {
   product: ICartProduct
 }
-
 const CartProduct: FC<CartProductProps> = ({ classes, product }) => {
   const dispatch = useAppDispatch()
   const isCartLoading = useAppSelector((state) => state.cart.isCartLoading)

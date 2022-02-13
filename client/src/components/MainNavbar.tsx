@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import { useAppSelector } from "../redux/hooks"
 import { Navbar, NavDropdown, Nav, Container, Button } from "react-bootstrap"
 import logo from "../assets/logo.png"
@@ -10,7 +10,6 @@ interface MainNavbarProps extends WithStylesProps<typeof styles> {}
 
 const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
   const cart = useAppSelector((state) => state.cart.cart)
-
   return (
     <Navbar
       className={classes.navbar}
@@ -56,4 +55,4 @@ const MainNavbar: FC<MainNavbarProps> = ({ classes }) => {
   )
 }
 
-export default withStyles(styles)(MainNavbar)
+export default withStyles(styles)(memo(MainNavbar))
