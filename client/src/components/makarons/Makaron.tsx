@@ -34,6 +34,7 @@ const Makaron: FC<IMakaronProps> = ({ classes, makaron }) => {
             src={makaron.image}
             alt={makaron.name}
             className={classes.img}
+            onClick={handleMakaronPick}
           />
         </div>
         <Card.Body className={classes.CardBody}>

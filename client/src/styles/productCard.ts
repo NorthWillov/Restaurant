@@ -1,6 +1,6 @@
 const styles = {
   root: {
-    boxShadow: "0px 0px 10px 3px lightgrey",
+    boxShadow: "0px 0px 5px 1px lightgrey",
     padding: 0,
     marginBottom: "28px !important",
   },

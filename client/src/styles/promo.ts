@@ -15,7 +15,7 @@ const styles = {
     },
   },
   carousel: {
-    boxShadow: "10px 10px 15px 5px grey",
+    boxShadow: "5px 5px 10px 1px grey",
   },
 }
 
