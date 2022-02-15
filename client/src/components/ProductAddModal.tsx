@@ -12,10 +12,19 @@ const ProductAddModal = () => {
 
   const history = useHistory()
 
+  const handleClose = () => {
+    dispatch(closeModal())
+  }
+
+  const handleButtonClick = () => {
+    dispatch(closeModal())
+    history.push("/cart")
+  }
+
   return (
     <Modal
       show={isModalOpen}
-      onHide={() => dispatch(closeModal())}
+      onHide={handleClose}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -32,20 +41,13 @@ const ProductAddModal = () => {
           <Modal.Footer>
             <Button
               variant="outline-secondary"
-              onClick={() => dispatch(closeModal())}
+              onClick={handleClose}
               className="mr-3"
             >
               <ArrowIcon />
               Kontynuuj zakupy
             </Button>
-            <Button
-              variant="success"
-              onClick={() => {
-                dispatch(closeModal())
-                history.push("/cart")
-              }}
-              type="button"
-            >
+            <Button variant="success" onClick={handleButtonClick} type="button">
               Przejdź do koszyka <CartIcon />
             </Button>
           </Modal.Footer>
