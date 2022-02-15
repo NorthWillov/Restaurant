@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { useAppSelector, useAppDispatch } from "../redux/hooks"
 import { closeModal } from "../redux/reducers/cartSlice"
 import { Modal, Button, Spinner } from "react-bootstrap"
@@ -6,8 +6,12 @@ import { useHistory } from "react-router-dom"
 import ArrowIcon from "./icons/ArrowIcon"
 import CartIcon from "./icons/CartIcon"
 import CartProduct from "./CartProduct"
+import withStyles, { WithStylesProps } from "react-jss"
+import styles from "../styles/modals/productAddModal"
 
-const ProductAddModal = () => {
+export interface ProductAddModalProps extends WithStylesProps<typeof styles> {}
+
+const ProductAddModal: FC<ProductAddModalProps> = ({ classes }) => {
   const { isModalOpen, isCartLoading, cart } = useAppSelector(
     (state) => state.cart
   )
@@ -39,19 +43,21 @@ const ProductAddModal = () => {
       ) : (
         <>
           <Modal.Header closeButton>
-            <Modal.Title>Product dodany do koszyka ;)</Modal.Title>
+            <Modal.Title>
+              Product dodany do koszyka ;)
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <CartProduct product={cart.products[cart.products.length - 1]} />
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className={classes.checkout}>
             <Button
               variant="outline-secondary"
               onClick={handleClose}
               className="mr-3"
             >
               <ArrowIcon />
-              Kontynuuj zakupy
+              Kontynuuj zamówienie
             </Button>
             <Button variant="success" onClick={handleButtonClick} type="button">
               Przejdź do koszyka <CartIcon />
@@ -63,4 +69,4 @@ const ProductAddModal = () => {
   )
 }
 
-export default ProductAddModal
+export default withStyles(styles)(ProductAddModal)
