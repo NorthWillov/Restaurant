@@ -45,7 +45,7 @@ const ProductAddModal: FC<ProductAddModalProps> = ({ classes }) => {
           <Modal.Header closeButton>
             <Modal.Title>
               {`${
-                cart.products[cart.products.length - 1].productType === "pizza"
+                cart.products[cart.products.length - 1]?.productType === "pizza"
                   ? "Pizzunia dodana"
                   : "Obiadek dodany"
               } do koszyka ;)`}

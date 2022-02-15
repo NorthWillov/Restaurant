@@ -26,7 +26,7 @@ const CartProduct: FC<CartProductProps> = ({ classes, product }) => {
   const handleDecrement = () => {
     dispatch(decrementQuantity(product._id))
   }
-  
+
   return (
     <div className={classes.item}>
       <div className={classes.itemCard}>
