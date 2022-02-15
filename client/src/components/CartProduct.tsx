@@ -7,6 +7,7 @@ import {
 } from "../redux/reducers/cartSlice"
 import { Button, Form } from "react-bootstrap"
 import { formatter } from "../utils/formatter"
+import { useLocation } from "react-router-dom"
 import withStyles, { WithStylesProps } from "react-jss"
 import styles from "../styles/pages/cartPage"
 
@@ -14,6 +15,7 @@ export interface CartProductProps extends WithStylesProps<typeof styles> {
   product: ICartProduct
 }
 const CartProduct: FC<CartProductProps> = ({ classes, product }) => {
+  const location = useLocation()
   const dispatch = useAppDispatch()
   const isCartLoading = useAppSelector((state) => state.cart.isCartLoading)
 
@@ -24,7 +26,7 @@ const CartProduct: FC<CartProductProps> = ({ classes, product }) => {
   const handleDecrement = () => {
     dispatch(decrementQuantity(product._id))
   }
-
+  
   return (
     <div className={classes.item}>
       <div className={classes.itemCard}>
@@ -65,33 +67,35 @@ const CartProduct: FC<CartProductProps> = ({ classes, product }) => {
         <h5 className={classes.productPrice}>
           {formatter.format(product.price * product.quantity)}PLN
         </h5>
-        <div className={classes.productCount}>
-          <Button
-            onClick={handleDecrement}
-            disabled={isCartLoading}
-            className={classes.buttonCount}
-            variant="primary"
-            size="sm"
-          >
-            -
-          </Button>
-          <Form.Control
-            type="text"
-            placeholder={product.quantity.toString()}
-            className={classes.numberProduct}
-            readOnly
-          />
+        {location.pathname === "/cart" && (
+          <div className={classes.productCount}>
+            <Button
+              onClick={handleDecrement}
+              disabled={isCartLoading}
+              className={classes.buttonCount}
+              variant="primary"
+              size="sm"
+            >
+              -
+            </Button>
+            <Form.Control
+              type="text"
+              placeholder={product.quantity.toString()}
+              className={classes.numberProduct}
+              readOnly
+            />
 
-          <Button
-            onClick={handleIncrement}
-            disabled={isCartLoading}
-            variant="primary"
-            size="sm"
-            className={classes.buttonCount}
-          >
-            +
-          </Button>
-        </div>
+            <Button
+              onClick={handleIncrement}
+              disabled={isCartLoading}
+              variant="primary"
+              size="sm"
+              className={classes.buttonCount}
+            >
+              +
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -5,9 +5,12 @@ import { Modal, Button, Spinner } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 import ArrowIcon from "./icons/ArrowIcon"
 import CartIcon from "./icons/CartIcon"
+import CartProduct from "./CartProduct"
 
 const ProductAddModal = () => {
-  const { isModalOpen, isCartLoading } = useAppSelector((state) => state.cart)
+  const { isModalOpen, isCartLoading, cart } = useAppSelector(
+    (state) => state.cart
+  )
   const dispatch = useAppDispatch()
 
   const history = useHistory()
@@ -35,8 +38,11 @@ const ProductAddModal = () => {
         </Modal.Body>
       ) : (
         <>
+          <Modal.Header closeButton>
+            <Modal.Title>Product dodany do koszyka ;)</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
-            <h4>Product został poprawnie dodany do koszyka ;)</h4>
+            <CartProduct product={cart.products[cart.products.length - 1]} />
           </Modal.Body>
           <Modal.Footer>
             <Button
