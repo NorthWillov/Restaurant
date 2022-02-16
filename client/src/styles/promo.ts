@@ -5,13 +5,13 @@ const styles = {
   title: {
     "@media (max-width: 767.98px)": {
       marginBottom: "0",
-      fontSize: "24px",
+      fontSize: "20px",
     },
   },
   subtitle: {
     "@media (max-width: 767.98px)": {
       marginBottom: "0",
-      fontSize: "14px",
+      fontSize: "12px",
     },
   },
   carousel: {
